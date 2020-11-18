@@ -12,3 +12,6 @@ endif
 
 CFLAGS=-Wall -Wextra -Weverything
 tablecode: tablecode.c
+
+clean::
+	rm tablecode 2> /dev/null || true
