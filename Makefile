@@ -10,5 +10,5 @@ else
 	    -b main https://github.com/martinthomson/i-d-template $(LIBDIR)
 endif
 
-CFLAGS=-Wall -Wextra
+CFLAGS=-Wall -Wextra -Weverything
 tablecode: tablecode.c
