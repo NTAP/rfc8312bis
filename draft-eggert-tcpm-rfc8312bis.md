@@ -720,7 +720,12 @@ This document does not require any IANA actions.
 
 --- back
 
-<!-- # Acknowledgements -->
+# Acknowledgements
+
+Richard Scheffenegger and Alexander Zimmermann originally co-authored
+{{?RFC8312}}.
+
+<!-- Anyone else to acknowledge? -->
 
 # Changes from RFC8312
 
