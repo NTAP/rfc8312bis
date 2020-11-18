@@ -729,6 +729,14 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 # Changes from RFC8312
 
+<!-- For future PRs, please include a bullet below that summarizes the change
+     and point to the PR number. -->
+
+## Since draft-eggert-tcpm-rfc8312bis-00
+
+- acknowledge former co-authors (#18)
+- prevent cwnd from becoming less than two (#9)
+
 ## Since RFC8312
 
 - converted to markdown and xml2rfc v3
