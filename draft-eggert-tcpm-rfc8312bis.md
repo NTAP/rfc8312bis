@@ -304,6 +304,7 @@ maximum segment size (MSS), and the unit of all times is seconds.
 
 beta_cubic:
 : CUBIC multiplication decrease factor as described in {{mult-dec}}
+
 C:
 : constant that determines the aggressiveness of CUBIC in competing
   with other congestion control algorithms in high BDP networks. Please see
@@ -315,27 +316,34 @@ C:
 Variables required to implement CUBIC are described in this section.
 
 RTT:
-: smoothed round-trip time in seconds calculated as described in {{!RFC6298}}
+: Smoothed round-trip time in seconds calculated as described in {{!RFC6298}}
+
 cwnd:
-: Current congestion window in segments.
+: Current congestion window in segments
+
 ssthresh:
-: Current slow start threshold in segments.
+: Current slow start threshold in segments
+
 W_max:
 : Size of the cwnd in segments just before the cwnd is reduced in the
-  last congestion event.
+  last congestion event
+
 W_last_max:
-: last value of W_max in segments before W_max is updated for the current
-  congestion event.
+: Last value of W_max in segments before W_max is updated for the current
+  congestion event
+
 K:
-: the time period in seconds it takes to increase the current congestion
+: The time period in seconds it takes to increase the current congestion
   window size to W_max
+
 W_cubic(t):
 : Target value of the congestion window in segments at time t in seconds
   based on the cubic increase function as described in {{win-inc}}
+
 W_est(t):
-: an estimate for the congestion window in segments at time t in seconds
+: An estimate for the congestion window in segments at time t in seconds
   in the TCP-friendly region, that is, an estimate for the congestion
-  window if the TCP-NewReno congestion controller was used.
+  window if the TCP-NewReno congestion controller was used
 
 ## Window Increase Function {#win-inc}
 
