@@ -625,45 +625,33 @@ window sizes of Standard TCP and HSTCP are from {{?RFC3649}}. The
 average window size of CUBIC is calculated using Eq. 6 and the CUBIC
 TCP-friendly region for three different values of C.
 
-~~~
-+--------+----------+-----------+------------+-----------+----------+
-|   Loss |  Average |   Average |      CUBIC |     CUBIC |    CUBIC |
-| Rate P |    TCP W |   HSTCP W |   (C=0.04) |   (C=0.4) |    (C=4) |
-+--------+----------+-----------+------------+-----------+----------+
-|  10^-2 |       12 |        12 |         12 |        12 |       12 |
-|  10^-3 |       38 |        38 |         38 |        38 |       59 |
-|  10^-4 |      120 |       263 |        120 |       187 |      333 |
-|  10^-5 |      379 |      1795 |        593 |      1054 |     1874 |
-|  10^-6 |     1200 |     12279 |       3332 |      5926 |    10538 |
-|  10^-7 |     3795 |     83981 |      18740 |     33325 |    59261 |
-|  10^-8 |    12000 |    574356 |     105383 |    187400 |   333250 |
-+--------+----------+-----------+------------+-----------+----------+
+| Loss Rate P | TCP | HSTCP | CUBIC (C=0.04) | CUBIC (C=0.4) | CUBIC (C=4) |
+| ---:| ---:| ---:| ---:| ---:| ---:|
+| 1.0e-02 | 12 | 12 | 12 | 12 | 12 |
+| 1.0e-03 | 38 | 38 | 38 | 38 | 59 |
+| 1.0e-04 | 120 | 263 | 120 | 187 | 333 |
+| 1.0e-05 | 379 | 1795 | 593 | 1054 | 1874 |
+| 1.0e-06 | 1200 | 12280 | 3332 | 5926 | 10538 |
+| 1.0e-07 | 3795 | 83981 | 18740 | 33325 | 59261 |
+| 1.0e-08 | 12000 | 574356 | 105383 | 187400 | 333250 |
+{: #tab1 title="Standard TCP, HSTCP, and CUBIC with RTT = 0.1 seconds"}
 
-                               Table 1
-~~~
-
-Table 1 describes the response function of Standard TCP, HSTCP, and
+{{tab1}} describes the response function of Standard TCP, HSTCP, and
 CUBIC in networks with RTT = 0.1 seconds. The average window size is
 in MSS-sized segments.
 
-~~~
-+--------+-----------+-----------+------------+-----------+---------+
-|   Loss |   Average |   Average |      CUBIC |     CUBIC |   CUBIC |
-| Rate P |     TCP W |   HSTCP W |   (C=0.04) |   (C=0.4) |   (C=4) |
-+--------+-----------+-----------+------------+-----------+---------+
-|  10^-2 |        12 |        12 |         12 |        12 |      12 |
-|  10^-3 |        38 |        38 |         38 |        38 |      38 |
-|  10^-4 |       120 |       263 |        120 |       120 |     120 |
-|  10^-5 |       379 |      1795 |        379 |       379 |     379 |
-|  10^-6 |      1200 |     12279 |       1200 |      1200 |    1874 |
-|  10^-7 |      3795 |     83981 |       3795 |      5926 |   10538 |
-|  10^-8 |     12000 |    574356 |      18740 |     33325 |   59261 |
-+--------+-----------+-----------+------------+-----------+---------+
+| Loss Rate P | TCP | HSTCP | CUBIC (C=0.04) | CUBIC (C=0.4) | CUBIC (C=4) |
+| ---:| ---:| ---:| ---:| ---:| ---:|
+| 1.0e-02 | 12 | 12 | 12 | 12 | 12 |
+| 1.0e-03 | 38 | 38 | 38 | 38 | 38 |
+| 1.0e-04 | 120 | 263 | 120 | 120 | 120 |
+| 1.0e-05 | 379 | 1795 | 379 | 379 | 379 |
+| 1.0e-06 | 1200 | 12280 | 1200 | 1200 | 1874 |
+| 1.0e-07 | 3795 | 83981 | 3795 | 5926 | 10538 |
+| 1.0e-08 | 12000 | 574356 | 18740 | 33325 | 59261 |
+{: #tab2 title="Standard TCP, HSTCP, and CUBIC with RTT = 0.01 seconds"}
 
-                               Table 2
-~~~
-
-Table 2 describes the response function of Standard TCP, HSTCP, and
+{{tab2}} describes the response function of Standard TCP, HSTCP, and
 CUBIC in networks with RTT = 0.01 seconds. The average window size
 is in MSS-sized segments.
 
@@ -702,21 +690,17 @@ The following table shows that to achieve the 10 Gbps rate, Standard
 TCP requires a packet loss rate of 2.0e-10, while CUBIC requires a
 packet loss rate of 2.9e-8.
 
-~~~
-   +------------------+-----------+---------+---------+---------+
-   | Throughput(Mbps) | Average W | TCP P   | HSTCP P | CUBIC P |
-   +------------------+-----------+---------+---------+---------+
-   |                1 |       8.3 | 2.0e-2  | 2.0e-2  | 2.0e-2  |
-   |               10 |      83.3 | 2.0e-4  | 3.9e-4  | 2.9e-4  |
-   |              100 |     833.3 | 2.0e-6  | 2.5e-5  | 1.4e-5  |
-   |             1000 |    8333.3 | 2.0e-8  | 1.5e-6  | 6.3e-7  |
-   |            10000 |   83333.3 | 2.0e-10 | 1.0e-7  | 2.9e-8  |
-   +------------------+-----------+---------+---------+---------+
+| Throughput (Mbps) | Average W | TCP P   | HSTCP P | CUBIC P |
+|------------------:|----------:|--------:|--------:|--------:|
+|                 1 |       8.3 | 2.0e-2  | 2.0e-2  | 2.0e-2  |
+|                10 |      83.3 | 2.0e-4  | 3.9e-4  | 2.9e-4  |
+|               100 |     833.3 | 2.0e-6  | 2.5e-5  | 1.4e-5  |
+|              1000 |    8333.3 | 2.0e-8  | 1.5e-6  | 6.3e-7  |
+|             10000 |   83333.3 | 2.0e-10 | 1.0e-7  | 2.9e-8  |
+{: #tab3 title="Required packet loss rate for Standard TCP,
+HSTCP, and CUBIC to achieve a certain throughput"}
 
-                               Table 3
-~~~
-
-Table 3 describes the required packet loss rate for Standard TCP,
+{{tab3}} describes the required packet loss rate for Standard TCP,
 HSTCP, and CUBIC to achieve a certain throughput. We use 1500-byte
 packets and an RTT of 0.1 seconds.
 

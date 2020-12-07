@@ -24,13 +24,14 @@ static long cubic(double C, double RTT, double p) {
 }
 
 static void print_table(int nr, double RTT) {
-  printf("\nTable %d (RTT=%gs)\n", nr, RTT);
-  printf("%-7s %12s %12s %12s %12s %12s\n", "P", "TCP", "HSTCP", "C=0.04",
-         "C=0.4", "C=4");
+  printf("\n<!--Table %d (RTT=%gs)-->\n", nr, RTT);
+  printf("| %s | %s | %s | %s | %s | %s |\n", "Loss Rate P", "TCP", "HSTCP",
+         "CUBIC (C=0.04)", "CUBIC (C=0.4)", "CUBIC (C=4)");
+  printf("| ---:| ---:| ---:| ---:| ---:| ---:|\n");
 
   for (long i = 2; i <= 8; i++) {
     const double p = pow(10, -i);
-    printf("%.1e %12ld %12ld %12ld %12ld %12ld\n", p, reno(p), hstcp(p),
+    printf("| %.1e | %ld | %ld | %ld | %ld | %ld |\n", p, reno(p), hstcp(p),
            cubic(0.04, RTT, p), cubic(0.4, RTT, p), cubic(4, RTT, p));
   }
 }
