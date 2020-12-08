@@ -796,14 +796,23 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 ## Since draft-eggert-tcpm-rfc8312bis-00
 
-- acknowledge former co-authors (#15)
-- prevent cwnd from becoming less than two (#7)
-- add list of variables and constants (#5, #6)
-- update K's definition and add bounds for CUBIC target cwnd (#1, #14)
-- update W_est to use AIMD approach (#20)
-- set alpha_aimd to 1 once W_est reaches W_max (#2)
-- add Vidhi as co-author (#17)
-- note for fast recovery during cwnd decrease due to congestion event (#11)
+- acknowledge former co-authors
+  ([#15](https://github.com/NTAP/rfc8312bis/issues/15))
+- prevent cwnd from becoming less than two
+  ([#7](https://github.com/NTAP/rfc8312bis/issues/7))
+- add list of variables and constants
+  ([#5](https://github.com/NTAP/rfc8312bis/issues/5),
+  [#6](https://github.com/NTAP/rfc8312bis/issues/5))
+- update K's definition and add bounds for CUBIC target cwnd
+  ([#1](https://github.com/NTAP/rfc8312bis/issues/1),
+  [#14](https://github.com/NTAP/rfc8312bis/issues/14))
+- update W_est to use AIMD approach
+  ([#20](https://github.com/NTAP/rfc8312bis/issues/20))
+- set alpha_aimd to 1 once W_est reaches W_max
+  ([#2](https://github.com/NTAP/rfc8312bis/issues/2))
+- add Vidhi as co-author ([#17](https://github.com/NTAP/rfc8312bis/issues/17))
+- note for fast recovery during cwnd decrease due to congestion event
+  ([#11](https://github.com/NTAP/rfc8312bis11/issues/11))
 
 ## Since RFC8312
 
