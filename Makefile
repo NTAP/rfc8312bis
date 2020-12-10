@@ -6,10 +6,6 @@ ASCIITEX := $(shell which asciitex)
 SVGCHECK := $(shell which svgcheck)
 TEX2SVG := $(shell which tex2svg)
 
-$(info ${ASCIITEX})
-$(info ${SVGCHECK})
-$(info ${TEX2SVG})
-
 apt-update:
 	DEBIAN_FRONTEND=noninteractive apt-get update
 
@@ -35,6 +31,12 @@ asciitex: apt-update
 	cmake -S asciiTeX -B build -DDISABLE_TESTING=ON
 	cmake --build build
 	cmake --install build
+	-kramdown-rfc2629 -V
+	-xml2rfc -V
+	-npm -v
+	-tex2svg --version
+	-svgcheck -V
+	-asciitex -v
 else
 asciitex:
 endif
