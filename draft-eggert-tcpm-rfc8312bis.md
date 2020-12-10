@@ -310,21 +310,19 @@ maximum segment size (MSS), and the unit of all times is seconds.
 
 ### Constants of interest
 
-{{{β}{}}}<sub>cubic</sub>:
+<!--{{{β}{}}}-->beta<sub>cubic</sub>:
 : CUBIC multiplication decrease factor as described in {{mult-dec}}
 
 C:
 : constant that determines the aggressiveness of CUBIC in competing
   with other congestion control algorithms in high BDP networks. Please
   see {{discussion}} for more explanation on how it is set. The unit for
-  C is segment / (second)^3
+  C is
 
-<!-- this does not work?
 ~~~ math
 \frac{segment}{second^3}
 ~~~
 {: artwork-align="center" }
--->
 
 ### Variables of interest
 
