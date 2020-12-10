@@ -317,7 +317,7 @@ C:
 : constant that determines the aggressiveness of CUBIC in competing
   with other congestion control algorithms in high BDP networks. Please
   see {{discussion}} for more explanation on how it is set. The unit for
--  C is segment / (second)^3
+  C is segment / (second)^3
 
 <!-- this does not work?
 ~~~ math

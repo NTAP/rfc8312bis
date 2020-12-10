@@ -1,6 +1,6 @@
-.PHONY: apt-update tex2svg asciitex svgcheck
+.PHONY: apt-update tex2svg asciitex svgcheck versions
 
-latest:: tex2svg asciitex svgcheck
+latest:: tex2svg asciitex svgcheck versions
 
 ASCIITEX := $(shell which asciitex)
 SVGCHECK := $(shell which svgcheck)
@@ -31,15 +31,17 @@ asciitex: apt-update
 	cmake -S asciiTeX -B build -DDISABLE_TESTING=ON
 	cmake --build build
 	cmake --install build
+else
+asciitex:
+endif
+
+versions:
 	-kramdown-rfc2629 -V
 	-xml2rfc -V
 	-npm -v
 	-tex2svg --version
 	-svgcheck -V
 	-asciitex -v
-else
-asciitex:
-endif
 
 LIBDIR := lib
 include $(LIBDIR)/main.mk
