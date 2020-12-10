@@ -337,10 +337,6 @@ W_max:
 : Size of the cwnd in segments just before the cwnd is reduced in the
   last congestion event
 
-W_last_max:
-: Last value of W_max in segments before W_max is updated for the current
-  congestion event
-
 K:
 : The time period in seconds it takes to increase the current congestion
   window size to W_max
