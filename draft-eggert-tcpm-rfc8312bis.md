@@ -529,13 +529,13 @@ as follows before the window reduction as described in Section 4.5.
       }
 ~~~
 
-At a congestion event, if the current cwnd is less than W_max, this 
+At a congestion event, if the current cwnd is less than W_max, this
 indicates that the saturation point experienced by this flow is getting
-reduced because of the change in available bandwidth.  Then we allow 
-this flow to release more bandwidth by reducing W_max further.  This 
-action effectively lengthens the time for this flow to increase its 
-congestion window because the reduced W_max forces the flow to have 
-the plateau earlier.  This allows more time for the new flow to catch 
+reduced because of the change in available bandwidth.  Then we allow
+this flow to release more bandwidth by reducing W_max further.  This
+action effectively lengthens the time for this flow to increase its
+congestion window because the reduced W_max forces the flow to have
+the plateau earlier.  This allows more time for the new flow to catch
 up to its congestion window size.
 
 The fast convergence is designed for network environments with
