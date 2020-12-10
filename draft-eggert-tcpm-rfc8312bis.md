@@ -518,17 +518,25 @@ bandwidth of the network. To speed up this bandwidth release by
 existing flows, the following mechanism called "fast convergence"
 SHOULD be implemented.
 
-With fast convergence, when a congestion event occurs, we update W_max as follows before the window reduction as described in Section 4.5.
+With fast convergence, when a congestion event occurs, we update W_max
+as follows before the window reduction as described in Section 4.5.
 
-```
+~~~
       if (cwnd < W_max){                        // should we make room for others
           W_max = W_max*(1.0+beta_cubic)/2.0;   // further reduce W_max
       } else {
           W_max = cwnd                          // remember cwnd before reduction
       }
-```
+~~~
 
-At a congestion event, if the current cwnd is less than W_max, this indicates that the saturation point experienced by this flow is getting reduced because of the change in available bandwidth.  Then we allow this flow to release more bandwidth by reducing W_max further.  This action effectively lengthens the time for this flow to increase its congestion window because the reduced W_max forces the flow to have the plateau earlier.  This allows more time for the new flow to catch up to its congestion window size.
+At a congestion event, if the current cwnd is less than W_max, this 
+indicates that the saturation point experienced by this flow is getting
+reduced because of the change in available bandwidth.  Then we allow 
+this flow to release more bandwidth by reducing W_max further.  This 
+action effectively lengthens the time for this flow to increase its 
+congestion window because the reduced W_max forces the flow to have 
+the plateau earlier.  This allows more time for the new flow to catch 
+up to its congestion window size.
 
 The fast convergence is designed for network environments with
 multiple CUBIC flows. In network environments with only a single
