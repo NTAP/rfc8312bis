@@ -553,7 +553,9 @@ During the first congestion avoidance after a timeout, CUBIC
 increases its congestion window size using Eq. 1, where t is the
 elapsed time since the beginning of the current congestion avoidance,
 K is set to 0, and W_max is set to the congestion window size at the
-beginning of the current congestion avoidance.
+beginning of the current congestion avoidance. In addition, for the 
+tcp-friendliness region, W_est should be set to the congestion window
+size at the beginning of the current congestion avoidance.
 
 ## Slow Start
 
@@ -805,6 +807,7 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 - add Vidhi as co-author ([#17](https://github.com/NTAP/rfc8312bis/issues/17))
 - note for fast recovery during cwnd decrease due to congestion event
   ([#11](https://github.com/NTAP/rfc8312bis11/issues/11))
+ - initialize W_est after timeout and remove variable W_last_max ([#28](https://github.com/NTAP/rfc8312bis/issues/28))
 
 ## Since RFC8312
 
