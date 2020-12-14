@@ -618,7 +618,7 @@ In case of timeout, CUBIC follows Standard TCP to reduce cwnd
 {{mult-dec}}) that is different from Standard TCP {{!RFC5681}}.
 
 During the first congestion avoidance after a timeout, CUBIC
-increases its congestion window size using Eq. 1, where t is the
+increases its congestion window size using {{eq1}}, where t is the
 elapsed time since the beginning of the current congestion avoidance,
 K is set to 0, and W_max is set to the congestion window size at the
 beginning of the current congestion avoidance. In addition, for the
