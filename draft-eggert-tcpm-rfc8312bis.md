@@ -331,7 +331,7 @@ during the different stages of the CUBIC congestion controller.
 The unit of all window sizes in this document is segments of the
 maximum segment size (MSS), and the unit of all times is seconds.
 
-### Constants of interest
+### Constants of Interest
 
 {{{β}{}}}*<sub>cubic</sub>*:
 CUBIC multiplication decrease factor as described in {{mult-dec}}.
@@ -347,7 +347,7 @@ with other congestion control algorithms in high BDP networks. Please see
 ~~~
 {: artwork-align="center" }
 
-### Variables of interest
+### Variables of Interest
 
 Variables required to implement CUBIC are described in this section.
 
