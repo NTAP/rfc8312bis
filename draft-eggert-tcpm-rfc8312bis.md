@@ -38,6 +38,16 @@ author:
   email: sangtae.ha@colorado.edu
   uri: "https://netstech.org/sangtaeha/"
 -
+  name: Injong Rhee
+  org: Bowery Farming
+  abbrev: Bowery
+  street: 151 W 26TH Street, 12TH Floor
+  city: New York
+  region: NY
+  code: 10001
+  country: USA
+  email: injongrhee@gmail.com
+-
   name: Vidhi Goel
   org: Apple Inc.
   street: One Apple Park Way
