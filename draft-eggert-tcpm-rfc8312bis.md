@@ -372,8 +372,13 @@ size at the beginning of the current congestion avoidance stage to
 *current_time*:
 Current time of the system in seconds.
 
-*epoch_start*:
-The time in seconds at which the current congestion avoidance stage starts.
+*epoch<sub>start</sub>*:
+The time in seconds at which the current congestion avoidance stage
+starts.
+
+*cwnd<sub>start</sub>*:
+The *cwnd* at the beginning of the current congestion avoidance stage,
+i.e., at time *epoch<sub>start</sub>*.
 
 W<sub>cubic</sub>(*t*):
 Target value of the congestion window in segments at time t in seconds
@@ -410,27 +415,28 @@ where t is the elapsed time in seconds from the beginning of the
 current congestion avoidance stage, that is,
 
 ~~~ math
-t = current\_time - epoch\_start
+t = current\_time - epoch_{start}
 ~~~
 {: artwork-align="center" }
 
-and where *epoch_start* is the time at which the current congestion
-avoidance stage starts. *K* is the time period that the above function
-takes to increase the congestion window size at the beginning of the
-current congestion avoidance stage to *W<sub>max</sub>* if there are
-no further congestion events and is calculated using the following
-equation:
+and where *epoch<sub>start</sub>* is the time at which the current
+congestion avoidance stage starts. *K* is the time period that the
+above function takes to increase the congestion window size at the
+beginning of the current congestion avoidance stage to
+*W<sub>max</sub>* if there are no further congestion events and is
+calculated using the following equation:
 
 ~~~ math
-K = \sqrt[3]{\frac{W_{max} - cwnd}{C}}
+K = \sqrt[3]{\frac{W_{max} - cwnd_{start}}{C}}
 ~~~
 {: #eq2 artwork-align="center" }
 
-where *cwnd* is the congestion window at the beginning of the current
-congestion avoidance stage. *cwnd* is calculated as described in
-{{mult-dec}} when a congestion event is detected, although
-implementations can further adjust *cwnd* based on other fast recovery
-mechanisms. In special cases, if *cwnd* is greater than
+where *cwnd<sub>start</sub>* is the congestion window at the beginning
+of the current congestion avoidance stage. *cwnd<sub>start</sub>* is
+calculated as described in {{mult-dec}} when a congestion event is
+detected, although implementations can further adjust
+*cwnd<sub>start</sub>* based on other fast recovery mechanisms. In
+special cases, if *cwnd<sub>start</sub>* is greater than
 *W<sub>max</sub>*, *K* is set to 0.
 
 Upon receiving an ACK during congestion avoidance, CUBIC computes the
@@ -476,8 +482,8 @@ at least the same throughput as Standard TCP.
 The TCP-friendly region is designed according to the analysis
 described in {{FHP00}}. The analysis studies the performance of an
 Additive Increase and Multiplicative Decrease (AIMD) algorithm with an
-additive factor of {{{α}{}}}*<sub>aimd</sub>* (segments per *RTT*) and a
-multiplicative factor of {{{β}{}}}*<sub>aimd</sub>*, denoted by
+additive factor of {{{α}{}}}*<sub>aimd</sub>* (segments per *RTT*) and
+a multiplicative factor of {{{β}{}}}*<sub>aimd</sub>*, denoted by
 AIMD({{{α}{}}}*<sub>aimd</sub>*, {{{β}{}}}*<sub>aimd</sub>*).
 Specifically, the average congestion window size of
 AIMD({{{α}{}}}*<sub>aimd</sub>*, {{{β}{}}}*<sub>aimd</sub>*) can be
@@ -677,7 +683,7 @@ prior\_cwnd = cwnd \\
 prior\_ssthresh = ssthresh \\
 prior\_W_{max} = W_{max} \\
 prior\_K = K \\
-prior\_epoch\_start = epoch\_start \\
+prior\_epoch_{start} = epoch_{start} \\
 prior\_W\_{est} = W_{est} \\
 \end{array}
 ~~~
@@ -685,11 +691,11 @@ prior\_W\_{est} = W_{est} \\
 
 CUBIC MAY implement an algorithm to detect spurious retransmissions,
 such as DSACK {{?RFC3708}}, Forward RTO-Recovery {{?RFC5682}} or Eifel
-{{?RFC3522}}. Once a spurious congestion event is detected, CUBIC SHOULD
-restore the original values of above mentioned variables as follows if
-the current *cwnd* is lower than *prior_cwnd*. Restoring to the
-original values ensures that CUBIC's performance is similar to what it
-would be if there were no spurious losses.
+{{?RFC3522}}. Once a spurious congestion event is detected, CUBIC
+SHOULD restore the original values of above mentioned variables as
+follows if the current *cwnd* is lower than *prior_cwnd*. Restoring to
+the original values ensures that CUBIC's performance is similar to
+what it would be if there were no spurious losses.
 
 ~~~ math
 \left.
@@ -698,7 +704,7 @@ cwnd = prior\_cwnd \\
 ssthresh = prior\_ssthresh \\
 W_{max} = prior\_W_{max} \\
 K = prior\_K \\
-epoch\_start = prior\_epoch\_start \\
+epoch_{start} = prior\_epoch_{start} \\
 W_{est} = prior\_W_{est} \\
 \end{array}
 \right\}
@@ -807,12 +813,12 @@ in MSS-sized segments.
 
 Both tables show that CUBIC with any of these three *C* values is more
 friendly to TCP than HSTCP, especially in networks with a short *RTT*
-where TCP performs reasonably well. For example, in a network with *RTT*
-= 0.01 seconds and p=10^-6, TCP has an average window of 1200 packets.
-If the packet size is 1500 bytes, then TCP can achieve an average rate
-of 1.44 Gbps. In this case, CUBIC with *C*=0.04 or *C*=0.4 achieves
-exactly the same rate as Standard TCP, whereas HSTCP is about ten
-times more aggressive than Standard TCP.
+where TCP performs reasonably well. For example, in a network with
+*RTT* = 0.01 seconds and p=10^-6, TCP has an average window of 1200
+packets. If the packet size is 1500 bytes, then TCP can achieve an
+average rate of 1.44 Gbps. In this case, CUBIC with *C*=0.04 or
+*C*=0.4 achieves exactly the same rate as Standard TCP, whereas HSTCP
+is about ten times more aggressive than Standard TCP.
 
 We can see that *C* determines the aggressiveness of CUBIC in
 competing with other congestion control algorithms for bandwidth.
