@@ -42,10 +42,10 @@ jobs:
           refcache-
 
     - name: "Build Drafts"
-      uses: martinthomson/i-d-template@v1
+      uses: martinthomson/i-d-template@v1m
 
     - name: "Update GitHub Pages"
-      uses: martinthomson/i-d-template@v1
+      uses: martinthomson/i-d-template@v1m
       if: ${{ github.event_name == 'push' }}
       with:
         make: gh-pages
