@@ -149,9 +149,9 @@ the traditional TCP standards only in the congestion control algorithm on
 the sender side. In particular, it uses a cubic function instead of a
 linear window increase function of the traditional TCP standards to
 improve scalability and stability under fast and long-distance
-networks. CUBIC and its predecessor algorithm have been adopted as
-defaults by Linux, Android, Windows, and Apple stacks, and have been
-used for many years. This document
+networks. CUBIC has been adopted as
+the default TCP congestion control algorithm by Linux, Android,
+Windows, and Apple stacks. This document
 provides a specification of CUBIC to enable third-party
 implementations and to solicit community feedback through
 experimentation on the performance of CUBIC.
@@ -182,8 +182,10 @@ of congestion window sizes over several hundreds of packets. This
 problem is equally applicable to all Reno-style TCP standards and
 their variants, including TCP-Reno {{!RFC5681}}, TCP-NewReno
 {{!RFC6582}}{{!RFC6675}}, SCTP {{?RFC4960}}, and TFRC {{!RFC5348}},
-which use the same linear increase function for window growth, which
-we refer to collectively as "AIMD TCP" below.
+which use the same linear increase function for window growth.
+We refer to all Reno-style TCP standards and
+their variants collectively as "AIMD TCP", below because they use
+the Additive Increase and Multiplicative Decrease algorithm (AIMD).
 
 CUBIC, originally proposed in {{HRX08}}, is a modification to the
 congestion control algorithm of AIMD TCP to remedy this problem.
@@ -201,7 +203,7 @@ to AIMD TCP in bandwidth usage than BIC-TCP while maintaining the
 strengths of BIC-TCP such as stability, window scalability, and RTT
 fairness. CUBIC has been adopted as the default TCP
 congestion control algorithm in Linux, Andoid, Windows,
-and Apple stacks, and has been deployed globally.
+and Apple stacks, and has been used and deployed globally.
 Through extensive testing in various Internet scenarios, we
 believe that CUBIC is safe for deployment in the global
 Internet.
@@ -270,8 +272,8 @@ network, likely causing frequent global loss synchronizations.
 Principle 2: CUBIC promotes per-flow fairness to AIMD TCP. Note
 that AIMD TCP performs well under short RTT and small bandwidth
 (or small BDP) networks. There is only a scalability problem in
-networks with long RTTs and large bandwidth (or large BDP). An
-alternative congestion control algorithm to AIMD TCP designed to
+networks with long RTTs and large bandwidth (or large BDP). A
+congestion control algorithm designed to
 be friendly to AIMD TCP on a per-flow basis must operate to
 increase its congestion window less aggressively in small BDP networks
 than in large BDP networks. The aggressiveness of CUBIC mainly depends
@@ -383,7 +385,7 @@ The *cwnd* at the beginning of the current congestion avoidance stage,
 i.e., at time *epoch<sub>start</sub>*.
 
 W<sub>cubic</sub>(*t*):
-Target value of the congestion window in segments at time t in seconds
+The congestion window in segments at time t in seconds
 based on the cubic increase function as described in {{win-inc}}.
 
 *target*:
@@ -392,14 +394,14 @@ that is, W<sub>cubic</sub>(*t* + *RTT*) as described in {{win-inc}}.
 
 *W<sub>est</sub>*:
 An estimate for the congestion window in segments in the AIMD-friendly
-region, that is, an estimate for the congestion window using the AIMD
-approach similar to TCP-NewReno congestion controller.
+region, that is, an estimate for the congestion window of AIMD TCP.
 
 ## Window Increase Function {#win-inc}
 
 CUBIC maintains the acknowledgment (ACK) clocking of AIMD TCP by
 increasing the congestion window only at the reception of an ACK. It
-does not make any change to the fast recovery and retransmit of TCP,
+does not make any change to the fast recovery and retransmit of
+AIMD TCP,
 such as TCP-NewReno {{!RFC6582}}{{!RFC6675}}. During congestion
 avoidance after a congestion event where a packet loss is detected by
 duplicate ACKs or a network congestion is detected by ACKs with
@@ -483,7 +485,7 @@ at least the same throughput as AIMD TCP.
 
 The AIMD-friendly region is designed according to the analysis
 described in {{FHP00}}. The analysis studies the performance of an
-Additive Increase and Multiplicative Decrease (AIMD) algorithm with an
+AIMD algorithm with an
 additive factor of {{{α}{}}}*<sub>aimd</sub>* (segments per *RTT*) and
 a multiplicative factor of {{{β}{}}}*<sub>aimd</sub>*, denoted by
 AIMD({{{α}{}}}*<sub>aimd</sub>*, {{{β}{}}}*<sub>aimd</sub>*).
@@ -659,17 +661,17 @@ its congestion window size using {{eq1}}, where t is the elapsed time
 since the beginning of the current congestion avoidance, *K* is set to
 0, and *W<sub>max</sub>* is set to the congestion window size at the
 beginning of the current congestion avoidance. In addition, for the
-tcp-friendliness region, *W<sub>est</sub>* should be set to the
+AIMD-friendly region, *W<sub>est</sub>* should be set to the
 congestion window size at the beginning of the current congestion
 avoidance.
 
 ## Spurious Congestion Events
 
-For the case where CUBIC reduces its congestion window in response to
+For the cases where CUBIC reduces its congestion window in response to
 detection of packet loss via duplicate ACKs or timeout, there is a
 possibility that the missing ACK would arrive after the congestion
 window reduction and the corresponding packet retransmission. For
-example, packet reordering which is common in networks could trigger
+example, packet reordering that is common in networks could trigger
 this behavior. A high degree of packet reordering could cause multiple
 events of congestion window reduction where spurious losses are
 incorrectly interpreted as congestion signals, thus degrading CUBIC's
@@ -725,7 +727,7 @@ CUBIC MUST employ a slow-start algorithm, when *cwnd* is no more than
 *ssthresh*. Among the slow-start algorithms, CUBIC MAY choose the
 AIMD TCP slow start {{!RFC5681}} in general networks, or the
 limited slow start {{?RFC3742}} or hybrid slow start {{HR08}} for fast
-and long- distance networks.
+and long-distance networks.
 
 In the case when CUBIC runs the hybrid slow start {{HR08}}, it may
 exit the first slow start without incurring any packet loss and thus
@@ -827,7 +829,7 @@ competing with other congestion control algorithms for bandwidth.
 CUBIC is more friendly to AIMD TCP, if the value of *C* is lower.
 However, we do not recommend setting *C* to a very low value like
 0.04, since CUBIC with a low *C* cannot efficiently use the bandwidth
-in long-*RTT* and high-bandwidth networks. Based on these observations
+in fast and long-distance networks. Based on these observations
 and our experiments, we find *C*=0.4 gives a good balance between AIMD-
 friendliness and aggressiveness of window increase. Therefore, *C*
 SHOULD be set to 0.4. With *C* set to 0.4, {{eq6}} is reduced to:
@@ -843,7 +845,7 @@ CUBIC.
 ## Using Spare Capacity
 
 CUBIC uses a more aggressive window increase function than AIMD
-TCP under long-*RTT* and high-bandwidth networks.
+TCP under fast and long-distance networks.
 
 The following table shows that to achieve the 10 Gbps rate, AIMD
 TCP requires a packet loss rate of 2.0e-10, while CUBIC requires a
@@ -1034,5 +1036,5 @@ differences between its original paper and {{?RFC8312}}.
 - Its pseudocode used *W<sub>last_max</sub>* while {{?RFC8312}} used
   *W<sub>max</sub>*.
 
-- Its AIMD friendly window was W<sub>tcp</sub> while {{?RFC8312}} used
+- Its AIMD-friendly window was W<sub>tcp</sub> while {{?RFC8312}} used
   *W<sub>est</sub>*.
