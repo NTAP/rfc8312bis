@@ -25,7 +25,7 @@ static long cubic(double C, double RTT, double p) {
 
 static void print_table(int nr, double RTT) {
   printf("\n<!--Table %d (RTT=%gs)-->\n", nr, RTT);
-  printf("| %s | %s | %s | %s | %s | %s |\n", "Loss Rate P", "TCP", "HSTCP",
+  printf("| %s | %s | %s | %s | %s | %s |\n", "Loss Rate P", "AIMD", "HSTCP",
          "CUBIC (C=0.04)", "CUBIC (C=0.4)", "CUBIC (C=4)");
   printf("| ---:| ---:| ---:| ---:| ---:| ---:|\n");
 
