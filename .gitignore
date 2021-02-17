@@ -5,6 +5,7 @@
 *.txt
 *.upload
 *~
+.markdownlintrc
 .refcache
 .tags
 .targets.mk

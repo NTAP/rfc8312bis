@@ -14,6 +14,9 @@ on:
     - LICENSE.md
     - .gitignore
 
+env:
+  LANG: "en_US.UTF-8"
+
 jobs:
   build:
     name: "Update Editor's Copy"
@@ -39,10 +42,10 @@ jobs:
           refcache-
 
     - name: "Build Drafts"
-      uses: martinthomson/i-d-template@v1
+      uses: martinthomson/i-d-template@v1m
 
     - name: "Update GitHub Pages"
-      uses: martinthomson/i-d-template@v1
+      uses: martinthomson/i-d-template@v1m
       if: ${{ github.event_name == 'push' }}
       with:
         make: gh-pages
@@ -57,3 +60,8 @@ jobs:
       uses: actions/upload-artifact@v2
       with:
         path: "*.txt"
+
+    - name: "Save XML"
+      uses: actions/upload-artifact@v2
+      with:
+        path: "*.xml"
