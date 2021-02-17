@@ -150,7 +150,7 @@ the sender side. In particular, it uses a cubic function instead of a
 linear window increase function of the traditional TCP standards to
 improve scalability and stability under fast and long-distance
 networks. CUBIC and its predecessor algorithm have been adopted as
-defaults by Linux, Android, Windows, and Apple stacks, and have been 
+defaults by Linux, Android, Windows, and Apple stacks, and have been
 used for many years. This document
 provides a specification of CUBIC to enable third-party
 implementations and to solicit community feedback through
@@ -200,8 +200,8 @@ function as BIC-TCP and is designed to be less aggressive and fairer
 to AIMD TCP in bandwidth usage than BIC-TCP while maintaining the
 strengths of BIC-TCP such as stability, window scalability, and RTT
 fairness. CUBIC has been adopted as the default TCP
-congestion control algorithm in Linux, Andoid, Windows, 
-and Apple stacks, and has been deployed globally. 
+congestion control algorithm in Linux, Andoid, Windows,
+and Apple stacks, and has been deployed globally.
 Through extensive testing in various Internet scenarios, we
 believe that CUBIC is safe for deployment in the global
 Internet.
@@ -989,13 +989,13 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
   *W<sub>last_max</sub>*
   ([#28](https://github.com/NTAP/rfc8312bis/issues/28))
   
-- Rename TCP-Friendly to AIMD-Friendly and rename Standard TCP 
-  to AIMD TCP to avoid confusion as CUBIC has been widely used 
-  in the Internet. 
+- Rename TCP-Friendly to AIMD-Friendly and rename Standard TCP
+  to AIMD TCP to avoid confusion as CUBIC has been widely used
+  in the Internet.
   ([#38](https://github.com/NTAP/rfc8312bis/issues/38))
 
-- Change introductory text to reflect the significant broader 
-  deployment of CUBIC in the Internet
+- Change introductory text to reflect the significant broader
+  deployment of CUBIC in the Internet.
   ([#39](https://github.com/NTAP/rfc8312bis/issues/39))
   
 ## Since RFC8312
