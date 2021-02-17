@@ -150,7 +150,8 @@ the sender side. In particular, it uses a cubic function instead of a
 linear window increase function of the traditional TCP standards to
 improve scalability and stability under fast and long-distance
 networks. CUBIC and its predecessor algorithm have been adopted as
-defaults by Linux, Android, Windows, and Apple stacks, and have been used for many years. This document
+defaults by Linux, Android, Windows, and Apple stacks, and have been 
+used for many years. This document
 provides a specification of CUBIC to enable third-party
 implementations and to solicit community feedback through
 experimentation on the performance of CUBIC.
@@ -199,7 +200,9 @@ function as BIC-TCP and is designed to be less aggressive and fairer
 to AIMD TCP in bandwidth usage than BIC-TCP while maintaining the
 strengths of BIC-TCP such as stability, window scalability, and RTT
 fairness. CUBIC has been adopted as the default TCP
-congestion control algorithm in Linux, Andoid, Windows, and Apple stacks, and has been deployed globally. Through extensive testing in various Internet scenarios, we
+congestion control algorithm in Linux, Andoid, Windows, 
+and Apple stacks, and has been deployed globally. 
+Through extensive testing in various Internet scenarios, we
 believe that CUBIC is safe for deployment in the global
 Internet.
 
@@ -986,13 +989,15 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
   *W<sub>last_max</sub>*
   ([#28](https://github.com/NTAP/rfc8312bis/issues/28))
   
-- Rename TCP-Friendly to AIMD-Friendly and rename Standard TCP to AIMD TCP to avoid confusion as CUBIC has been widely used in the Internet. 
+- Rename TCP-Friendly to AIMD-Friendly and rename Standard TCP 
+  to AIMD TCP to avoid confusion as CUBIC has been widely used 
+  in the Internet. 
   ([#38](https://github.com/NTAP/rfc8312bis/issues/38))
 
-- Change introductory text to reflect the significant broader deployment of CUBIC in the Internet
+- Change introductory text to reflect the significant broader 
+  deployment of CUBIC in the Internet
   ([#39](https://github.com/NTAP/rfc8312bis/issues/39))
   
-
 ## Since RFC8312
 
 - converted to Markdown and xml2rfc v3
@@ -1029,5 +1034,5 @@ differences between its original paper and {{?RFC8312}}.
 - Its pseudocode used *W<sub>last_max</sub>* while {{?RFC8312}} used
   *W<sub>max</sub>*.
 
-- Its TCP friendly window was W<sub>tcp</sub> while {{?RFC8312}} used
+- Its AIMD friendly window was W<sub>tcp</sub> while {{?RFC8312}} used
   *W<sub>est</sub>*.
