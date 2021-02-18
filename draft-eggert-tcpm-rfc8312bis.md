@@ -152,9 +152,10 @@ improve scalability and stability under fast and long-distance
 networks. CUBIC has been adopted as
 the default TCP congestion control algorithm by Linux, Android,
 Windows, and Apple stacks. This document
-provides a specification of CUBIC to enable third-party
-implementations and to solicit community feedback through
-experimentation on the performance of CUBIC.
+updates the specification of CUBIC to include algorithmic
+improvements based on these implementations and recent
+academic work. Based on the extensive deployment experience
+with CUBIC, it also moves the specification to the Standards Track.
 
 This documents obsoletes {{?RFC8312}}, updating the specification of
 CUBIC to conform to the current Linux version.
