@@ -960,6 +960,17 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
 
+## Since draft-eggert-tcpm-rfc8312bis-01
+
+- Rename TCP-Friendly to AIMD-Friendly and rename Standard TCP
+  to AIMD TCP to avoid confusion as CUBIC has been widely used
+  in the Internet.
+  ([#38](https://github.com/NTAP/rfc8312bis/issues/38))
+
+- Change introductory text to reflect the significant broader
+  deployment of CUBIC in the Internet.
+  ([#39](https://github.com/NTAP/rfc8312bis/issues/39))
+
 ## Since draft-eggert-tcpm-rfc8312bis-00
 
 - acknowledge former co-authors
@@ -996,15 +1007,6 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 - initialize *W<sub>est</sub>* after timeout and remove variable
   *W<sub>last_max</sub>*
   ([#28](https://github.com/NTAP/rfc8312bis/issues/28))
-  
-- Rename TCP-Friendly to AIMD-Friendly and rename Standard TCP
-  to AIMD TCP to avoid confusion as CUBIC has been widely used
-  in the Internet.
-  ([#38](https://github.com/NTAP/rfc8312bis/issues/38))
-
-- Change introductory text to reflect the significant broader
-  deployment of CUBIC in the Internet.
-  ([#39](https://github.com/NTAP/rfc8312bis/issues/39))
   
 ## Since RFC8312
 
