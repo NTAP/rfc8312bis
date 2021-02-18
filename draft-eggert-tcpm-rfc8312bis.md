@@ -543,7 +543,7 @@ W_{est} = W_{est} + α_{aimd} * \frac{segments\_acked}{cwnd}
 Note that once *W<sub>est</sub>* reaches *W<sub>max</sub>*, that is,
 *W<sub>est</sub>* >= *W<sub>max</sub>*, {{{α}{}}}*<sub>aimd</sub>*
 SHOULD be set to 1 to achieve the same congestion window increment as
-AIMD TCP that uses AIMD(1, 0.5).
+AIMD TCP, which uses AIMD(1, 0.5).
 
 ## Concave Region
 
