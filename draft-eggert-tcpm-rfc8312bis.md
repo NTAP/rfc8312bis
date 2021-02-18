@@ -206,9 +206,11 @@ strengths of BIC-TCP such as stability, window scalability, and RTT
 fairness. CUBIC has been adopted as the default TCP
 congestion control algorithm in Linux, Andoid, Windows,
 and Apple stacks, and has been used and deployed globally.
-Through extensive testing in various Internet scenarios, we
-believe that CUBIC is safe for deployment in the global
-Internet.
+Extensive, decade-long deployment experience in vastly different
+Internet scenarios has convincingly demonstrated that CUBIC is
+safe for deployment on the global Internet and delivers substantial
+benefits over traditional AIMD congestion control. It is therefore to
+be regarded as the current standard for TCP congestion control.
 
 In the following sections, we first briefly explain the design
 principles of CUBIC, then provide the exact specification of CUBIC,
