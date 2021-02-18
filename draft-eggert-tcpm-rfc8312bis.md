@@ -243,7 +243,9 @@ Principle 4:
 : CUBIC appropriately sets its multiplicative window decrease factor
   in order to balance between the scalability and convergence speed.
 
-Principle 1: For better network utilization and stability, CUBIC
+## Principle 1 for the CUBIC Increase Function
+
+For better network utilization and stability, CUBIC
 {{HRX08}} uses a cubic window increase function in terms of the
 elapsed time from the last congestion event. While most alternative
 congestion control algorithms to AIMD TCP increase the congestion
@@ -272,7 +274,9 @@ maximum increments around *W<sub>max</sub>*, and thus introduce a
 large number of packet bursts around the saturation point of the
 network, likely causing frequent global loss synchronizations.
 
-Principle 2: CUBIC promotes per-flow fairness to AIMD TCP. Note
+## Principle 2 for AIMD Friendliness
+
+CUBIC promotes per-flow fairness to AIMD TCP. Note
 that AIMD TCP performs well under short RTT and small bandwidth
 (or small BDP) networks. There is only a scalability problem in
 networks with long RTTs and large bandwidth (or large BDP). A
@@ -290,7 +294,9 @@ of AIMD TCP to ensure that CUBIC achieves at least the same
 throughput as AIMD TCP in small BDP networks. We call this region
 where CUBIC behaves like AIMD TCP, the "AIMD-friendly region".
 
-Principle 3: Two CUBIC flows with different RTTs have their throughput
+## Principle 3 for RTT Fairness
+
+Two CUBIC flows with different RTTs have their throughput
 ratio linearly proportional to the inverse of their RTT ratio, where
 the throughput of a flow is approximately the size of its congestion
 window divided by its RTT. Specifically, CUBIC maintains a window
@@ -312,7 +318,9 @@ throughput for flows with different RTTs) or a higher-order throughput
 ratio (e.g., a quadratical throughput ratio of AIMD TCP under low
 statistical multiplexing environments).
 
-Principle 4: To balance between the scalability and convergence speed,
+## Principle 4 for the CUBIC Decrease Factor
+
+To balance between the scalability and convergence speed,
 CUBIC sets the multiplicative window decrease factor to 0.7 while
 AIMD TCP uses 0.5. While this improves the scalability of CUBIC, a
 side effect of this decision is slower convergence, especially under
