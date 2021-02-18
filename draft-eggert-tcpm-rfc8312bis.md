@@ -150,7 +150,7 @@ the sender side. In particular, it uses a cubic function instead of a
 linear window increase function of the traditional TCP standards to
 improve scalability and stability under fast and long-distance
 networks. CUBIC has been adopted as
-the default TCP congestion control algorithm by Linux, Android,
+the default TCP congestion control algorithm by Linux,
 Windows, and Apple stacks. This document
 updates the specification of CUBIC to include algorithmic
 improvements based on these implementations and recent
@@ -189,8 +189,7 @@ their variants collectively as "AIMD TCP", below because they use
 the Additive Increase and Multiplicative Decrease algorithm (AIMD).
 
 CUBIC, originally proposed in {{HRX08}}, is a modification to the
-congestion control algorithm of traditional Additive Increase and
-Multiplicative Decrease (AIMD) TCP to remedy this problem.
+congestion control algorithm of traditional AIMD TCP to remedy this problem.
 This document describes the most recent specification of CUBIC.
 Specifically, CUBIC uses a cubic function instead of a linear window
 increase function of AIMD TCP to improve scalability and stability
@@ -204,7 +203,7 @@ function as BIC-TCP and is designed to be less aggressive and fairer
 to AIMD TCP in bandwidth usage than BIC-TCP while maintaining the
 strengths of BIC-TCP such as stability, window scalability, and RTT
 fairness. CUBIC has been adopted as the default TCP
-congestion control algorithm in Linux, Andoid, Windows,
+congestion control algorithm in Linux, Windows,
 and Apple stacks, and has been used and deployed globally.
 Extensive, decade-long deployment experience in vastly different
 Internet scenarios has convincingly demonstrated that CUBIC is
