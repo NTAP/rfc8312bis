@@ -189,7 +189,8 @@ their variants collectively as "AIMD TCP", below because they use
 the Additive Increase and Multiplicative Decrease algorithm (AIMD).
 
 CUBIC, originally proposed in {{HRX08}}, is a modification to the
-congestion control algorithm of AIMD TCP to remedy this problem.
+congestion control algorithm of traditional Additive Increase and
+Multiplicative Decrease (AIMD) TCP to remedy this problem.
 This document describes the most recent specification of CUBIC.
 Specifically, CUBIC uses a cubic function instead of a linear window
 increase function of AIMD TCP to improve scalability and stability
