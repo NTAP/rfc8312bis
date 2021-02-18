@@ -834,7 +834,8 @@ CUBIC is more friendly to AIMD TCP, if the value of *C* is lower.
 However, we do not recommend setting *C* to a very low value like
 0.04, since CUBIC with a low *C* cannot efficiently use the bandwidth
 in fast, long-distance networks. Based on these observations
-and our experiments, we find *C*=0.4 gives a good balance between AIMD-
+and extensive deployment experience, we find *C*=0.4 gives
+a good balance between AIMD-
 friendliness and aggressiveness of window increase. Therefore, *C*
 SHOULD be set to 0.4. With *C* set to 0.4, {{eq6}} is reduced to:
 
