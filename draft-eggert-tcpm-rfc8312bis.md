@@ -885,6 +885,8 @@ long-distance networks.
 CUBIC has been extensively studied by using both NS-2 simulation and
 test-bed experiments covering a wide range of network environments.
 More information can be found in {{HKLRX06}}.
+Additionally, there is decade-long deployment experience
+with CUBIC on the Internet.
 
 Same as AIMD TCP, CUBIC is a loss-based congestion control
 algorithm. Because CUBIC is designed to be more aggressive (due to a
