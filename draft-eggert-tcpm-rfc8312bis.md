@@ -174,7 +174,8 @@ for this draft can be found at [](https://github.com/NTAP/rfc8312bis).
 
 # Introduction
 
-The low utilization problem of traditional TCP in fast and long-distance networks is
+The low utilization problem of traditional TCP in fast and
+long-distance networks is
 well documented in {{K03}} and {{?RFC3649}}. This problem arises from
 a slow increase of the congestion window following a congestion event
 in a network with a large bandwidth-delay product (BDP). {{HKLRX06}}
