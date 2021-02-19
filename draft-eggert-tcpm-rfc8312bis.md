@@ -1,6 +1,6 @@
 ---
 
-title: CUBIC for Fast Long-Distance Networks
+title: CUBIC for Fast and Long-Distance Networks
 abbrev: CUBIC
 docname: draft-eggert-tcpm-rfc8312bis-latest
 date: {DATE}
@@ -174,7 +174,7 @@ for this draft can be found at [](https://github.com/NTAP/rfc8312bis).
 
 # Introduction
 
-The low utilization problem of traditional TCP in fast long-distance networks is
+The low utilization problem of traditional TCP in fast and long-distance networks is
 well documented in {{K03}} and {{?RFC3649}}. This problem arises from
 a slow increase of the congestion window following a congestion event
 in a network with a large bandwidth-delay product (BDP). {{HKLRX06}}
@@ -185,7 +185,7 @@ their variants, including TCP-Reno {{!RFC5681}}, TCP-NewReno
 {{!RFC6582}}{{!RFC6675}}, SCTP {{?RFC4960}}, and TFRC {{!RFC5348}},
 which use the same linear increase function for window growth.
 We refer to all Reno-style TCP standards and
-their variants collectively as "AIMD TCP", below because they use
+their variants collectively as "AIMD TCP" below because they use
 the Additive Increase and Multiplicative Decrease algorithm (AIMD).
 
 CUBIC, originally proposed in {{HRX08}}, is a modification to the
@@ -193,7 +193,7 @@ congestion control algorithm of traditional AIMD TCP to remedy this problem.
 This document describes the most recent specification of CUBIC.
 Specifically, CUBIC uses a cubic function instead of a linear window
 increase function of AIMD TCP to improve scalability and stability
-under fast and long-distance networks.
+under and long-distance networks.
 
 Binary Increase Congestion Control (BIC-TCP) {{XHR04}}, a predecessor
 of CUBIC, was selected as the default TCP congestion control algorithm
@@ -840,7 +840,7 @@ competing with other congestion control algorithms for bandwidth.
 CUBIC is more friendly to AIMD TCP, if the value of *C* is lower.
 However, we do not recommend setting *C* to a very low value like
 0.04, since CUBIC with a low *C* cannot efficiently use the bandwidth
-in fast, long-distance networks. Based on these observations
+in fast and long-distance networks. Based on these observations
 and extensive deployment experience, we find *C*=0.4 gives
 a good balance between AIMD-
 friendliness and aggressiveness of window increase. Therefore, *C*
