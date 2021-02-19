@@ -150,14 +150,13 @@ algorithm on the sender side. In particular, it uses a cubic function
 instead of a linear window increase function of the traditional TCP
 standards to improve scalability and stability under fast and
 long-distance networks. CUBIC has been adopted as the default TCP
-congestion control algorithm by Linux, Windows, and Apple stacks. This
-document updates the specification of CUBIC to include algorithmic
-improvements based on these implementations and recent academic work.
-Based on the extensive deployment experience with CUBIC, it also moves
-the specification to the Standards Track.
+congestion control algorithm by Linux, Windows, and Apple stacks.
 
-This documents obsoletes {{?RFC8312}}, updating the specification of
-CUBIC to conform to the current Linux version.
+This document updates the specification of CUBIC to include
+algorithmic improvements based on these implementations and recent
+academic work. Based on the extensive deployment experience with
+CUBIC, it also moves the specification to the Standards Track,
+obsoleting {{?RFC8312}}.
 
 --- note_Note_to_Readers
 
@@ -197,18 +196,19 @@ stability under and long-distance networks.
 Binary Increase Congestion Control (BIC-TCP) {{XHR04}}, a predecessor
 of CUBIC, was selected as the default TCP congestion control algorithm
 by Linux in the year 2005 and had been used for several years by the
-Internet community at large. CUBIC uses a similar window increase
-function as BIC-TCP and is designed to be less aggressive and fairer
-to AIMD TCP in bandwidth usage than BIC-TCP while maintaining the
-strengths of BIC-TCP such as stability, window scalability, and RTT
-fairness. CUBIC has been adopted as the default TCP congestion control
-algorithm in Linux, Windows, and Apple stacks, and has been used and
-deployed globally. Extensive, decade-long deployment experience in
-vastly different Internet scenarios has convincingly demonstrated that
-CUBIC is safe for deployment on the global Internet and delivers
-substantial benefits over traditional AIMD congestion control. It is
-therefore to be regarded as the current standard for TCP congestion
-control.
+Internet community at large.
+
+CUBIC uses a similar window increase function as BIC-TCP and is
+designed to be less aggressive and fairer to AIMD TCP in bandwidth
+usage than BIC-TCP while maintaining the strengths of BIC-TCP such as
+stability, window scalability, and round-trip time (RTT) fairness.
+CUBIC has been adopted as the default TCP congestion control algorithm
+in Linux, Windows, and Apple stacks, and has been used and deployed
+globally. Extensive, decade-long deployment experience in vastly
+different Internet scenarios has convincingly demonstrated that CUBIC
+is safe for deployment on the global Internet and delivers substantial
+benefits over traditional AIMD congestion control. It is therefore to
+be regarded as the current standard for TCP congestion control.
 
 In the following sections, we first briefly explain the design
 principles of CUBIC, then provide the exact specification of CUBIC,
@@ -249,90 +249,107 @@ cubic window increase function in terms of the elapsed time from the
 last congestion event. While most alternative congestion control
 algorithms to AIMD TCP increase the congestion window using convex
 functions, CUBIC uses both the concave and convex profiles of a cubic
-function for window growth. After a window reduction in response to a
-congestion event is detected by duplicate ACKs or Explicit Congestion
-Notification-Echo (ECN-Echo) ACKs {{!RFC3168}}, CUBIC registers the
-congestion window size where it got the congestion event as
-*W<sub>max</sub>* and performs a multiplicative decrease of congestion
-window. After it enters into congestion avoidance, it starts to
-increase the congestion window using the concave profile of the cubic
-function. The cubic function is set to have its plateau at
-*W<sub>max</sub>* so that the concave window increase continues until
-the window size becomes *W<sub>max</sub>*. After that, the cubic
+function for window growth.
+
+After a window reduction in response to a congestion event is detected
+by duplicate ACKs or Explicit Congestion Notification-Echo (ECN-Echo,
+ECE) ACKs {{!RFC3168}}, CUBIC remembers the congestion window size
+where it received the congestion event and performs a multiplicative
+decrease of the congestion window. When CUBIC enters into congestion
+avoidance, it starts to increase the congestion window using the
+concave profile of the cubic function. The cubic function is set to
+have its plateau at the remembered congestion window size, so that the
+concave window increase continues until then. After that, the cubic
 function turns into a convex profile and the convex window increase
-begins. This style of window adjustment (concave and then convex)
-improves the algorithm stability while maintaining high network
-utilization {{CEHRX07}}. This is because the window size remains
-almost constant, forming a plateau around *W<sub>max</sub>* where
-network utilization is deemed highest. Under steady state, most window
-size samples of CUBIC are close to *W<sub>max</sub>*, thus promoting
-high network utilization and stability. Note that those congestion
-control algorithms using only convex functions to increase the
-congestion window size have the maximum increments around
-*W<sub>max</sub>*, and thus introduce a large number of packet bursts
-around the saturation point of the network, likely causing frequent
-global loss synchronizations.
+begins.
+
+This style of window adjustment (concave and then convex) improves the
+algorithm stability while maintaining high network utilization
+{{CEHRX07}}. This is because the window size remains almost constant,
+forming a plateau around the remembered congestion window size of the
+last congestion event, where network utilization is deemed highest.
+Under steady state, most window size samples of CUBIC are close to
+that remembered congestion window size, thus promoting high network
+utilization and stability.
+
+Note that congestion control algorithms that only use convex functions
+to increase the congestion window size have their maximum increments
+around the remembered congestion window size of the last congestion
+event, and thus introduce a large number of packet bursts around the
+saturation point of the network, likely causing frequent global loss
+synchronizations.
 
 ## Principle 2 for AIMD Friendliness
 
 CUBIC promotes per-flow fairness to AIMD TCP. Note that AIMD TCP
-performs well under short RTT and small bandwidth (or small BDP)
-networks. There is only a scalability problem in networks with long
-RTTs and large bandwidth (or large BDP). A congestion control
-algorithm designed to be friendly to AIMD TCP on a per-flow basis must
-operate to increase its congestion window less aggressively in small
-BDP networks than in large BDP networks. The aggressiveness of CUBIC
-mainly depends on the maximum window size before a window reduction,
-which is smaller in small BDP networks than in large BDP networks.
-Thus, CUBIC increases its congestion window less aggressively in small
-BDP networks than in large BDP networks. Furthermore, in cases when
-the cubic function of CUBIC increases its congestion window less
-aggressively than AIMD TCP, CUBIC simply follows the window size of
-AIMD TCP to ensure that CUBIC achieves at least the same throughput as
-AIMD TCP in small BDP networks. We call this region where CUBIC
-behaves like AIMD TCP, the "AIMD-friendly region".
+performs well over paths with short RTTs and small bandwidths (or
+small BDPs). There is only a scalability problem in networks with long
+RTTs and large bandwidths (or large BDPs).
+
+A congestion control algorithm designed to be friendly to AIMD TCP on
+a per-flow basis must increase its congestion window less aggressively
+in small BDP networks than in large BDP networks.
+
+The aggressiveness of CUBIC mainly depends on the maximum window size
+before a window reduction, which is smaller in small-BDP networks than
+in large-BDP networks. Thus, CUBIC increases its congestion window
+less aggressively in small-BDP networks than in large-BDP networks.
+
+Furthermore, in cases when the cubic function of CUBIC would increase
+the congestion window less aggressively than AIMD TCP, CUBIC simply
+follows the window size of AIMD TCP to ensure that CUBIC achieves at
+least the same throughput as AIMD TCP in small-BDP networks. We call
+this region where CUBIC behaves like AIMD TCP the "AIMD-friendly
+region".
 
 ## Principle 3 for RTT Fairness
 
-Two CUBIC flows with different RTTs have their throughput ratio
+Two CUBIC flows with different RTTs have a throughput ratio that is
 linearly proportional to the inverse of their RTT ratio, where the
 throughput of a flow is approximately the size of its congestion
-window divided by its RTT. Specifically, CUBIC maintains a window
-increase rate independent of RTTs outside of the AIMD-friendly region,
-and thus flows with different RTTs have similar congestion window
-sizes under steady state when they operate outside the AIMD-friendly
-region. This notion of a linear throughput ratio is similar to that of
-AIMD TCP under high statistical multiplexing environments where packet
-losses are independent of individual flow rates. However, under low
-statistical multiplexing environments, the throughput ratio of AIMD
-TCP flows with different RTTs is quadratically proportional to the
-inverse of their RTT ratio {{XHR04}}. CUBIC always ensures the linear
-throughput ratio independent of the levels of statistical
-multiplexing. This is an improvement over AIMD TCP. While there is no
-consensus on particular throughput ratios of different RTT flows, we
-believe that under wired Internet, use of a linear throughput ratio
-seems more reasonable than equal throughputs (i.e., the same
-throughput for flows with different RTTs) or a higher-order throughput
-ratio (e.g., a quadratical throughput ratio of AIMD TCP under low
-statistical multiplexing environments).
+window divided by its RTT.
+
+Specifically, CUBIC maintains a window increase rate independent of
+RTTs outside of the AIMD-friendly region, and thus flows with
+different RTTs have similar congestion window sizes under steady state
+when they operate outside the AIMD-friendly region.
+
+This notion of a linear throughput ratio is similar to that of AIMD
+TCP under high statistical multiplexing where packet loss is
+independent of individual flow rates. However, under low statistical
+multiplexing, the throughput ratio of AIMD TCP flows with different
+RTTs is quadratically proportional to the inverse of their RTT ratio
+{{XHR04}}.
+
+CUBIC always ensures a linear throughput ratio independent of the
+amount of statistical multiplexing. This is an improvement over AIMD
+TCP. While there is no consensus on particular throughput ratios for
+different RTT flows, we believe that over wired Internet paths, use of
+a linear throughput ratio seems more reasonable than equal throughputs
+(i.e., the same throughput for flows with different RTTs) or a
+higher-order throughput ratio (e.g., a quadratical throughput ratio of
+AIMD TCP under low statistical multiplexing environments).
 
 ## Principle 4 for the CUBIC Decrease Factor
 
-To balance between the scalability and convergence speed, CUBIC sets
-the multiplicative window decrease factor to 0.7 while AIMD TCP uses
-0.5. While this improves the scalability of CUBIC, a side effect of
-this decision is slower convergence, especially under low statistical
-multiplexing environments. This design choice is following the
-observation that the author of HighSpeed TCP (HSTCP) {{?RFC3649}} has
-made along with other researchers (e.g., {{GV02}}): the current
-Internet becomes more asynchronous with less frequent loss
-synchronizations with high statistical multiplexing. Under this
-environment, even strict Multiplicative-Increase
+To balance between scalability and convergence speed, CUBIC sets the
+multiplicative window decrease factor to 0.7, whereas AIMD TCP uses
+0.5.
+
+While this improves the scalability of CUBIC, a side effect of this
+decision is slower convergence, especially under low statistical
+multiplexing. This design choice is following the observation that
+HighSpeed TCP (HSTCP) {{?RFC3649}} and other approaches (e.g.,
+{{GV02}}) made: the current Internet becomes more asynchronous with
+less frequent loss synchronizations under high statistical
+multiplexing.
+
+In such environments, even strict Multiplicative-Increase
 Multiplicative-Decrease (MIMD) can converge. CUBIC flows with the same
 RTT always converge to the same throughput independent of statistical
 multiplexing, thus achieving intra-algorithm fairness. We also find
-that under the environments with sufficient statistical multiplexing,
-the convergence speed of CUBIC flows is reasonable.
+that in environments with sufficient statistical multiplexing, the
+convergence speed of CUBIC is reasonable.
 
 # CUBIC Congestion Control
 
@@ -362,10 +379,11 @@ with other congestion control algorithms in high BDP networks. Please see
 
 ### Variables of Interest
 
-Variables required to implement CUBIC are described in this section.
+This section defines the variables required to implement CUBIC:
 
 *RTT*:
-Smoothed round-trip time in seconds calculated as described in {{!RFC6298}}.
+Smoothed round-trip time in seconds, calculated as described in
+{{!RFC6298}}.
 
 *cwnd*:
 Current congestion window in segments.
@@ -374,7 +392,7 @@ Current congestion window in segments.
 Current slow start threshold in segments.
 
 *W<sub>max</sub>*:
-Size of *cwnd* in segments just before *cwnd* is reduced in the
+Size of *cwnd* in segments just before *cwnd* was reduced in the
 last congestion event.
 
 *K*:
@@ -387,19 +405,19 @@ Current time of the system in seconds.
 
 *epoch<sub>start</sub>*:
 The time in seconds at which the current congestion avoidance stage
-starts.
+started.
 
 *cwnd<sub>start</sub>*:
 The *cwnd* at the beginning of the current congestion avoidance stage,
 i.e., at time *epoch<sub>start</sub>*.
 
 W<sub>cubic</sub>(*t*):
-The congestion window in segments at time t in seconds
-based on the cubic increase function as described in {{win-inc}}.
+The congestion window in segments at time *t* in seconds
+based on the cubic increase function, as described in {{win-inc}}.
 
 *target*:
-Target value of congestion window in segments after the next *RTT*,
-that is, W<sub>cubic</sub>(*t* + *RTT*) as described in {{win-inc}}.
+Target value of congestion window in segments after the next RTT,
+that is, W<sub>cubic</sub>(*t* + *RTT*), as described in {{win-inc}}.
 
 *W<sub>est</sub>*:
 An estimate for the congestion window in segments in the AIMD-friendly
@@ -409,12 +427,13 @@ region, that is, an estimate for the congestion window of AIMD TCP.
 
 CUBIC maintains the acknowledgment (ACK) clocking of AIMD TCP by
 increasing the congestion window only at the reception of an ACK. It
-does not make any change to the fast recovery and retransmit of AIMD
-TCP, such as TCP-NewReno {{!RFC6582}}{{!RFC6675}}. During congestion
-avoidance after a congestion event where a packet loss is detected by
-duplicate ACKs or a network congestion is detected by ACKs with
-ECN-Echo flags {{!RFC3168}}, CUBIC changes the window increase
-function of AIMD TCP.
+does not make any changes to the TCP Fast Recovery and Fast Retransmit
+algorithms {{!RFC6582}}{{!RFC6675}}.
+
+During congestion avoidance after a congestion event where a packet
+loss is detected by duplicate ACKs or by receiving packets carrying
+ECE flags {{!RFC3168}}, CUBIC changes the window increase function of
+AIMD TCP.
 
 CUBIC uses the following window increase function:
 
@@ -423,7 +442,7 @@ CUBIC uses the following window increase function:
 ~~~
 {: #eq1 artwork-align="center" }
 
-where t is the elapsed time in seconds from the beginning of the
+where *t* is the elapsed time in seconds from the beginning of the
 current congestion avoidance stage, that is,
 
 ~~~ math
@@ -447,7 +466,7 @@ where *cwnd<sub>start</sub>* is the congestion window at the beginning
 of the current congestion avoidance stage. *cwnd<sub>start</sub>* is
 calculated as described in {{mult-dec}} when a congestion event is
 detected, although implementations can further adjust
-*cwnd<sub>start</sub>* based on other fast recovery mechanisms. In
+*cwnd<sub>start</sub>* based on other Fast Recovery mechanisms. In
 special cases, if *cwnd<sub>start</sub>* is greater than
 *W<sub>max</sub>*, *K* is set to 0.
 
@@ -471,7 +490,7 @@ cwnd                          &
 {: artwork-align="center" }
 
 Depending on the value of the current congestion window size *cwnd*,
-CUBIC runs in three different modes.
+CUBIC runs in three different regions:
 
 1. The AIMD-friendly region, which ensures that CUBIC achieves at
    least the same throughput as AIMD TCP.
@@ -487,15 +506,14 @@ Below, we describe the exact actions taken by CUBIC in each region.
 ## AIMD-Friendly Region
 
 AIMD TCP performs well in certain types of networks, for example,
-under short RTT and small bandwidth (or small BDP) networks. In these
-networks, we use the AIMD-friendly region to ensure that CUBIC
-achieves at least the same throughput as AIMD TCP.
+under short RTTs and small bandwidths (or small BDPs). In these
+networks, CUBIC remains in the AIMD-friendly region to achieve at
+least the same throughput as AIMD TCP.
 
-The AIMD-friendly region is designed according to the analysis
-described in {{FHP00}}. The analysis studies the performance of an
-AIMD algorithm with an additive factor of {{{α}{}}}*<sub>aimd</sub>*
-(segments per *RTT*) and a multiplicative factor of
-{{{β}{}}}*<sub>aimd</sub>*, denoted by
+The AIMD-friendly region is designed according to the analysis in
+{{FHP00}}, which studies the performance of an AIMD algorithm with an
+additive factor of {{{α}{}}}*<sub>aimd</sub>* (segments per *RTT*) and
+a multiplicative factor of {{{β}{}}}*<sub>aimd</sub>*, denoted by
 AIMD({{{α}{}}}*<sub>aimd</sub>*, {{{β}{}}}*<sub>aimd</sub>*).
 Specifically, the average congestion window size of
 AIMD({{{α}{}}}*<sub>aimd</sub>*, {{{β}{}}}*<sub>aimd</sub>*) can be
@@ -529,8 +547,8 @@ size *W<sub>est</sub>* of AIMD({{{α}{}}}*<sub>aimd</sub>*,
 {: artwork-align="center" }
 
 which achieves the same average window size as AIMD TCP. When
-receiving an ACK in congestion avoidance (*cwnd* could be greater than
-or less than *W<sub>max</sub>*), CUBIC checks whether
+receiving an ACK in congestion avoidance (where *cwnd* could be
+greater than or less than *W<sub>max</sub>*), CUBIC checks whether
 W<sub>cubic</sub>(*t*) is less than *W<sub>est</sub>*. If so, CUBIC is
 in the AIMD-friendly region and *cwnd* SHOULD be set to
 *W<sub>est</sub>* at each reception of an ACK.
@@ -561,42 +579,44 @@ incremented by
 ~~~
 {: artwork-align="center" }
 
-for each received ACK, where *target* is
-calculated as described in {{win-inc}}.
+for each received ACK, where *target* is calculated as described in
+{{win-inc}}.
 
 ## Convex Region
 
 When receiving an ACK in congestion avoidance, if CUBIC is not in the
 AIMD-friendly region and *cwnd* is larger than or equal to
-*W<sub>max</sub>*, then CUBIC is in the convex region. The convex
-region indicates that the network conditions might have been perturbed
-since the last congestion event, possibly implying more available
-bandwidth after some flow departures. Since the Internet is highly
-asynchronous, some amount of perturbation is always possible without
-causing a major change in available bandwidth. In this region, CUBIC
-is being very careful by very slowly increasing its window size. The
-convex profile ensures that the window increases very slowly at the
-beginning and gradually increases its increase rate. We also call this
-region the "maximum probing phase" since CUBIC is searching for a new
-*W<sub>max</sub>*. In this region, *cwnd* MUST be incremented by
+*W<sub>max</sub>*, then CUBIC is in the convex region.
+
+The convex region indicates that the network conditions might have
+changed since the last congestion event, possibly implying more
+available bandwidth after some flow departures. Since the Internet is
+highly asynchronous, some amount of perturbation is always possible
+without causing a major change in available bandwidth.
+
+In this region, CUBIC is very careful. The convex profile ensures that
+the window increases very slowly at the beginning and gradually
+increases its increase rate. We also call this region the "maximum
+probing phase", since CUBIC is searching for a new *W<sub>max</sub>*.
+In this region, *cwnd* MUST be incremented by
 
 ~~~ math
 \frac{target - cwnd}{cwnd}
 ~~~
 {: artwork-align="center" }
 
-for each received ACK, where *target* is
-calculated as described in {{win-inc}}.
+for each received ACK, where *target* is calculated as described in
+{{win-inc}}.
 
 ## Multiplicative Decrease {#mult-dec}
 
-When a packet loss is detected by duplicate ACKs or a network
-congestion is detected by receiving packets marked with ECN-Echo
-(ECE), CUBIC updates its *W<sub>max</sub>* and reduces its *cwnd* and
-*ssthresh* immediately as below. For both packet loss and congestion
-detection through ECN, the sender MAY employ a fast recovery algorithm
-to gradually adjust the congestion window to its new reduced value.
-Parameter {{{β}{}}}*<sub>cubic</sub>* SHOULD be set to 0.7.
+When a packet loss is detected by duplicate ACKs or by receiving
+packets carrying ECE flags, CUBIC updates *W<sub>max</sub>* and
+reduces *cwnd* and *ssthresh* immediately as described below. For both
+packet loss and congestion detection through ECN, the sender MAY
+employ a Fast Recovery algorithm to gradually adjust the congestion
+window to its new reduced value. The parameter {{{β}{}}}*<sub>cubic</sub>*
+SHOULD be set to 0.7.
 
 ~~~ math
 \begin{array}{ll}
@@ -616,19 +636,19 @@ setting of {{{β}{}}}*<sub>cubic</sub>* could result in faster
 convergence, it will make the analysis of CUBIC much harder. This
 adaptive adjustment of {{{β}{}}}*<sub>cubic</sub>* is an item for the
 next version of CUBIC.
+<!-- TODO: is this "adaptive adjustment" something that is still planned? -->
 
 ## Fast Convergence
 
-To improve the convergence speed of CUBIC, we add a heuristic in
-CUBIC. When a new flow joins the network, existing flows in the
-network need to give up some of their bandwidth to allow the new flow
-some room for growth if the existing flows have been using all the
-bandwidth of the network. To speed up this bandwidth release by
-existing flows, the following mechanism called "fast convergence"
-SHOULD be implemented.
+To improve convergence speed, CUBIC uses a heuristic. When a new flow
+joins the network, existing flows need to give up some
+of their bandwidth to allow the new flow some room for growth, if the
+existing flows have been using all the network bandwidth. To
+speed up this bandwidth release by existing flows, the following "Fast
+Convergence" mechanism SHOULD be implemented.
 
-With fast convergence, when a congestion event occurs, we update
-*W<sub>max</sub>* as follows before the window reduction as described
+With Fast Convergence, when a congestion event occurs, we update
+*W<sub>max</sub>* as follows, before the window reduction as described
 in {{mult-dec}}.
 
 ~~~ math
@@ -644,46 +664,44 @@ cwnd
 
 At a congestion event, if the current *cwnd* is less than
 *W<sub>max</sub>*, this indicates that the saturation point
-experienced by this flow is getting reduced because of the change in
-available bandwidth.  Then we allow this flow to release more
-bandwidth by reducing *W<sub>max</sub>* further.  This action
-effectively lengthens the time for this flow to increase its
-congestion window because the reduced *W<sub>max</sub>* forces the
-flow to have the plateau earlier.  This allows more time for the new
-flow to catch up to its congestion window size.
+experienced by this flow is getting reduced because of a change in
+available bandwidth. Then we allow this flow to release more bandwidth
+by reducing *W<sub>max</sub>* further. This action effectively
+lengthens the time for this flow to increase its congestion window,
+because the reduced *W<sub>max</sub>* forces the flow to plateau
+earlier. This allows more time for the new flow to catch up to its
+congestion window size.
 
-The fast convergence is designed for network environments with
-multiple CUBIC flows. In network environments with only a single CUBIC
-flow and without any other traffic, the fast convergence SHOULD be
-disabled.
+Fast Convergence is designed for network environments with multiple
+CUBIC flows. In network environments with only a single CUBIC flow and
+without any other traffic, Fast Convergence SHOULD be disabled.
 
 ## Timeout
 
-In case of timeout, CUBIC follows AIMD TCP to reduce *cwnd*
+In case of a timeout, CUBIC follows AIMD TCP to reduce *cwnd*
 {{!RFC5681}}, but sets *ssthresh* using {{{β}{}}}*<sub>cubic</sub>*
-(same as in {{mult-dec}}) that is different from AIMD TCP
+(same as in {{mult-dec}}) in a way that is different from AIMD TCP
 {{!RFC5681}}.
 
-During the first congestion avoidance after a timeout, CUBIC increases
-its congestion window size using {{eq1}}, where t is the elapsed time
-since the beginning of the current congestion avoidance, *K* is set to
-0, and *W<sub>max</sub>* is set to the congestion window size at the
-beginning of the current congestion avoidance. In addition, for the
-AIMD-friendly region, *W<sub>est</sub>* should be set to the
-congestion window size at the beginning of the current congestion
-avoidance.
+During the first congestion avoidance stage after a timeout, CUBIC
+increases its congestion window size using {{eq1}}, where *t* is the
+elapsed time since the beginning of the current congestion avoidance,
+*K* is set to 0, and *W<sub>max</sub>* is set to the congestion window
+size at the beginning of the current congestion avoidance stage. In
+addition, for the AIMD-friendly region, *W<sub>est</sub>* SHOULD be
+set to the congestion window size at the beginning of the current
+congestion avoidance.
 
 ## Spurious Congestion Events
 
-For the cases where CUBIC reduces its congestion window in response to
-detection of packet loss via duplicate ACKs or timeout, there is a
+In cases where CUBIC reduces its congestion window in response to
+having detected packet loss via duplicate ACKs or timeouts, there is a
 possibility that the missing ACK would arrive after the congestion
-window reduction and the corresponding packet retransmission. For
-example, packet reordering that is common in networks could trigger
-this behavior. A high degree of packet reordering could cause multiple
-events of congestion window reduction where spurious losses are
-incorrectly interpreted as congestion signals, thus degrading CUBIC's
-performance significantly.
+window reduction and a corresponding packet retransmission. For
+example, packet reordering could trigger this behavior. A high degree
+of packet reordering could cause multiple congestion window reduction
+events, where spurious losses are incorrectly interpreted as
+congestion signals, thus degrading CUBIC's performance significantly.
 
 When there is a congestion event, a CUBIC implementation SHOULD save the
 current value of the following variables before the congestion window
@@ -705,9 +723,10 @@ CUBIC MAY implement an algorithm to detect spurious retransmissions,
 such as DSACK {{?RFC3708}}, Forward RTO-Recovery {{?RFC5682}} or Eifel
 {{?RFC3522}}. Once a spurious congestion event is detected, CUBIC
 SHOULD restore the original values of above mentioned variables as
-follows if the current *cwnd* is lower than *prior_cwnd*. Restoring to
+follows if the current *cwnd* is lower than *prior_cwnd*. Restoring
 the original values ensures that CUBIC's performance is similar to
-what it would be if there were no spurious losses.
+what it would be without spurious losses.
+<!-- TODO: prior_cwnd is not defined -->
 
 ~~~ math
 \left.
@@ -725,7 +744,7 @@ W_{est} = prior\_W_{est} \\
 {: artwork-align="center" }
 
 In rare cases, when the detection happens long after a spurious loss
-event and the current *cwnd* is already higher than the *prior_cwnd*,
+event and the current *cwnd* is already higher than *prior_cwnd*,
 CUBIC SHOULD continue to use the current and the most recent values of
 these variables.
 
@@ -737,14 +756,14 @@ TCP slow start {{!RFC5681}} in general networks, or the limited slow
 start {{?RFC3742}} or hybrid slow start {{HR08}} for fast and
 long-distance networks.
 
-In the case when CUBIC runs the hybrid slow start {{HR08}}, it may
-exit the first slow start without incurring any packet loss and thus
-*W<sub>max</sub>* is undefined. In this special case, CUBIC switches
-to congestion avoidance and increases its congestion window size using
-{{eq1}}, where t is the elapsed time since the beginning of the
-current congestion avoidance, *K* is set to 0, and *W<sub>max</sub>*
-is set to the congestion window size at the beginning of the current
-congestion avoidance.
+When CUBIC uses hybrid slow start {{HR08}}, it may exit the first slow
+start without incurring any packet loss and thus *W<sub>max</sub>* is
+undefined. In this special case, CUBIC switches to congestion
+avoidance and increases its congestion window size using {{eq1}},
+where *t* is the elapsed time since the beginning of the current
+congestion avoidance, *K* is set to 0, and *W<sub>max</sub>* is set to
+the congestion window size at the beginning of the current congestion
+avoidance stage.
 
 # Discussion {#discussion}
 
@@ -762,8 +781,8 @@ AVG\_W_{cubic} = \sqrt[4]{\frac{C * (3 + β_{cubic})}{4 * (1 - β_{cubic})}} * \
 ~~~
 {: #eq5 artwork-align="center" }
 
-With {{{β}{}}}*<sub>cubic</sub>* set to 0.7, the above formula is
-reduced to:
+With {{{β}{}}}*<sub>cubic</sub>* set to 0.7, the above formula reduces
+to:
 
 ~~~ math
 AVG\_W_{cubic} = \sqrt[4]{\frac{C * 3.7}{1.2}} *
@@ -854,7 +873,7 @@ CUBIC.
 ## Using Spare Capacity
 
 CUBIC uses a more aggressive window increase function than AIMD TCP
-under fast and long-distance networks.
+for fast and long-distance networks.
 
 The following table shows that to achieve the 10 Gbps rate, AIMD TCP
 requires a packet loss rate of 2.0e-10, while CUBIC requires a packet
@@ -887,7 +906,7 @@ and long-distance networks.
 ## Investigating a Range of Environments
 
 CUBIC has been extensively studied by using both NS-2 simulation and
-test-bed experiments covering a wide range of network environments.
+testbed experiments, covering a wide range of network environments.
 More information can be found in {{HKLRX06}}. Additionally, there is
 decade-long deployment experience with CUBIC on the Internet.
 
@@ -895,7 +914,7 @@ Same as AIMD TCP, CUBIC is a loss-based congestion control algorithm.
 Because CUBIC is designed to be more aggressive (due to a faster
 window increase function and bigger multiplicative decrease factor)
 than AIMD TCP in fast and long-distance networks, it can fill large
-drop-tail buffers more quickly than AIMD TCP and increase the risk of
+drop-tail buffers more quickly than AIMD TCP and increases the risk of
 a standing queue {{?RFC8511}}. In this case, proper queue sizing and
 management {{!RFC7567}} could be used to reduce the packet queuing
 delay.
@@ -903,30 +922,30 @@ delay.
 ## Protection against Congestion Collapse
 
 With regard to the potential of causing congestion collapse, CUBIC
-behaves like AIMD TCP since CUBIC modifies only the window adjustment
+behaves like AIMD TCP, since CUBIC modifies only the window adjustment
 algorithm of AIMD TCP. Thus, it does not modify the ACK clocking and
-Timeout behaviors of AIMD TCP.
+timeout behaviors of AIMD TCP.
 
 ## Fairness within the Alternative Congestion Control Algorithm
 
-CUBIC ensures convergence of competing CUBIC flows with the same *RTT*
+CUBIC ensures convergence of competing CUBIC flows with the same RTT
 in the same bottleneck links to an equal throughput. When competing
-flows have different *RTT* values, their throughput ratio is linearly
-proportional to the inverse of their *RTT* ratios. This is true
-independent of the level of statistical multiplexing in the link.
+flows have different RTT values, their throughput ratio is linearly
+proportional to the inverse of their RTT ratios. This is true
+independently of the level of statistical multiplexing on the link.
 
 ## Performance with Misbehaving Nodes and Outside Attackers
 
-This is not considered in the current CUBIC.
+This is not considered in the current CUBIC design.
 
 ## Behavior for Application-Limited Flows
 
-CUBIC does not raise its congestion window size if the flow is
+CUBIC does not increase its congestion window size if a flow is
 currently limited by the application instead of the congestion window.
-In case of long periods when *cwnd* has not been updated due to the
-application rate limit, such as idle periods, t in {{eq1}} MUST NOT
-include these periods; otherwise, W<sub>cubic</sub>(*t*) might be very
-high after restarting from these periods.
+In case of long periods during which *cwnd* has not been updated due
+to such an application limit, such as idle periods, *t* in {{eq1}}
+MUST NOT include these periods; otherwise, W<sub>cubic</sub>(*t*)
+might be very high after restarting from these periods.
 
 ## Responses to Sudden or Transient Events
 
@@ -935,15 +954,14 @@ event, CUBIC behaves the same as AIMD TCP.
 
 ## Incremental Deployment
 
-CUBIC requires only the change of AIMD TCP senders, and it does not
-make any changes to AIMD TCP receivers. That is, a CUBIC sender works
-correctly with the AIMD TCP receivers. In addition, CUBIC does not
-require any changes to the routers and does not require any assistance
-from the routers.
+CUBIC requires only changes to TCP senders, and it does not require
+any changes at TCP receivers. That is, a CUBIC sender works correctly
+with the AIMD TCP receivers. In addition, CUBIC does not require any
+changes to routers and does not require any assistance from routers.
 
 # Security Considerations
 
-This proposal makes no changes to the underlying security of TCP. More
+CUBIC makes no changes to the underlying security of TCP. More
 information about TCP security concerns can be found in {{!RFC5681}}.
 
 # IANA Considerations
@@ -974,6 +992,9 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
   deployment of CUBIC in the Internet.
   ([#39](https://github.com/NTAP/rfc8312bis/issues/39))
 
+- Rephrase introduction to avoid referring to variables that have not
+  been defined yet.
+
 ## Since draft-eggert-tcpm-rfc8312bis-00
 
 - acknowledge former co-authors
@@ -1001,7 +1022,7 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 - add Vidhi as co-author
   ([#17](https://github.com/NTAP/rfc8312bis/issues/17))
 
-- note for fast recovery during *cwnd* decrease due to congestion
+- note for Fast Recovery during *cwnd* decrease due to congestion
   event ([#11](https://github.com/NTAP/rfc8312bis11/issues/11))
 
 - add section for spurious congestion events
