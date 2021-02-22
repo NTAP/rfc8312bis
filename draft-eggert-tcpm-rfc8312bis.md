@@ -633,10 +633,7 @@ cwnd = ssthresh &
 A side effect of setting {{{β}{}}}*<sub>cubic</sub>* to a value bigger
 than 0.5 is slower convergence. We believe that while a more adaptive
 setting of {{{β}{}}}*<sub>cubic</sub>* could result in faster
-convergence, it will make the analysis of CUBIC much harder. This
-adaptive adjustment of {{{β}{}}}*<sub>cubic</sub>* is an item for the
-next version of CUBIC.
-<!-- TODO: is this "adaptive adjustment" something that is still planned? -->
+convergence, it will make the analysis of CUBIC much harder.
 
 ## Fast Convergence
 
@@ -726,7 +723,6 @@ SHOULD restore the original values of above mentioned variables as
 follows if the current *cwnd* is lower than *prior_cwnd*. Restoring
 the original values ensures that CUBIC's performance is similar to
 what it would be without spurious losses.
-<!-- TODO: prior_cwnd is not defined -->
 
 ~~~ math
 \left.
