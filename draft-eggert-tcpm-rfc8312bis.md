@@ -147,10 +147,10 @@ informative:
 CUBIC is an extension to the traditional TCP standards. It differs
 from the traditional TCP standards only in the congestion control
 algorithm on the sender side. In particular, it uses a cubic function
-instead of a linear window increase function of the traditional TCP
+instead of the linear window increase function of the traditional TCP
 standards to improve scalability and stability under fast and
 long-distance networks. CUBIC has been adopted as the default TCP
-congestion control algorithm by Linux, Windows, and Apple stacks.
+congestion control algorithm by the Linux, Windows, and Apple stacks.
 
 This document updates the specification of CUBIC to include
 algorithmic improvements based on these implementations and recent
@@ -189,9 +189,9 @@ Additive Increase and Multiplicative Decrease algorithm (AIMD).
 CUBIC, originally proposed in {{HRX08}}, is a modification to the
 congestion control algorithm of traditional AIMD TCP to remedy this
 problem. This document describes the most recent specification of
-CUBIC. Specifically, CUBIC uses a cubic function instead of a linear
+CUBIC. Specifically, CUBIC uses a cubic function instead of the linear
 window increase function of AIMD TCP to improve scalability and
-stability under and long-distance networks.
+stability under fast and long-distance networks.
 
 Binary Increase Congestion Control (BIC-TCP) {{XHR04}}, a predecessor
 of CUBIC, was selected as the default TCP congestion control algorithm
@@ -203,7 +203,7 @@ designed to be less aggressive and fairer to AIMD TCP in bandwidth
 usage than BIC-TCP while maintaining the strengths of BIC-TCP such as
 stability, window scalability, and round-trip time (RTT) fairness.
 CUBIC has been adopted as the default TCP congestion control algorithm
-in Linux, Windows, and Apple stacks, and has been used and deployed
+in the Linux, Windows, and Apple stacks, and has been used and deployed
 globally. Extensive, decade-long deployment experience in vastly
 different Internet scenarios has convincingly demonstrated that CUBIC
 is safe for deployment on the global Internet and delivers substantial
@@ -1048,7 +1048,7 @@ differences between its original paper and {{?RFC8312}}.
   pseudocode might be a good source to start with and understand CUBIC.
 
 - {{HRX08}} also includes experimental results showing its performance
-  {{and fairness.
+  and fairness.
 
 <!-- xml2rfc currently doesn't allow the β Unicode symbol in bullet lists -->
 - The definition of <!--{{{β}{}}}-->beta*<sub>cubic</sub>* constant
