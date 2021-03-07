@@ -658,8 +658,8 @@ in {{mult-dec}}.
 ~~~ math
 W_{max} = \left\{
 \begin{array}{ll}
-W_{max} * \frac{1 + β_{cubic}}{2}
-& \text{if } cwnd < W_{max}, \text{further reduce } W_{max} \\
+cwnd * \frac{1 + β_{cubic}}{2}
+& \text{if } (cwnd < W_{max}) and (fast convergence is enabled), \text{further reduce } W_{max} \\
 cwnd
 &\text{otherwise, remember cwnd before reduction} \\
 \end{array} \right.
