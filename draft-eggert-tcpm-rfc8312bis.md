@@ -659,8 +659,8 @@ in {{mult-dec}}.
 W_{max} = \left\{
 \begin{array}{ll}
 cwnd * \frac{1 + β_{cubic}}{2}
-& \text{if } (cwnd < W_{max}) and (fast convergence is enabled),
-\text{further reduce } W_{max} \\
+& \text{if} (cwnd < W_{max}) \text{and (fast convergence is enabled)},\\
+& \text{further reduce } W_{max} \\
 cwnd
 &\text{otherwise, remember cwnd before reduction} \\
 \end{array} \right.
