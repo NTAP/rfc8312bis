@@ -993,6 +993,7 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 - fix a mistake in *W<sub>max</sub>* calculation in the fast convergence section.
   ([#51](https://github.com/NTAP/rfc8312bis/issues/51))
+  
 ## Since draft-eggert-tcpm-rfc8312bis-01
 
 - Rename TCP-Friendly to AIMD-Friendly and rename Standard TCP to AIMD
