@@ -2,7 +2,7 @@
 
 title: CUBIC for Fast and Long-Distance Networks
 abbrev: CUBIC
-docname: draft-eggert-tcpm-rfc8312bis-latest
+docname: draft-ietf-tcpm-rfc8312bis-latest
 date: {DATE}
 category: std
 ipr: trust200902
