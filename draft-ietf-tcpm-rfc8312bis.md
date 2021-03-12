@@ -988,6 +988,7 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 ## Since draft-eggert-tcpm-rfc8312bis-03
 
 - fix spelling nits
+- rename to draft-ietf
 
 ## Since draft-eggert-tcpm-rfc8312bis-02
 

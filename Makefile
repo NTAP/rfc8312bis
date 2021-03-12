@@ -10,7 +10,7 @@ else
 	    -b main https://github.com/martinthomson/i-d-template $(LIBDIR)
 endif
 
-.SECONDARY: draft-eggert-tcpm-rfc8312bis.xml
+.SECONDARY: draft-ietf-tcpm-rfc8312bis.xml
 
 CFLAGS=-Wall -Wextra -Weverything
 tablecode: tablecode.c

@@ -1,13 +1,14 @@
 # CUBIC for Fast Long-Distance Networks
 
-This is the working area for the individual Internet-Draft, "CUBIC for Fast
-Long-Distance Networks".
+This is the working area for the [TCPM Working
+Group](https://datatracker.ietf.org/wg/tcpm/about/) Internet-Draft "CUBIC for
+Fast Long-Distance Networks".
 
 * [Editor's
-  Copy](https://NTAP.github.io/rfc8312bis/#go.draft-eggert-tcpm-rfc8312bis.html)
-* [Individual Draft](https://tools.ietf.org/html/draft-eggert-tcpm-rfc8312bis)
+  Copy](https://NTAP.github.io/rfc8312bis/#go.draft-ietf-tcpm-rfc8312bis.html)
+* [Individual Draft](https://tools.ietf.org/html/draft-ietf-tcpm-rfc8312bis)
 * [Compare Editor's Copy to Individual
-  Draft](https://NTAP.github.io/rfc8312bis/#go.draft-eggert-tcpm-rfc8312bis.diff)
+  Draft](https://NTAP.github.io/rfc8312bis/#go.draft-ietf-tcpm-rfc8312bis.diff)
 
 ## Building the Draft
 
@@ -20,7 +21,7 @@ docker run \
        -v $(pwd):/id:delegated \
        --cap-add=SYS_ADMIN \
        ghcr.io/larseggert/i-d-toolchain:latest \
-       kdrfc -h -3 draft-eggert-tcpm-rfc8312bis.md
+       kdrfc -h -3 draft-ietf-tcpm-rfc8312bis.md
 ```
 Alternatively, formatted text and HTML versions of the draft can be built using
 `make`.
