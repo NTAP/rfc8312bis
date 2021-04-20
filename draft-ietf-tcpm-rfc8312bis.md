@@ -397,8 +397,10 @@ Current congestion window in segments.
 Current slow start threshold in segments.
 
 *W<sub>max</sub>*:
-Size of *cwnd* (without fast convergence) or adjusted *cwnd* (with fast convergence)
-in segments just before *cwnd* was reduced in the last congestion event.
+Size of *cwnd* in segments just before *cwnd* was reduced in the last
+congestion event when fast convergence is disabled. However, if fast
+convergence is enabled, the size may be further reduced based on the
+current saturation point.
 
 *K*:
 The time period in seconds it takes to increase the congestion window
