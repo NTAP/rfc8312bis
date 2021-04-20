@@ -991,6 +991,7 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 - fix spelling nits
 - rename to draft-ietf
+- define *W<sub>max</sub>* more clearly
 
 ## Since draft-eggert-tcpm-rfc8312bis-02
 
