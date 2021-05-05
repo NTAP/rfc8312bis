@@ -1001,6 +1001,7 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 - address Michael Scharf's editorial suggestions.
   ([#59](https://github.com/NTAP/rfc8312bis/issues/59))
+- add "Note to the RFC Editor" about removing underscores
 
 ## Since draft-ietf-tcpm-rfc8312bis-00
 
