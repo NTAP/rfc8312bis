@@ -144,13 +144,11 @@ informative:
 
 --- abstract
 
-CUBIC is an extension to the traditional TCP standards. It differs
-from the traditional TCP standards only in the congestion control
-algorithm on the sender side. In particular, it uses a cubic function
-instead of the linear window increase function of the traditional TCP
-standards to improve scalability and stability under fast and
-long-distance networks. CUBIC has been adopted as the default TCP
-congestion control algorithm by the Linux, Windows, and Apple stacks.
+CUBIC is a standard TCP congestion control algorithm that uses a cubic
+function instead of the linear window increase function on the sender
+side to improve scalability and stability over fast and long-distance
+networks. CUBIC has been adopted as the default TCP congestion control
+algorithm by the Linux, Windows, and Apple stacks.
 
 This document updates the specification of CUBIC to include
 algorithmic improvements based on these implementations and recent
@@ -182,19 +180,29 @@ future: https://trac.tools.ietf.org/tools/xml2rfc/trac/ticket/596)
 
 # Introduction
 
-The low utilization problem of traditional TCP in fast and
-long-distance networks is well documented in {{K03}} and {{?RFC3649}}.
-This problem arises from a slow increase of the congestion window
-following a congestion event in a network with a large bandwidth-delay
-product (BDP). {{HKLRX06}} indicates that this problem is frequently
-observed even in the range of congestion window sizes over several
-hundreds of packets. This problem is equally applicable to all
-Reno-style TCP standards and their variants, including TCP-Reno
-{{!RFC5681}}, TCP-NewReno {{!RFC6582}}{{!RFC6675}}, SCTP {{?RFC4960}},
-and TFRC {{!RFC5348}}, which use the same linear increase function for
-window growth. We refer to all Reno-style TCP standards and their
-variants collectively as "AIMD TCP" below because they use the
-Additive Increase and Multiplicative Decrease algorithm (AIMD).
+CUBIC has been adopted as the default TCP congestion control algorithm
+in the Linux, Windows, and Apple stacks, and has been used and
+deployed globally. Extensive, decade-long deployment experience in
+vastly different Internet scenarios has convincingly demonstrated that
+CUBIC is safe for deployment on the global Internet and delivers
+substantial benefits over traditional AIMD congestion control. It is
+therefore to be regarded as the current standard for TCP congestion
+control.
+
+The design of CUBIC was motivated by the well-documented problem
+traditional TCP has with  low utilization over fast and long-distance
+networks {{K03}}{{?RFC3649}}. This problem arises from a slow increase
+of the congestion window following a congestion event in a network
+with a large bandwidth-delay product (BDP). {{HKLRX06}} indicates that
+this problem is frequently observed even in the range of congestion
+window sizes over several hundreds of packets. This problem is equally
+applicable to all Reno-style TCP standards and their variants,
+including TCP-Reno {{!RFC5681}}, TCP-NewReno {{!RFC6582}}{{!RFC6675}},
+SCTP {{?RFC4960}}, and TFRC {{!RFC5348}}, which use the same linear
+increase function for window growth. We refer to all Reno-style TCP
+standards and their variants collectively as "AIMD TCP" below because
+they use the Additive Increase and Multiplicative Decrease algorithm
+(AIMD).
 
 CUBIC, originally proposed in {{HRX08}}, is a modification to the
 congestion control algorithm of traditional AIMD TCP to remedy this
@@ -212,14 +220,6 @@ CUBIC uses a similar window increase function as BIC-TCP and is
 designed to be less aggressive and fairer to AIMD TCP in bandwidth
 usage than BIC-TCP while maintaining the strengths of BIC-TCP such as
 stability, window scalability, and round-trip time (RTT) fairness.
-CUBIC has been adopted as the default TCP congestion control algorithm
-in the Linux, Windows, and Apple stacks, and has been used and
-deployed globally. Extensive, decade-long deployment experience in
-vastly different Internet scenarios has convincingly demonstrated that
-CUBIC is safe for deployment on the global Internet and delivers
-substantial benefits over traditional AIMD congestion control. It is
-therefore to be regarded as the current standard for TCP congestion
-control.
 
 In the following sections, we first briefly explain the design
 principles of CUBIC, then provide the exact specification of CUBIC,
@@ -286,7 +286,7 @@ utilization and stability.
 Note that congestion control algorithms that only use convex functions
 to increase the congestion window size have their maximum increments
 around the remembered congestion window size of the last congestion
-event, and thus introduce a large number of packet bursts around the
+event, and thus introduce many packet bursts around the
 saturation point of the network, likely causing frequent global loss
 synchronizations.
 
@@ -321,7 +321,7 @@ throughput of a flow is approximately the size of its congestion
 window divided by its RTT.
 
 Specifically, CUBIC maintains a window increase rate independent of
-RTTs outside of the AIMD-friendly region, and thus flows with
+RTTs outside the AIMD-friendly region, and thus flows with
 different RTTs have similar congestion window sizes under steady state
 when they operate outside the AIMD-friendly region.
 
@@ -920,10 +920,10 @@ and long-distance networks.
 
 ## Investigating a Range of Environments
 
-CUBIC has been extensively studied by using both NS-2 simulation and
-testbed experiments, covering a wide range of network environments.
-More information can be found in {{HKLRX06}}. Additionally, there is
-decade-long deployment experience with CUBIC on the Internet.
+There is decade-long deployment experience with CUBIC on the Internet.
+CUBIC has also been extensively studied by using both NS-2 simulation
+and testbed experiments, covering a wide range of network
+environments. More information can be found in {{HKLRX06}}.
 
 Same as AIMD TCP, CUBIC is a loss-based congestion control algorithm.
 Because CUBIC is designed to be more aggressive (due to a faster
@@ -985,7 +985,7 @@ This document does not require any IANA actions.
 
 --- back
 
-# Acknowledgements
+# Acknowledgments
 
 Richard Scheffenegger and Alexander Zimmermann originally co-authored
 {{?RFC8312}}.
@@ -996,6 +996,15 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
+
+## Since draft-ietf-tcpm-rfc8312bis-01
+
+- address Michael Scharf's editorial suggestions.
+  ([#59](https://github.com/NTAP/rfc8312bis/issues/59))
+
+## Since draft-ietf-tcpm-rfc8312bis-00
+
+- use updated xml2rfc with better text rendering of subscripts
 
 ## Since draft-eggert-tcpm-rfc8312bis-03
 
@@ -1018,11 +1027,11 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 ## Since draft-eggert-tcpm-rfc8312bis-01
 
 - rename TCP-Friendly to AIMD-Friendly and rename Standard TCP to AIMD
-  TCP to avoid confusion as CUBIC has been widely used in the Internet.
+  TCP to avoid confusion as CUBIC has been widely used on the Internet.
   ([#38](https://github.com/NTAP/rfc8312bis/issues/38))
 
 - change introductory text to reflect the significant broader
-  deployment of CUBIC in the Internet.
+  deployment of CUBIC on the Internet.
   ([#39](https://github.com/NTAP/rfc8312bis/issues/39))
 
 - rephrase introduction to avoid referring to variables that have not
