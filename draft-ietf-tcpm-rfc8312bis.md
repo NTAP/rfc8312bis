@@ -176,6 +176,10 @@ the text version of this document.
 (There is an issue open against xml2rfc to stop doing this in the
 future: https://trac.tools.ietf.org/tools/xml2rfc/trac/ticket/596)
 
+Also, please manually change "Figure" to "Equation" for all artwork
+with anchors beginning with "eq" - xml2rfc doesn't seem to be able to
+do this.
+
 --- middle
 
 # Introduction
