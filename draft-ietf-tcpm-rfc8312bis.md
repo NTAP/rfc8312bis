@@ -450,7 +450,7 @@ region, that is, an estimate for the congestion window of AIMD TCP.
 
 *segments_acked*:
 Number of MSS-sized segments acked when an ACK is received. This
-number will be a non-integer value when an ACK acknowledges data
+number will be a decimal value when an ACK acknowledges an amount of data
 that is not MSS-sized. Specifically, it can be less than 1 when
 an ACK acknowledges a segment smaller than the MSS.
 
