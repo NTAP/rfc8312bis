@@ -461,7 +461,7 @@ increasing the congestion window only at the reception of an ACK. It
 does not make any changes to the TCP Fast Recovery and Fast Retransmit
 algorithms {{!RFC6582}}{{!RFC6675}}.
 
-During congestion avoidance after a congestion event is detected
+During congestion avoidance, after a congestion event is detected
 by mechanisms described in {{cubic-inc}}, CUBIC changes the window
 increase function of AIMD TCP.
 
