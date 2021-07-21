@@ -257,7 +257,7 @@ Principle 4:
 : CUBIC appropriately sets its multiplicative window decrease factor
   in order to balance between the scalability and convergence speed.
 
-## Principle 1 for the CUBIC Increase Function
+## Principle 1 for the CUBIC Increase Function {#cubic-inc}
 
 For better network utilization and stability, CUBIC {{HRX08}} uses a
 cubic window increase function in terms of the elapsed time from the
@@ -266,17 +266,17 @@ algorithms to AIMD TCP increase the congestion window using convex
 functions, CUBIC uses both the concave and convex profiles of a cubic
 function for window growth.
 
-After a window reduction in response to a congestion event is detected
-by duplicate ACKs or Explicit Congestion Notification-Echo (ECN-Echo,
-ECE) ACKs {{!RFC3168}}, CUBIC remembers the congestion window size
-where it received the congestion event and performs a multiplicative
-decrease of the congestion window. When CUBIC enters into congestion
-avoidance, it starts to increase the congestion window using the
-concave profile of the cubic function. The cubic function is set to
-have its plateau at the remembered congestion window size, so that the
-concave window increase continues until then. After that, the cubic
-function turns into a convex profile and the convex window increase
-begins.
+After a window reduction in response to a congestion event detected
+by duplicate ACKs, Explicit Congestion Notification-Echo (ECN-Echo,
+ECE) ACKs {{!RFC3168}}, TCP RACK {{!RFC8985}}} or QUIC loss detection {{!9002}},
+CUBIC remembers the congestion window size where it received the congestion
+event and performs a multiplicative decrease of the congestion window.
+When CUBIC enters into congestion avoidance, it starts to increase the
+congestion window using the concave profile of the cubic function.
+The cubic function is set to have its plateau at the remembered
+congestion window size, so that the concave window increase continues
+until then. After that, the cubic function turns into a convex profile
+and the convex window increase begins.
 
 This style of window adjustment (concave and then convex) improves the
 algorithm stability while maintaining high network utilization
@@ -461,10 +461,9 @@ increasing the congestion window only at the reception of an ACK. It
 does not make any changes to the TCP Fast Recovery and Fast Retransmit
 algorithms {{!RFC6582}}{{!RFC6675}}.
 
-During congestion avoidance after a congestion event where a packet
-loss is detected by duplicate ACKs or by receiving packets carrying
-ECE flags {{!RFC3168}}, CUBIC changes the window increase function of
-AIMD TCP.
+During congestion avoidance after a congestion event is detected
+by mechanisms described in {{cubic-inc}}, CUBIC changes the window
+increase function of AIMD TCP.
 
 CUBIC uses the following window increase function:
 
@@ -585,7 +584,7 @@ adjusted by using the number of acknowledged bytes instead of acknowledged
 segments. Also note that this equation works for connections with
 enabled or disabled Delayed ACKs {{!RFC5681}}, as
 *segments_acked* will be different based on
-the segments actually acknowledged by an ACK.  
+the segments actually acknowledged by an ACK.
 
 ~~~ math
 W_{est} = W_{est} + α_{cubic} * \frac{segments\_acked}{cwnd}
@@ -644,10 +643,10 @@ for each received ACK, where *target* is calculated as described in
 
 ## Multiplicative Decrease {#mult-dec}
 
-When a packet loss is detected by duplicate ACKs or by receiving
-packets carrying ECE flags, CUBIC updates *W<sub>max</sub>* and
-reduces *cwnd* and *ssthresh* immediately as described below. An
-implementation MAY set a smaller *ssthresh* than suggested below to
+When a congestion event is detected by mechanisms described in
+{{cubic-inc}}, CUBIC updates *W<sub>max</sub>* and reduces *cwnd*
+and *ssthresh* immediately as described below. An implementation MAY
+set a smaller *ssthresh* than suggested below to
 accommodate rate-limited applications as described in {{?RFC7661}}.
 For both packet loss and congestion detection through ECN, the sender
 MAY employ a Fast Recovery algorithm to gradually adjust the
@@ -1036,6 +1035,9 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 - add guidance for using bytes and mention that segments count is decimal
   ([#67](https://github.com/NTAP/rfc8312bis/issues/67))
+
+- add loss events detected by RACK and QUIC loss detection
+  ([#62](https://github.com/NTAP/rfc8312bis/issues/62))
 
 ## Since draft-ietf-tcpm-rfc8312bis-01
 
