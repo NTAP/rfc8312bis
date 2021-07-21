@@ -268,7 +268,7 @@ function for window growth.
 
 After a window reduction in response to a congestion event detected
 by duplicate ACKs, Explicit Congestion Notification-Echo (ECN-Echo,
-ECE) ACKs {{!RFC3168}}, TCP RACK {{!RFC8985}}} or QUIC loss detection,
+ECE) ACKs {{!RFC3168}}, TCP RACK {{!RFC8985}} or QUIC loss detection,
 CUBIC remembers the congestion window size where it received the congestion
 event and performs a multiplicative decrease of the congestion window.
 When CUBIC enters into congestion avoidance, it starts to increase the
