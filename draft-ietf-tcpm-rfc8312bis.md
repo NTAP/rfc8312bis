@@ -583,7 +583,7 @@ is for a connection where Appropriate Byte Counting (ABC) {{!RFC3465}}
 is disabled. For a connection with ABC enabled, this equation SHOULD be
 adjusted by using the number of acknowledged bytes instead of acknowledged
 segments. Also note that this equation works for connections with
-Delayed ACK {{!RFC5681}} both enabled and disabled, as
+enabled or disabled Delayed ACKs {{!RFC5681}}, as
 *segments_acked* will be different based on
 the segments actually acknowledged by an ACK.  
 
