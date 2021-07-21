@@ -579,7 +579,7 @@ in the AIMD-friendly region and *cwnd* SHOULD be set to
 *W<sub>est</sub>* is set equal to *cwnd<sub>start</sub>* at the start
 of the congestion avoidance stage. After that, on every ACK,
 *W<sub>est</sub>* is updated using {{eq4}}. Note that this equation
-is for a connection in which Appropriate Byte Counting (ABC) {{!RFC3465}}
+is for a connection where Appropriate Byte Counting (ABC) {{!RFC3465}}
 is disabled. For a connection with ABC enabled, this equation should be
 adjusted using the number of acknowledged  bytes instead of acknowledged
 segments. Also note that, this equation works for connections with
