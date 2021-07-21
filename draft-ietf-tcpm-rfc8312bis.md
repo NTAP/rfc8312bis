@@ -582,7 +582,7 @@ of the congestion avoidance stage. After that, on every ACK,
 is for a connection where Appropriate Byte Counting (ABC) {{!RFC3465}}
 is disabled. For a connection with ABC enabled, this equation SHOULD be
 adjusted by using the number of acknowledged bytes instead of acknowledged
-segments. Also note that, this equation works for connections with
+segments. Also note that this equation works for connections with
 Delayed ACK {{!RFC5681}} both enabled and disabled, as
 *segments_acked* will be different based on
 the segments actually acknowledged by an ACK.  
