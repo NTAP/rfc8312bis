@@ -153,7 +153,7 @@ This document updates the specification of CUBIC to include
 algorithmic improvements based on these implementations and recent
 academic work. Based on the extensive deployment experience with
 CUBIC, it also moves the specification to the Standards Track,
-obsoleting {{?RFC8312}}.
+obsoleting RFC 8312.
 
 --- note_Note_to_Readers
 
@@ -210,10 +210,15 @@ they use the Additive Increase and Multiplicative Decrease algorithm
 
 CUBIC, originally proposed in {{HRX08}}, is a modification to the
 congestion control algorithm of classical AIMD TCP to remedy this
-problem. This document describes the most recent specification of
-CUBIC. Specifically, CUBIC uses a cubic function instead of the linear
+problem. Specifically, CUBIC uses a cubic function instead of the linear
 window increase function of AIMD TCP to improve scalability and
 stability under fast and long-distance networks.
+
+This document updates the specification of CUBIC to include
+algorithmic improvements based on these implementations and recent
+academic work. Based on the extensive deployment experience with
+CUBIC, it also moves the specification to the Standards Track,
+obsoleting {{?RFC8312}}.
 
 Binary Increase Congestion Control (BIC-TCP) {{XHR04}}, a predecessor
 of CUBIC, was selected as the default TCP congestion control algorithm
