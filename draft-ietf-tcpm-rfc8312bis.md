@@ -215,7 +215,7 @@ window increase function of AIMD TCP to improve scalability and
 stability under fast and long-distance networks.
 
 This document updates the specification of CUBIC to include
-algorithmic improvements based on these implementations and recent
+algorithmic improvements based on the Linux, Windows, and Apple implementations and recent
 academic work. Based on the extensive deployment experience with
 CUBIC, it also moves the specification to the Standards Track,
 obsoleting {{?RFC8312}}.
