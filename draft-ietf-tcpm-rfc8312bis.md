@@ -186,12 +186,13 @@ do this.
 CUBIC has been adopted as the default TCP congestion control algorithm
 in the Linux, Windows, and Apple stacks, and has been used and
 deployed globally. Extensive, decade-long deployment experience in
-vastly different Internet scenarios has convincingly demonstrated that
-CUBIC is safe for deployment on the global Internet and delivers
+vastly different Internet scenarios has convincingly demonstrated
+that CUBIC is safe for deployment on the global Internet and delivers
 substantial benefits over classical AIMD congestion control. It is
-therefore to be regarded as the current standard for TCP congestion
-control. CUBIC can also be used for other transport protocols such as
-QUIC {{?RFC9000}} and SCTP {{?RFC4960}} as a default congestion controller.
+therefore to be regarded as the currently most widely deployed
+standard for TCP congestion control. CUBIC can also be used for other
+transport protocols such as QUIC {{?RFC9000}} and SCTP {{?RFC4960}}
+as a default congestion controller.
 
 The design of CUBIC was motivated by the well-documented problem
 classical TCP has with  low utilization over fast and long-distance
