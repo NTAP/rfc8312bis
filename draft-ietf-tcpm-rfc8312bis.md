@@ -502,7 +502,7 @@ of the current congestion avoidance stage. For example, right after a
 congestion event, *cwnd<sub>start</sub>* is equal to the new cwnd
 calculated as described in {{mult-dec}}.
 
-Upon receiving an ACK during congestion avoidance, CUBIC computes the
+Upon receiving a new ACK during congestion avoidance, CUBIC computes the
 *target* congestion window size after the next *RTT* using {{eq1}} as
 follows, where *RTT* is the smoothed round-trip time. The lower and
 upper bounds below ensure that CUBIC's congestion window increase rate
