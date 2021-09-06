@@ -1018,6 +1018,11 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
 
+## Since draft-ietf-tcpm-rfc8312bis-04
+
+- Fix incorrect math
+  ([#106](https://github.com/NTAP/rfc8312bis/issues/106))
+
 ## Since draft-ietf-tcpm-rfc8312bis-03
 
 - Remove reference from abstract
