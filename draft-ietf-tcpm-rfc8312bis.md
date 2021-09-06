@@ -814,7 +814,7 @@ performance analysis of CUBIC. The average window size of CUBIC can be
 obtained by the following function:
 
 ~~~ math
-AVG\_W_{cubic} = \sqrt[4]{\frac{C * (3 + β_{cubic})}{4 * (1 - β_{cubic})}} * \frac{\sqrt[3]{RTT^4}}{\sqrt[3]{p^4}}
+AVG\_W_{cubic} = \sqrt[4]{\frac{C * (3 + β_{cubic})}{4 * (1 - β_{cubic})}} * \frac{\sqrt[4]{RTT^3}}{\sqrt[4]{p^3}}
 ~~~
 {: #eq5 artwork-align="center" }
 
@@ -823,7 +823,7 @@ to:
 
 ~~~ math
 AVG\_W_{cubic} = \sqrt[4]{\frac{C * 3.7}{1.2}} *
-                 \frac{\sqrt[3]{RTT^4}}{\sqrt[3]{p^4}}
+                 \frac{\sqrt[4]{RTT^3}}{\sqrt[4]{p^3}}
 ~~~
 {: #eq6 artwork-align="center" }
 
@@ -899,7 +899,7 @@ Therefore, *C* SHOULD be set to 0.4. With *C* set to 0.4, {{eq6}} is
 reduced to:
 
 ~~~ math
-AVG\_W_{cubic} = 1.054 * \frac{\sqrt[3]{RTT^4}}{\sqrt[3]{p^4}}
+AVG\_W_{cubic} = 1.054 * \frac{\sqrt[4]{RTT^3}}{\sqrt[4]{p^3}}
 ~~~
 {: #eq7 artwork-align="center" }
 
