@@ -154,7 +154,7 @@ This document updates the specification of CUBIC to include
 algorithmic improvements based on these implementations and recent
 academic work. Based on the extensive deployment experience with
 CUBIC, it also moves the specification to the Standards Track,
-obsoleting RFC 8312.  This also requires updating RFC 5861, to allow
+obsoleting RFC 8312.  This also requires updating RFC 5681, to allow
 for CUBIC's occasionally more aggressive sending behavior.
 
 --- note_Note_to_Readers
