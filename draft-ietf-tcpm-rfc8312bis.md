@@ -461,15 +461,16 @@ An estimate for the congestion window in segments in the AIMD-friendly
 region, that is, an estimate for the congestion window of AIMD TCP.
 
 *segments_acked*:
-Number of MSS-sized segments acked when an ACK is received. This
-number will be a decimal value when an ACK acknowledges an amount of data
-that is not MSS-sized. Specifically, it can be less than 1 when
-an ACK acknowledges a segment smaller than the MSS.
+Number of MSS-sized segments acked when a "new ACK" is received, i.e., an
+ACK that cumulatively acknowledges the delivery of new data. This
+number will be a decimal value when a new ACK acknowledges an amount of
+data that is not MSS-sized. Specifically, it can be less than 1 when a
+new ACK acknowledges a segment smaller than the MSS.
 
 ## Window Increase Function {#win-inc}
 
 CUBIC maintains the acknowledgment (ACK) clocking of AIMD TCP by
-increasing the congestion window only at the reception of an ACK. It
+increasing the congestion window only at the reception of a new ACK. It
 does not make any changes to the TCP Fast Recovery and Fast Retransmit
 algorithms {{!RFC6582}}{{!RFC6675}}.
 
@@ -585,10 +586,10 @@ receiving a new ACK in congestion avoidance (where *cwnd* could be
 greater than or less than *W<sub>max</sub>*), CUBIC checks whether
 W<sub>cubic</sub>(*t*) is less than *W<sub>est</sub>*. If so, CUBIC is
 in the AIMD-friendly region and *cwnd* SHOULD be set to
-*W<sub>est</sub>* at each reception of an ACK.
+*W<sub>est</sub>* at each reception of a new ACK.
 
 *W<sub>est</sub>* is set equal to *cwnd<sub>start</sub>* at the start
-of the congestion avoidance stage. After that, on every ACK,
+of the congestion avoidance stage. After that, on every new ACK,
 *W<sub>est</sub>* is updated using {{eq4}}. Note that this equation
 is for a connection where Appropriate Byte Counting (ABC) {{?RFC3465}}
 is disabled. For a connection with ABC enabled, this equation SHOULD be
@@ -596,7 +597,7 @@ adjusted by using the number of acknowledged bytes instead of acknowledged
 segments. Also note that this equation works for connections with
 enabled or disabled Delayed ACKs {{!RFC5681}}, as
 *segments_acked* will be different based on
-the segments actually acknowledged by an ACK.
+the segments actually acknowledged by a new ACK.
 
 ~~~ math
 W_{est} = W_{est} + α_{cubic} * \frac{segments\_acked}{cwnd}
@@ -622,7 +623,7 @@ incremented by
 ~~~
 {: artwork-align="center" }
 
-for each received ACK, where *target* is calculated as described in
+for each received new ACK, where *target* is calculated as described in
 {{win-inc}}.
 
 ## Convex Region
@@ -650,7 +651,7 @@ incremented by
 ~~~
 {: artwork-align="center" }
 
-for each received ACK, where *target* is calculated as described in
+for each received new ACK, where *target* is calculated as described in
 {{win-inc}}.
 
 ## Multiplicative Decrease {#mult-dec}
@@ -1031,6 +1032,8 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
   ([#106](https://github.com/NTAP/rfc8312bis/issues/106))
 - Update RFC5681
   ([#99](https://github.com/NTAP/rfc8312bis/issues/99))
+- Clarify what we mean by "new ACK" and use it in the text in more places.
+  ([#101](https://github.com/NTAP/rfc8312bis/issues/101))
 
 ## Since draft-ietf-tcpm-rfc8312bis-03
 
