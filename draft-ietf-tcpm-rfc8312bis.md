@@ -993,7 +993,9 @@ might be very high after restarting from these periods.
 ## Responses to Sudden or Transient Events
 
 If there is a sudden congestion, a routing change, or a mobility
-event, CUBIC behaves the same as AIMD TCP.
+event, CUBIC behaves the same as AIMD TCP,
+except a different
+Multiplicative Decrease factor as described in {{mult-dec}}.
 
 ## Incremental Deployment
 
@@ -1031,6 +1033,8 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
   ([#106](https://github.com/NTAP/rfc8312bis/issues/106))
 - Update RFC5681
   ([#99](https://github.com/NTAP/rfc8312bis/issues/99))
+- Update Section 5.9 "Responses to Sudden or Transient Events"
+  ([#98](https://github.com/NTAP/rfc8312bis/issues/98))
 
 ## Since draft-ietf-tcpm-rfc8312bis-03
 
