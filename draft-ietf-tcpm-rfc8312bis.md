@@ -992,7 +992,7 @@ might be very high after restarting from these periods.
 
 ## Responses to Sudden or Transient Events
 
-If there is a sudden congestion, a routing change, or a mobility
+If there is a sudden routing change or a mobility
 event, CUBIC behaves the same as AIMD TCP,
 except a different
 Multiplicative Decrease factor as described in {{mult-dec}}.
