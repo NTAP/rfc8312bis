@@ -1037,6 +1037,7 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
   ([#99](https://github.com/NTAP/rfc8312bis/issues/99))
 - Rephrase text around algorithmic alternatives, add HyStart++
   ([#85](https://github.com/NTAP/rfc8312bis/issues/85),
+   [#86](https://github.com/NTAP/rfc8312bis/issues/86),
   [#90](https://github.com/NTAP/rfc8312bis/issues/90))
 - Clarify what we mean by "new ACK" and use it in the text in more places.
   ([#101](https://github.com/NTAP/rfc8312bis/issues/101))
