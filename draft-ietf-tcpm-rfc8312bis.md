@@ -796,9 +796,9 @@ these variables.
 
 CUBIC MUST employ a slow-start algorithm, when *cwnd* is no more than
 *ssthresh*. In general, CUBIC SHOULD use the HyStart++ slow start
-algorithm {{!I-D.ietf-tcpm-hystartplusplus}}, or MAY use the AIMD TCP
-slow start algorithm {{!RFC5681}} when HyStart++ is not suitable.
-Experimental alternatives include
+algorithm {{!I-D.ietf-tcpm-hystartplusplus}}, or MAY use the Reno TCP
+slow start algorithm {{!RFC5681}} in the rare cases when
+HyStart++ is not suitable. Experimental alternatives include
 hybrid slow start {{HR08}}, a predecessor to HyStart++ that CUBIC
 implementations have used as the default for the last decade, and
 limited slow start {{?RFC3742}}.
