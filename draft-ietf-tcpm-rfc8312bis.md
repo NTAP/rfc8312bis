@@ -190,14 +190,14 @@ in the Linux, Windows, and Apple stacks, and has been used and
 deployed globally. Extensive, decade-long deployment experience in
 vastly different Internet scenarios has convincingly demonstrated
 that CUBIC is safe for deployment on the global Internet and delivers
-substantial benefits over classical AIMD congestion control. It is
+substantial benefits over classical Reno congestion control {{!RFC5681}}. It is
 therefore to be regarded as the currently most widely deployed
 standard for TCP congestion control. CUBIC can also be used for other
 transport protocols such as QUIC {{?RFC9000}} and SCTP {{?RFC4960}}
 as a default congestion controller.
 
 The design of CUBIC was motivated by the well-documented problem
-classical TCP has with  low utilization over fast and long-distance
+classical Reno TCP has with  low utilization over fast and long-distance
 networks {{K03}}{{?RFC3649}}. This problem arises from a slow increase
 of the congestion window following a congestion event in a network with
 a large bandwidth-delay product (BDP). {{HKLRX06}} indicates that this
@@ -221,7 +221,7 @@ improvements based on the Linux, Windows, and Apple implementations and
 recent academic work. Based on the extensive deployment experience with
 CUBIC, it also moves the specification to the Standards Track,
 obsoleting {{?RFC8312}}. This requires an update to {{!RFC5681}}, which
-limits the aggressiveness of TCP implementations in its Section 3.
+limits the aggressiveness of Reno TCP implementations in its Section 3.
 Since CUBIC is occasionally more aggressive than the {{!RFC5681}}
 algorithms, this document updates {{!RFC5681}} to allow for CUBIC's
 behavior.
@@ -837,20 +837,20 @@ AVG\_W_{cubic} = \sqrt[4]{\frac{C * 3.7}{1.2}} *
 We will determine the value of *C* in the following subsection using
 {{eq6}}.
 
-## Fairness to Reno TCP
+## Fairness to Reno
 
-In environments where Reno TCP is able to make reasonable use of the
+In environments where Reno is able to make reasonable use of the
 available bandwidth, CUBIC does not significantly change this state.
 
-Reno TCP performs well in the following two types of networks:
+Reno performs well in the following two types of networks:
 
 1. networks with a small bandwidth-delay product (BDP)
 
 2. networks with a short RTTs, but not necessarily a small BDP
 
-CUBIC is designed to behave very similarly to Reno TCP in the above
+CUBIC is designed to behave very similarly to Reno in the above
 two types of networks. The following two tables show the average
-window sizes of Reno TCP, HSTCP, and CUBIC. The average window sizes
+window sizes of Reno TCP, HSTCP, and CUBIC TCP. The average window sizes
 of Reno TCP and HSTCP are from {{?RFC3649}}. The average window size
 of CUBIC is calculated using {{eq6}} and the CUBIC Reno-friendly
 region for three different values of *C*.
@@ -915,11 +915,11 @@ CUBIC.
 
 ## Using Spare Capacity
 
-CUBIC uses a more aggressive window increase function than Reno TCP
+CUBIC uses a more aggressive window increase function than Reno
 for fast and long-distance networks.
 
 The following table shows that to achieve the 10 Gbps rate, Reno TCP
-requires a packet loss rate of 2.0e-10, while CUBIC requires a packet
+requires a packet loss rate of 2.0e-10, while CUBIC TCP requires a packet
 loss rate of 2.9e-8.
 
 | Throughput (Mbps) | Average W | Reno P  | HSTCP P | CUBIC P |
@@ -997,9 +997,9 @@ event, CUBIC behaves the same as Reno.
 
 ## Incremental Deployment
 
-CUBIC requires only changes to TCP senders, and it does not require
-any changes at TCP receivers. That is, a CUBIC sender works correctly
-with the Reno receivers. In addition, CUBIC does not require any
+CUBIC requires only changes to the congestion control at the sender, and it does
+not require any changes at receivers. That is, a CUBIC sender works correctly
+with Reno receivers. In addition, CUBIC does not require any
 changes to routers and does not require any assistance from routers.
 
 # Security Considerations
