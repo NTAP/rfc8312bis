@@ -506,9 +506,7 @@ K = \sqrt[3]{\frac{W_{max} - cwnd_{start}}{C}}
 {: #eq2 artwork-align="center" }
 
 where *cwnd<sub>start</sub>* is the congestion window at the beginning
-of the current congestion avoidance stage. For example, right after a
-congestion event, *cwnd<sub>start</sub>* is equal to the new cwnd
-calculated as described in {{mult-dec}}.
+of the current congestion avoidance stage.
 
 Upon receiving a new ACK during congestion avoidance, CUBIC computes the
 *target* congestion window size after the next *RTT* using {{eq1}} as
@@ -1040,6 +1038,10 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
   ([#99](https://github.com/NTAP/rfc8312bis/issues/99))
 - Clarify what we mean by "new ACK" and use it in the text in more places.
   ([#101](https://github.com/NTAP/rfc8312bis/issues/101))
+- Rewrite the Responses to Sudden or Transient Events section
+  ([#98](https://github.com/NTAP/rfc8312bis/issues/98))
+- Remove confusing text about *cwnd<sub>start</sub>* in Section 4.2
+  ([#100](https://github.com/NTAP/rfc8312bis/issues/100))
 
 ## Since draft-ietf-tcpm-rfc8312bis-03
 
