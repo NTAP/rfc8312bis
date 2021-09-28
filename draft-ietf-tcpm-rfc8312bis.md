@@ -990,8 +990,14 @@ might be very high after restarting from these periods.
 
 ## Responses to Sudden or Transient Events
 
-If there is a sudden congestion, a routing change, or a mobility
-event, CUBIC behaves the same as Reno.
+If there is a sudden increase in capacity, e.g., due to variable radio
+capacity, a routing change, or a mobility event, CUBIC is designed to
+utilize the newly available capacity faster than Reno.
+
+On the other hand, if there is a sudden decrease in capacity, CUBIC
+reduces more slowly than Reno. This remains true whether or not CUBIC
+is in Reno-friendly mode and whether or not fast convergence is
+enabled.
 
 ## Incremental Deployment
 
