@@ -1035,7 +1035,7 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
   ([#98](https://github.com/NTAP/rfc8312bis/issues/98))
 - Remove confusing text about *cwnd<sub>start</sub>* in Section 4.2
   ([#100](https://github.com/NTAP/rfc8312bis/issues/100))
-- Change terminology from "AIMD" to "Reno" 
+- Change terminology from "AIMD" to "Reno"
   ([#108](https://github.com/NTAP/rfc8312bis/issues/108))
 
 ## Since draft-ietf-tcpm-rfc8312bis-03
