@@ -1024,17 +1024,17 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 These individuals suggested improvements to this document:
 
-* Bob Briscoe
-* Gorry Fairhurst
-* Jonathan Morton
-* Juhamatti Kuusisaari
-* Markku Kojo
-* Matt Olson
-* Neal Cardwell
-* Praveen Balasubramanian
-* Rod Grimes
-* Tom Petch
-* Yoshifumi Nishida
+- Bob Briscoe
+- Gorry Fairhurst
+- Jonathan Morton
+- Juhamatti Kuusisaari
+- Markku Kojo
+- Matt Olson
+- Neal Cardwell
+- Praveen Balasubramanian
+- Rod Grimes
+- Tom Petch
+- Yoshifumi Nishida
 
 <!-- Anyone else to acknowledge? -->
 
