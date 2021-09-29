@@ -1025,16 +1025,26 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 These individuals suggested improvements to this document:
 
 - Bob Briscoe
+- Christian Huitema
 - Gorry Fairhurst
 - Jonathan Morton
 - Juhamatti Kuusisaari
+- Junho Choi
 - Markku Kojo
+- Martin Thomson
 - Matt Olson
+- Michael Welzl
+- Mirja Kühlewind
+- Mohit P. Tahiliani
 - Neal Cardwell
 - Praveen Balasubramanian
+- Richard Scheffenegger
 - Rod Grimes
+- Tom Henderson
 - Tom Petch
+- Wesley Rosenblum
 - Yoshifumi Nishida
+- Yuchung Cheng
 
 <!-- Anyone else to acknowledge? -->
 
