@@ -662,10 +662,11 @@ When a congestion event is detected by mechanisms described in
 and *ssthresh* immediately as described below. An implementation MAY
 set a smaller *ssthresh* than suggested below to
 accommodate rate-limited applications as described in {{?RFC7661}}.
-For both packet loss and congestion detection through ECN, the sender
-MAY employ a Fast Recovery algorithm to gradually adjust the
-congestion window to its new reduced *ssthresh* value. The parameter
-{{{β}{}}}*<sub>cubic</sub>* SHOULD be set to 0.7.
+On detecting a packet loss, the sender MAY reduce the congestion window
+immediately upon entering the loss recovery or use other mechanisms, such as
+Proportional Rate Reduction {{?RFC 6937}} to update the congestion
+window to its new reduced *ssthresh* value at the end of loss recovery.
+The parameter {{{β}{}}}*<sub>cubic</sub>* SHOULD be set to 0.7.
 
 ~~~ math
 \begin{array}{ll}
