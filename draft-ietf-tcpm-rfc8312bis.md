@@ -1071,6 +1071,8 @@ These individuals suggested improvements to this document:
   ([#100](https://github.com/NTAP/rfc8312bis/issues/100))
 - Change terminology from "AIMD" to "Reno"
   ([#108](https://github.com/NTAP/rfc8312bis/issues/108))
+- Moved MUST NOT from app-limited section to main cubic AI section
+([#97](https://github.com/NTAP/rfc8312bis/issues/97))
 
 ## Since draft-ietf-tcpm-rfc8312bis-03
 
