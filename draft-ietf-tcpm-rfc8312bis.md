@@ -666,7 +666,7 @@ In case of packet loss, the sender MAY reduce the congestion window
 immediately upon entering the loss recovery similar to {{!RFC6675}}
 or use other mechanisms, such as Proportional Rate Reduction {{?RFC6937}},
 to reduce the congestion window more gradually.
-The parameter {{{β}{}}}*<sub>cubic</sub>* SHOULD be set to 0.7 which
+The parameter {{{β}{}}}*<sub>cubic</sub>* SHOULD be set to 0.7, which
 is different from the multiplicative decrease factor used in {{!RFC5681}} and
 {{!RFC6675}} during fast recovery.
 
