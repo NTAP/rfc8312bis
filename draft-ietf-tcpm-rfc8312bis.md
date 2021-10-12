@@ -662,13 +662,14 @@ When a congestion event is detected by mechanisms described in
 and *ssthresh* immediately as described below. An implementation MAY
 set a smaller *ssthresh* than suggested below to
 accommodate rate-limited applications as described in {{?RFC7661}}.
-In case of packet loss, the sender MAY reduce the congestion window
-immediately upon entering the loss recovery similar to {{!RFC6675}}
-or use other mechanisms, such as Proportional Rate Reduction {{?RFC6937}},
-to reduce the congestion window more gradually.
+In case of packet loss, the sender MUST reduce the *cwnd*
+and *ssthresh* immediately upon entering the loss recovery similar to
+{{!RFC5681}} (and {{!RFC6675}}). Note that, other mechanisms
+such as Proportional Rate Reduction {{?RFC6937}}, can be used
+to reduce the sending rate during loss recovery more gradually.
 The parameter {{{β}{}}}*<sub>cubic</sub>* SHOULD be set to 0.7, which
-is different from the multiplicative decrease factor used in {{!RFC5681}} and
-{{!RFC6675}} during fast recovery.
+is different from the multiplicative decrease factor used in {{!RFC5681}}
+(and {{!RFC6675}}) during fast recovery.
 
 ~~~ math
 \begin{array}{ll}
