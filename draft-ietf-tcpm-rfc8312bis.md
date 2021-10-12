@@ -662,7 +662,7 @@ When a congestion event is detected by mechanisms described in
 and *ssthresh* immediately as described below. An implementation MAY
 set a smaller *ssthresh* than suggested below to
 accommodate rate-limited applications as described in {{?RFC7661}}.
-In case of packet loss, the sender MUST reduce the *cwnd*
+In case of packet loss, the sender MUST reduce *cwnd*
 and *ssthresh* immediately upon entering the loss recovery similar to
 {{!RFC5681}} (and {{!RFC6675}}). Note that, other mechanisms
 such as Proportional Rate Reduction {{?RFC6937}}, can be used
