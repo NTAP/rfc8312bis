@@ -664,7 +664,7 @@ set a smaller *ssthresh* than suggested below to
 accommodate rate-limited applications as described in {{?RFC7661}}.
 In case of packet loss, the sender MUST reduce *cwnd*
 and *ssthresh* immediately upon entering loss recovery, similar to
-{{!RFC5681}} (and {{!RFC6675}}). Note that, other mechanisms
+{{!RFC5681}} (and {{!RFC6675}}). Note that other mechanisms,
 such as Proportional Rate Reduction {{?RFC6937}}, can be used
 to reduce the sending rate during loss recovery more gradually.
 The parameter {{{β}{}}}*<sub>cubic</sub>* SHOULD be set to 0.7, which
