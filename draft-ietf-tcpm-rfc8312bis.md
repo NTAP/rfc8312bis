@@ -1085,6 +1085,8 @@ These individuals suggested improvements to this document:
   ([#97](https://github.com/NTAP/rfc8312bis/issues/97))
 - Clarify cwnd decrease during multiplicative decrease
   ([#102](https://github.com/NTAP/rfc8312bis/issues/102))
+- Clarify text around queuing
+  ([#94](https://github.com/NTAP/rfc8312bis/issues/94))
 
 ## Since draft-ietf-tcpm-rfc8312bis-03
 
