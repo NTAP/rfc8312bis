@@ -141,6 +141,7 @@ informative:
   CEHRX07:  DOI.10.1109/INFCOM.2007.111
   HRX08:    DOI.10.1145/1400097.1400105
   K03:      DOI.10.1145/956981.956989
+  LIU16:    DOI.10.1109/TMC.2015.2500227
 
 --- abstract
 
@@ -963,10 +964,15 @@ Same as Reno, CUBIC is a loss-based congestion control algorithm.
 Because CUBIC is designed to be more aggressive (due to a faster
 window increase function and bigger multiplicative decrease factor)
 than Reno in fast and long-distance networks, it can fill large
-drop-tail buffers more quickly than Reno and increases the risk of
-a standing queue {{?RFC8511}}. In this case, proper queue sizing and
-management {{!RFC7567}} could be used to reduce the packet queuing
-delay.
+drop-tail buffers more quickly than Reno and increases the risk of a
+standing queue {{?RFC8511}}. In this case, proper queue sizing and
+management {{!RFC7567}} could be used to mitigate the risk to some
+extent and reduce the packet queuing delay.
+
+Similar to Reno, the performance of CUBIC as a loss-based congestion
+control algorithm suffers in networks where a packet loss is not a
+good indication of bandwidth utilization, such as wireless or mobile
+networks {{LIU16}}.
 
 ## Protection against Congestion Collapse
 
