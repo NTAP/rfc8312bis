@@ -675,10 +675,11 @@ is different from the multiplicative decrease factor used in {{!RFC5681}}
 \begin{array}{ll}
 ssthresh = cwnd * β_{cubic} &
 \text{// new slow-start threshold} \\
+cwnd = \mathrm{max}(ssthresh, 1) &
+\text{// window reduction, is at least 1 MSS} \\
 ssthresh = \mathrm{max}(ssthresh, 2) &
 \text{// threshold is at least 2 MSS} \\
-cwnd = ssthresh &
-\text{// window reduction} \\
+
 \end{array}
 ~~~
 {: artwork-align="center" }
@@ -687,6 +688,12 @@ A side effect of setting {{{β}{}}}*<sub>cubic</sub>* to a value bigger
 than 0.5 is slower convergence. We believe that while a more adaptive
 setting of {{{β}{}}}*<sub>cubic</sub>* could result in faster
 convergence, it will make the analysis of CUBIC much harder.
+
+Note that CUBIC will continue to reduce cwnd in response to congestion
+events until it reaches a value of 1 MSS. After that, if there is a
+new congestion event, the sender with the cwnd of 1 MSS needs to reduce
+its sending rate even further and it can acheive that by using a retransmit
+timer with exponential backoff as described in {{!RFC3168}}.
 
 ## Fast Convergence
 
