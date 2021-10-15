@@ -967,7 +967,12 @@ than Reno in fast and long-distance networks, it can fill large
 drop-tail buffers more quickly than Reno and increases the risk of a
 standing queue {{?RFC8511}}. In this case, proper queue sizing and
 management {{!RFC7567}} could be used to mitigate the risk to some
-extent and reduce the packet queuing delay.
+extent and reduce the packet queuing delay. Also, in large-BDP
+networks after a congestion event, CUBIC, due its cubic window
+increase function, recovers quickly to the highest link utilization
+point. This mean that link utilization is less sensitive to an active
+queue management (AQM) target that is lower than the amplitude of the
+whole sawtooth.
 
 Similar to Reno, the performance of CUBIC as a loss-based congestion
 control algorithm suffers in networks where a packet loss is not a
