@@ -970,7 +970,7 @@ management {{!RFC7567}} could be used to mitigate the risk to some
 extent and reduce the packet queuing delay. Also, in large-BDP
 networks after a congestion event, CUBIC, due its cubic window
 increase function, recovers quickly to the highest link utilization
-point. This mean that link utilization is less sensitive to an active
+point. This means that link utilization is less sensitive to an active
 queue management (AQM) target that is lower than the amplitude of the
 whole sawtooth.
 
