@@ -1086,6 +1086,8 @@ These individuals suggested improvements to this document:
   ([#97](https://github.com/NTAP/rfc8312bis/issues/97))
 - Clarify cwnd decrease during multiplicative decrease
   ([#102](https://github.com/NTAP/rfc8312bis/issues/102))
+- Set lower bound of cwnd to 1 MSS and use retransmit timer thereafter
+  ([#83](https://github.com/NTAP/rfc8312bis/issues/83))
 
 ## Since draft-ietf-tcpm-rfc8312bis-03
 
