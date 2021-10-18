@@ -982,6 +982,11 @@ behaves like Reno, since CUBIC modifies only the window adjustment
 algorithm of Reno. Thus, it does not modify the ACK clocking and
 timeout behaviors of Reno.
 
+CUBIC also satisfies the "full backoff" requirement as described in
+{{!RFC5033}}. After reducing the sending rate to one packet per
+round-trip time, CUBIC would then exponential backoff the transmit
+time between each packet if congestion persists.
+
 ## Fairness within the Alternative Congestion Control Algorithm
 
 CUBIC ensures convergence of competing CUBIC flows with the same RTT
