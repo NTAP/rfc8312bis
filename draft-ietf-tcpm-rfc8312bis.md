@@ -984,8 +984,8 @@ timeout behaviors of Reno.
 
 CUBIC also satisfies the "full backoff" requirement as described in
 {{!RFC5033}}. After reducing the sending rate to one packet per
-round-trip time, CUBIC would then exponential backoff the transmit
-time between each packet if congestion persists.
+RTT, CUBIC then exponentially increases the transmission
+timer for each packet retransmission while congestion persists.
 
 ## Fairness within the Alternative Congestion Control Algorithm
 
