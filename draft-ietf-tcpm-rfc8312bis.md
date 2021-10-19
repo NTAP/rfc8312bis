@@ -807,7 +807,9 @@ slow start algorithm {{!RFC5681}} in the rare cases when
 HyStart++ is not suitable. Experimental alternatives include
 hybrid slow start {{HR08}}, a predecessor to HyStart++ that some CUBIC
 implementations have used as the default for the last decade, and
-limited slow start {{?RFC3742}}.
+limited slow start {{?RFC3742}}. Whichever start-up algorithm is used,
+work might be needed to ensure that the end of slow start and the first
+multiplicative decrease of congestion avoidance work well together.
 
 When CUBIC uses HyStart++ {{!I-D.ietf-tcpm-hystartplusplus}}, it may
 exit the first slow start without incurring any packet loss and
@@ -1094,7 +1096,7 @@ These individuals suggested improvements to this document:
 
 ## Since draft-ietf-tcpm-rfc8312bis-02
 
-- Decription of packet loss rate *p*
+- Description of packet loss rate *p*
   ([#65](https://github.com/NTAP/rfc8312bis/issues/65))
 
 - Clarification of TCP Friendly Equation for ABC and Delayed ACK
