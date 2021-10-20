@@ -705,8 +705,8 @@ setting of {{{β}{}}}*<sub>cubic</sub>* could result in faster
 convergence, it will make the analysis of CUBIC much harder.
 
 Note that CUBIC will continue to reduce *cwnd* in response to congestion
-events until it reaches a value of 1 MSS. If congestion persists,
-a sender with a *cwnd* of 1 MSS needs to reduce
+events due to ECN-Echo ACK packet until it reaches a value of 1 MSS.
+If congestion persists, a sender with a *cwnd* of 1 MSS needs to reduce
 its sending rate even further. It can achieve that by using a retransmission
 timer with exponential backoff, as described in {{!RFC3168}}.
 
@@ -999,7 +999,8 @@ timeout behaviors of Reno.
 
 CUBIC also satisfies the "full backoff" requirement as described in
 {{!RFC5033}}. After reducing the sending rate to one packet per
-RTT, CUBIC then exponentially increases the transmission
+RTT in response to congestion events due to ECN-Echo ACKs, CUBIC
+then exponentially increases the transmission
 timer for each packet retransmission while congestion persists.
 
 ## Fairness within the Alternative Congestion Control Algorithm
