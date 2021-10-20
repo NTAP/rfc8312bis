@@ -675,11 +675,19 @@ is different from the multiplicative decrease factor used in {{!RFC5681}}
 \begin{array}{ll}
 ssthresh = cwnd * β_{cubic} &
 \text{// new slow-start threshold} \\
-cwnd = \mathrm{max}(ssthresh, 1) &
-\text{// window reduction, is at least 1 MSS} \\
+\end{array}
+
+cwnd = \left\{
+\begin{array}{ll}
+\mathrm{max}(ssthresh, 2) &
+\text{// window reduction on packet loss, is at least 2 MSS} \\
+\mathrm{max}(ssthresh, 1) &
+\text{// window reduction on ECE, is at least 1 MSS} \\
+\end{array} \right.
+
+\begin{array}{ll}
 ssthresh = \mathrm{max}(ssthresh, 2) &
 \text{// threshold is at least 2 MSS} \\
-
 \end{array}
 ~~~
 {: artwork-align="center" }
