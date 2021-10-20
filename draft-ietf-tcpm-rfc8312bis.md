@@ -672,11 +672,23 @@ The parameter {{{β}{}}}*<sub>cubic</sub>* SHOULD be set to 0.7, which
 is different from the multiplicative decrease factor used in {{!RFC5681}}
 (and {{!RFC6675}}) during fast recovery.
 
+*flight_size* is the amount of outstanding data in the network, as defined
+in {{!RFC5681}}. Note that a rate-limited application with idle periods
+or periods when unable to send at the full rate permitted by *cwnd*
+may easily encounter notable variations in the volume of data sent
+from one RTT to another, resulting in *flight_size* that is significantly
+less than *cwnd* on a congestion event. This may decrease *cwnd* to a
+much lower value than necessary. To avoid suboptimal performance with
+such applications, some implementations of CUBIC use *cwnd* instead of
+*flight_size* to calculate the new *ssthresh*. Alternatively, the
+mechanisms described in {{?RFC 7661}} may also be adopted to
+mitigate this issue.
+
 ~~~ math
 \begin{array}{lll}
 
 ssthresh = &
-cwnd * β_{cubic} &
+flight_size * β_{cubic} &
 \text{new slow-start threshold} \\
 
 cwnd = &
@@ -1129,6 +1141,8 @@ These individuals suggested improvements to this document:
   ([#94](https://github.com/NTAP/rfc8312bis/issues/94))
 - Set lower bound of cwnd to 1 MSS and use retransmit timer thereafter
   ([#83](https://github.com/NTAP/rfc8312bis/issues/83))
+- Use FlightSize instead of cwnd to update ssthresh
+  ([#114](https://github.com/NTAP/rfc8312bis/issues/114))
 
 ## Since draft-ietf-tcpm-rfc8312bis-03
 
