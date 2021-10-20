@@ -672,17 +672,29 @@ is different from the multiplicative decrease factor used in {{!RFC5681}}
 (and {{!RFC6675}}) during fast recovery.
 
 ~~~ math
-\begin{array}{ll}
-ssthresh = cwnd * β_{cubic} &
+\begin{array}{lll}
+
+ssthresh = &
+cwnd * β_{cubic} &
 \text{// new slow-start threshold} \\
-cwnd = \left\{
-\mathrm{max}(ssthresh, 2)
-& \text{// window reduction on packet loss, is at least 2 MSS} \\
-\mathrm{max}(ssthresh, 1)
-& \text{// window reduction on ECE, is at least 1 MSS} \\
-\right.
-ssthresh = \mathrm{max}(ssthresh, 2) &
-\text{// threshold is at least 2 MSS} \\
+
+cwnd = &
+\left\{
+\begin{array}{l}
+\mathrm{max}(ssthresh, 2) \\
+\mathrm{max}(ssthresh, 1) \\
+\end{array}
+\right. &
+\begin{array}{l}
+\text{// on packet loss, reduce by at least 2 MSS} \\
+\text{// on ECE, reduce by at least 1 MSS} \\
+\end{array}
+\\
+
+ssthresh = &
+\mathrm{max}(ssthresh, 2) &
+\text{// } ssthresh \text{ is at least 2 MSS} \\
+
 \end{array}
 ~~~
 {: artwork-align="center" }
