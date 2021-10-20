@@ -705,7 +705,7 @@ setting of {{{β}{}}}*<sub>cubic</sub>* could result in faster
 convergence, it will make the analysis of CUBIC much harder.
 
 Note that CUBIC will continue to reduce *cwnd* in response to congestion
-events due to ECN-Echo ACK packet until it reaches a value of 1 MSS.
+events due to ECN-Echo ACKs until it reaches a value of 1 MSS.
 If congestion persists, a sender with a *cwnd* of 1 MSS needs to reduce
 its sending rate even further. It can achieve that by using a retransmission
 timer with exponential backoff, as described in {{!RFC3168}}.
