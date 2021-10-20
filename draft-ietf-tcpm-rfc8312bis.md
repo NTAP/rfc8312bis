@@ -686,8 +686,8 @@ cwnd = &
 \end{array}
 \right. &
 \begin{array}{l}
-\text{// on packet loss, reduce by at least 2 MSS} \\
-\text{// on ECE, reduce by at least 1 MSS} \\
+\text{// window reduction on packet loss, *cwnd* is at least 2 MSS} \\
+\text{// window reduction on ECE, *cwnd* is at least 1 MSS} \\
 \end{array}
 \\
 
