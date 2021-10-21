@@ -680,9 +680,9 @@ from one RTT to another, resulting in *flight_size* that is significantly
 less than *cwnd* on a congestion event. This may decrease *cwnd* to a
 much lower value than necessary. To avoid suboptimal performance with
 such applications, some implementations of CUBIC use *cwnd* instead of
-*flight_size* to calculate the new *ssthresh*. Alternatively, the
-mechanisms described in {{?RFC7661}} may also be adopted to
-mitigate this issue.
+*flight_size* to calculate the new *ssthresh* in {{eqssthresh}}.
+Alternatively, the mechanisms described in {{?RFC7661}} may also
+be adopted to mitigate this issue.
 
 ~~~ math
 \begin{array}{lll}
@@ -708,9 +708,7 @@ ssthresh = &
 \mathrm{max}(ssthresh, 2) &
  ssthresh \text{ is at least 2 MSS} \\
 
-\end{array}
-~~~
-{: artwork-align="center" }
+{: #eqssthresh artwork-align="center" }
 
 A side effect of setting {{{β}{}}}*<sub>cubic</sub>* to a value bigger
 than 0.5 is slower convergence. We believe that while a more adaptive
