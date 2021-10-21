@@ -688,7 +688,7 @@ be adopted to mitigate this issue.
 \begin{array}{lll}
 
 ssthresh = &
-flight_size * β_{cubic} &
+flight\_size * β_{cubic} &
 \text{new slow-start threshold} \\
 
 cwnd = &
