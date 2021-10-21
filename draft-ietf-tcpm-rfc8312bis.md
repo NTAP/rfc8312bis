@@ -672,8 +672,9 @@ The parameter {{{β}{}}}*<sub>cubic</sub>* SHOULD be set to 0.7, which
 is different from the multiplicative decrease factor used in {{!RFC5681}}
 (and {{!RFC6675}}) during fast recovery.
 
-In {{eqssthresh}}, *flight_size* is the amount of outstanding data in the network, as defined
-in {{!RFC5681}}. Note that a rate-limited application with idle periods
+In {{eqssthresh}}, *flight_size* is the amount of outstanding data in
+the network, as defined in {{!RFC5681}}.
+Note that a rate-limited application with idle periods
 or periods when unable to send at the full rate permitted by *cwnd*
 may easily encounter notable variations in the volume of data sent
 from one RTT to another, resulting in *flight_size* that is significantly
