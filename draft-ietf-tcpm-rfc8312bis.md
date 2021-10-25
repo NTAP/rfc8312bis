@@ -688,7 +688,7 @@ be adopted to mitigate this issue.
 
 ssthresh = &
 flight\_size * β_{cubic} &
-\text{new slow-start threshold} \\
+\text{// new } ssthresh \\
 
 cwnd = &
 \left\{
@@ -698,15 +698,17 @@ cwnd = &
 \end{array}
 \right. &
 \begin{array}{l}
-\text{reduction on packet loss}, cwnd \text{ is at least 2 MSS} \\
-\text{reduction on ECE}, cwnd \text{ is at least 1 MSS} \\
+\text{// reduction on packet loss}, cwnd \text{ is at least 2 MSS} \\
+\text{// reduction on ECE}, cwnd \text{ is at least 1 MSS} \\
 \end{array}
 \\
 
 ssthresh = &
 \mathrm{max}(ssthresh, 2) &
- ssthresh \text{ is at least 2 MSS} \\
+\text{// } ssthresh \text{ is at least 2 MSS} \\
 
+\end{array}
+~~~
 {: #eqssthresh artwork-align="center" }
 
 A side effect of setting {{{β}{}}}*<sub>cubic</sub>* to a value bigger
