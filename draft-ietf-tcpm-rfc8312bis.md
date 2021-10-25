@@ -660,9 +660,7 @@ for each received new ACK, where *target* is calculated as described in
 
 When a congestion event is detected by mechanisms described in
 {{cubic-inc}}, CUBIC updates *W<sub>max</sub>* and reduces *cwnd*
-and *ssthresh* immediately as described below. An implementation MAY
-set a smaller *ssthresh* than suggested below to
-accommodate rate-limited applications as described in {{?RFC7661}}.
+and *ssthresh* immediately as described below.
 In case of packet loss, the sender MUST reduce *cwnd*
 and *ssthresh* immediately upon entering loss recovery, similar to
 {{!RFC5681}} (and {{!RFC6675}}). Note that other mechanisms,
