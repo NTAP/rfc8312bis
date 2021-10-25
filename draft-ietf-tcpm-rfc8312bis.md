@@ -146,8 +146,8 @@ informative:
 --- abstract
 
 CUBIC is a standard TCP congestion control algorithm that uses a cubic
-function instead of the linear window increase function on the sender
-side to improve scalability and stability over fast and long-distance
+function instead of a linear congestion window increase function
+to improve scalability and stability over fast and long-distance
 networks. CUBIC has been adopted as the default TCP congestion control
 algorithm by the Linux, Windows, and Apple stacks.
 
