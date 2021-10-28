@@ -719,7 +719,7 @@ convergence, it will make the analysis of CUBIC much harder.
 Note that CUBIC MUST continue to reduce *cwnd* in response to congestion
 events due to ECN-Echo ACKs until it reaches a value of 1 MSS.
 If congestion events indicated by ECN-Echo ACKs persist, a sender with a
-*cwnd* of 1 MSS MUST reduce its sending rate even further. It can achieve 
+*cwnd* of 1 MSS MUST reduce its sending rate even further. It can achieve
 that by using a retransmission timer with exponential backoff, as
 described in {{!RFC3168}}.
 
