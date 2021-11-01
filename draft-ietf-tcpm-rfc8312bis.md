@@ -357,7 +357,7 @@ a linear throughput ratio seems more reasonable than equal throughputs
 higher-order throughput ratio (e.g., a quadratical throughput ratio of
 Reno under low statistical multiplexing environments).
 
-## Principle 4 for the CUBIC Decrease Factor
+## Principle 4 for the CUBIC Decrease Factor {#prin-beta}
 
 To balance between scalability and convergence speed, CUBIC sets the
 multiplicative window decrease factor to 0.7, whereas Reno uses
@@ -1038,6 +1038,9 @@ in the same bottleneck links to an equal throughput. When competing
 flows have different RTT values, their throughput ratio is linearly
 proportional to the inverse of their RTT ratios. This is true
 independently of the level of statistical multiplexing on the link.
+The convergence time depends on the network environments
+(e.g., bandwidth, RTT) and the level of statistical multiplexing,
+as mentioned in {{prin-beta}}.
 
 ## Performance with Misbehaving Nodes and Outside Attackers
 
