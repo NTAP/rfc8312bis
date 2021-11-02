@@ -1120,6 +1120,11 @@ These individuals suggested improvements to this document:
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
 
+## Since draft-ietf-tcpm-rfc8312bis-05
+
+- Brief discussion of convergence in Section 5.6
+  ([#96](https://github.com/NTAP/rfc8312bis/issues/96))
+
 ## Since draft-ietf-tcpm-rfc8312bis-04
 
 - Fix incorrect math
