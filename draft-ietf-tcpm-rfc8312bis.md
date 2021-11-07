@@ -113,14 +113,13 @@ informative:
     - name: Sebastian Elbaum
     - name: Di Zhao
     target: "https://www.usenix.org/system/files/nsdi19-sun.pdf"
-    
+
   H16:
     title: Simulation, Testbed, and Reployment Testing Results of CUBIC
     date: 2016-11-03
     author:
     - ins: Sangtae Ha
     target: "https://web.archive.org/web/20161118125842/http://netsrv.csc.ncsu.edu/wiki/index.php/TCP_Testing"
-
 
   HLRX07: DOI.10.1016/j.comnet.2006.11.005
   CEHRX09: DOI.10.1016/j.comnet.2008.10.012
