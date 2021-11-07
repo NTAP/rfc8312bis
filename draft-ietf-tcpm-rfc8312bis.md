@@ -89,30 +89,6 @@ informative:
     - ins: H. Vin
     target: "https://www.cs.utexas.edu/ftp/techreports/tr02-39.ps.gz"
 
-  HKLRX06:
-    title:
-      A Step toward Realistic Performance Evaluation of High-Speed TCP Variants
-    date: 2006-2
-    seriesinfo:
-      International Workshop on: Protocols for Fast Long-Distance Networks
-    author:
-    - ins: S. Ha
-    - ins: Y. Kim
-    - ins: L. Le
-    - ins: I. Rhee
-    - ins: L. Xu
-    target: "https://pfld.net/2006/paper/s2_03.pdf"
-
-  HR08:
-    title: Hybrid Slow Start for High-Bandwidth and Long-Distance Networks
-    date: 2008-3
-    seriesinfo:
-      International Workshop on: Protocols for Fast Long-Distance Networks
-    author:
-    - ins: S. Ha
-    - ins: I. Rhee
-    target: "http://www.hep.man.ac.uk/g/GDARN-IT/pfldnet2008/paper/Sangate_Ha%20Final.pdf"
-
   XHR04:
     title: Binary Increase Congestion Control (BIC) for Fast Long-Distance Networks
     date: 2004-3
@@ -137,8 +113,20 @@ informative:
     - name: Sebastian Elbaum
     - name: Di Zhao
     target: "https://www.usenix.org/system/files/nsdi19-sun.pdf"
+    
+  H16:
+    title: Simulation, Testbed, and Reployment Testing Results of CUBIC
+    date: 2016-11-03
+    author:
+    - ins: Sangtae Ha
+    target: "https://web.archive.org/web/20161118125842/http://netsrv.csc.ncsu.edu/wiki/index.php/TCP_Testing"
 
-  CEHRX07:  DOI.10.1109/INFCOM.2007.111
+
+  HLRX07: DOI.10.1016/j.comnet.2006.11.005
+  CEHRX09: DOI.10.1016/j.comnet.2008.10.012
+  HR11: DOI.10.1016/j.comnet.2011.01.014
+  BSCLU13: DOI.10.1109/CloudNet.2013.6710576
+  LBEWK16: DOI.10.1109/LCN.2016.121
   HRX08:    DOI.10.1145/1400097.1400105
   K03:      DOI.10.1145/956981.956989
   LIU16:    DOI.10.1109/TMC.2015.2500227
@@ -201,7 +189,7 @@ The design of CUBIC was motivated by the well-documented problem
 classical Reno TCP has with  low utilization over fast and long-distance
 networks {{K03}}{{?RFC3649}}. This problem arises from a slow increase
 of the congestion window following a congestion event in a network with
-a large bandwidth-delay product (BDP). {{HKLRX06}} indicates that this
+a large bandwidth-delay product (BDP). {{HLRX07}} indicates that this
 problem is frequently observed even in the range of congestion window
 sizes over several hundreds of packets. This problem is equally
 applicable to all Reno-style standards and their variants, including
@@ -292,7 +280,7 @@ into a convex profile and the convex window increase begins.
 
 This style of window adjustment (concave and then convex) improves the
 algorithm stability while maintaining high network utilization
-{{CEHRX07}}. This is because the window size remains almost constant,
+{{CEHRX09}}. This is because the window size remains almost constant,
 forming a plateau around the remembered congestion window size of the
 last congestion event, where network utilization is deemed highest.
 Under steady state, most window size samples of CUBIC are close to
@@ -840,7 +828,7 @@ CUBIC MUST employ a slow-start algorithm, when *cwnd* is no more than
 algorithm {{!I-D.ietf-tcpm-hystartplusplus}}, or MAY use the Reno TCP
 slow start algorithm {{!RFC5681}} in the rare cases when
 HyStart++ is not suitable. Experimental alternatives include
-hybrid slow start {{HR08}}, a predecessor to HyStart++ that some CUBIC
+hybrid slow start {{HR11}}, a predecessor to HyStart++ that some CUBIC
 implementations have used as the default for the last decade, and
 limited slow start {{?RFC3742}}. Whichever start-up algorithm is used,
 work might be needed to ensure that the end of slow start and the first
@@ -982,7 +970,7 @@ HSTCP, and CUBIC to achieve a certain throughput"}
 and CUBIC to achieve a certain throughput. We use 1500-byte packets
 and an *RTT* of 0.1 seconds.
 
-Our test results in {{HKLRX06}} indicate that CUBIC uses the spare
+Our test results in {{HLRX07}} indicate that CUBIC uses the spare
 bandwidth left unused by existing Reno TCP flows in the same
 bottleneck link without taking away much bandwidth from the existing
 flows.
@@ -994,10 +982,13 @@ and long-distance networks.
 
 ## Investigating a Range of Environments
 
-There is decade-long deployment experience with CUBIC on the Internet.
-CUBIC has also been extensively studied by using both NS-2 simulation
-and testbed experiments, covering a wide range of network
-environments. More information can be found in {{HKLRX06}}.
+CUBIC has been extensively studied using simulations,
+testbed emulations, Internet experiments, and Internet
+measurements, covering a wide range of network environments
+{{HLRX07}},{{H16}},{{CEHRX09}},{{HR11}},{{BSCLU13}},{{LBEWK16}}.
+They have convincingly demonstrated
+that CUBIC delivers substantial benefits over
+classical Reno congestion control {{!RFC5681}}.
 
 Same as Reno, CUBIC is a loss-based congestion control algorithm.
 Because CUBIC is designed to be more aggressive (due to a faster
@@ -1124,6 +1115,8 @@ These individuals suggested improvements to this document:
 
 - Brief discussion of convergence in Section 5.6
   ([#96](https://github.com/NTAP/rfc8312bis/issues/96))
+- Add more test results to Section 5 and update some references
+  ([#91](https://github.com/NTAP/rfc8312bis/issues/91))
 
 ## Since draft-ietf-tcpm-rfc8312bis-04
 
