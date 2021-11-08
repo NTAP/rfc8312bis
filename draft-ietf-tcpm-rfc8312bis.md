@@ -984,7 +984,7 @@ and long-distance networks.
 CUBIC has been extensively studied using simulations,
 testbed emulations, Internet experiments, and Internet
 measurements, covering a wide range of network environments
-{{HLRX07}},{{H16}},{{CEHRX09}},{{HR11}},{{BSCLU13}},{{LBEWK16}}.
+{{HLRX07}}{{H16}}{{CEHRX09}}{{HR11}}{{BSCLU13}}{{LBEWK16}}.
 They have convincingly demonstrated
 that CUBIC delivers substantial benefits over
 classical Reno congestion control {{!RFC5681}}.
