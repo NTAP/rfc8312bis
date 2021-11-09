@@ -89,31 +89,6 @@ informative:
     - ins: H. Vin
     target: "https://www.cs.utexas.edu/ftp/techreports/tr02-39.ps.gz"
 
-  XHR04:
-    title: Binary Increase Congestion Control (BIC) for Fast Long-Distance Networks
-    date: 2004-3
-    seriesinfo:
-      IEEE INFOCOM: 2004
-      DOI: 10.1109/infcom.2004.1354672
-    author:
-    - name: Lisong Xu
-    - name: Khaled Harfoush
-    - name: Injong Rhee
-
-  SXEZ19:
-    title:
-      Model-Agnostic and Efficient Exploration of Numerical State Space of
-      Real-World TCP Congestion Control Implementations
-    date: 2019-2
-    seriesinfo:
-      USENIX NSDI: 2019
-    author:
-    - name: Wei Sun
-    - name: Lisong Xu
-    - name: Sebastian Elbaum
-    - name: Di Zhao
-    target: "https://www.usenix.org/system/files/nsdi19-sun.pdf"
-
   H16:
     title: Simulation, Testbed, and Deployment Testing Results of CUBIC
     date: 2016-11-03
@@ -121,6 +96,8 @@ informative:
     - ins: Sangtae Ha
     target: "https://web.archive.org/web/20161118125842/http://netsrv.csc.ncsu.edu/wiki/index.php/TCP_Testing"
 
+  SXEZ19: DOI.10.1109/TNET.2021.3078161
+  XHR04: DOI.10.1109/infcom.2004.1354672
   HLRX07: DOI.10.1016/j.comnet.2006.11.005
   CEHRX09: DOI.10.1016/j.comnet.2008.10.012
   HR11: DOI.10.1016/j.comnet.2011.01.014
