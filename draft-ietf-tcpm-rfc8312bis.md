@@ -115,7 +115,7 @@ informative:
     target: "https://www.usenix.org/system/files/nsdi19-sun.pdf"
 
   H16:
-    title: Simulation, Testbed, and Reployment Testing Results of CUBIC
+    title: Simulation, Testbed, and Deployment Testing Results of CUBIC
     date: 2016-11-03
     author:
     - ins: Sangtae Ha
