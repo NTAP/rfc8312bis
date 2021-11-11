@@ -476,7 +476,7 @@ Upon receiving a new ACK during congestion avoidance, CUBIC computes the
 *target* congestion window size after the next *RTT* using {{eq1}} as
 follows, where *RTT* is the smoothed round-trip time. The lower and
 upper bounds below ensure that CUBIC's congestion window increase rate
-is non-decreasing and is less than the increase rate of slow start.
+is non-decreasing and is less than the increase rate of slow start {{SXEZ19}}.
 
 ~~~ math
 target = \left\{
