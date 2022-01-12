@@ -753,6 +753,7 @@ and spurious fast retransmits. In case of QUIC, there are no spurious
 timeouts as the loss is only detected after receiving an ACK.
 
 ### Spurious timeout
+
 An implementation MAY detect spurious timeouts based on the mechanisms
 described in Forward RTO-Recovery {{!RFC5682}}. Experimental alternative
 include Eifel {{?RFC3522}}. When a spurious timeout is detected,
@@ -762,6 +763,7 @@ provides a response algorithm for a TCP implementation when a spurious timeout
 is detected.
 
 ### Spurious loss detected by acknowledgements
+
 Upon receiving an ACK, a TCP implementation MAY detect spurious losses
 either using TCP Timestamps or via D-SACK{{!RFC2883}}. Experimental
 alternatives include Eifel detection algorithm {{?RFC3522}} which uses
