@@ -748,9 +748,38 @@ of packet reordering could cause multiple congestion window reduction
 events, where spurious losses are incorrectly interpreted as
 congestion signals, thus degrading CUBIC's performance significantly.
 
-When there is a congestion event, a CUBIC implementation SHOULD save
-the current value of the following variables before the congestion
-window reduction.
+For TCP, there are two types of spurious events - spurious timeouts
+and spurious fast retransmits. In case of QUIC, there are no spurious
+timeouts as the loss is only detected after receiving an ACK.
+
+### Spurious timeout
+An implementation MAY detect spurious timeouts based on the mechanisms
+described in Forward RTO-Recovery {{!RFC5682}}. Experimental alternative
+include Eifel {{?RFC3522}}. When a spurious timeout is detected,
+the sender MAY restore the congestion control state and adapt
+the retransmission timer to avoid further spurious timeouts. {{!RFC4015}}
+provides a response algorithm for a TCP implementation when a spurious timeout
+is detected.
+
+### Spurious loss detected by acknowledgements
+Upon receiving an ACK, a TCP implementation MAY detect spurious losses
+either using TCP Timestamps or via D-SACK{{!RFC2883}}. Experimental
+alternatives include Eifel detection algorithm {{?RFC3522}} which uses
+TCP Timestamps and DSACK based detection {{?RFC3708}} which uses
+DSACK information. A QUIC implementation can easily determine a
+spurious loss if a QUIC packet is acknowledged after it has been
+marked as lost and the original data has been retransmitted with
+a new QUIC packet.
+
+In this section, we specify a simple response algorithm when a spurious
+loss is detected by acknowledgements. Implementations would need to carefully
+evaluate the impact of using this algorithm in different environments
+that may experience sudden change in available capacity (e.g., due to variable
+radio capacity, a routing change, or a mobility event).
+
+When a packet loss is detected via acknowledgements, a CUBIC
+implementation SHOULD save the current value of the following
+variables before the congestion window is reduced.
 
 ~~~ math
 \begin{array}{l}
@@ -764,12 +793,10 @@ prior\_W\_{est} = W_{est} \\
 ~~~
 {: artwork-align="center" }
 
-CUBIC MAY implement an algorithm to detect spurious retransmissions,
-such as Forward RTO-Recovery {{!RFC5682}}. Experimental alternatives
-include DSACK {{?RFC3708}} and Eifel {{?RFC3522}}. Once a spurious
-congestion event is detected, CUBIC SHOULD restore the original values
-of above-mentioned variables as follows if the current *cwnd* is lower
-than *prior_cwnd*. Restoring the original values ensures that CUBIC's
+Once the previously declared packet loss is confirmed to be spurious,
+CUBIC SHOULD restore the original values of above-mentioned variables
+as follows if the current *cwnd* is lower than *prior_cwnd*.
+Restoring the original values ensures that CUBIC's
 performance is similar to what it would be without spurious losses.
 
 ~~~ math
@@ -1119,6 +1146,8 @@ These individuals suggested improvements to this document:
   ([#83](https://github.com/NTAP/rfc8312bis/issues/83))
 - Use FlightSize instead of cwnd to update ssthresh
   ([#114](https://github.com/NTAP/rfc8312bis/issues/114))
+- Create new subsections for spurious timeouts and spurious loss via ACK
+  ([#90](https://github.com/NTAP/rfc8312bis/issues/90))
 
 ## Since draft-ietf-tcpm-rfc8312bis-03
 
