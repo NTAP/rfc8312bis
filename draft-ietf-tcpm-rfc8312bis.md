@@ -780,7 +780,7 @@ that may experience sudden change in available capacity (e.g., due to variable
 radio capacity, a routing change, or a mobility event).
 
 When a packet loss is detected via acknowledgements, a CUBIC
-implementation SHOULD save the current value of the following
+implementation MAY save the current value of the following
 variables before the congestion window is reduced.
 
 ~~~ math
@@ -796,7 +796,7 @@ prior\_W\_{est} = W_{est} \\
 {: artwork-align="center" }
 
 Once the previously declared packet loss is confirmed to be spurious,
-CUBIC SHOULD restore the original values of above-mentioned variables
+CUBIC MAY restore the original values of above-mentioned variables
 as follows if the current *cwnd* is lower than *prior_cwnd*.
 Restoring the original values ensures that CUBIC's
 performance is similar to what it would be without spurious losses.
