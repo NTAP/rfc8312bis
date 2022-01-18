@@ -1016,8 +1016,7 @@ This can happen if the flow is limited by either the
 sender application or the receiver application (via the receiver
 advertised window) instead of the sender's congestion window.
 
-CUBIC does not 
-increase its congestion window if a flow is application-limited.
+CUBIC does not increase its congestion window if a flow is application-limited.
 {{win-inc}} requires that *t* in {{eq1}} does not include
 application-limited periods, such as idle periods, otherwise
 W<sub>cubic</sub>(*t*) might be very high after restarting from these
