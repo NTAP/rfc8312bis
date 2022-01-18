@@ -433,8 +433,8 @@ does not make any changes to the TCP Fast Recovery and Fast Retransmit
 algorithms {{!RFC6582}}{{!RFC6675}}.
 
 During congestion avoidance, after a congestion event is detected
-by mechanisms described in {{cubic-inc}}, CUBIC changes the window
-increase function of Reno.
+by mechanisms described in {{cubic-inc}}, CUBIC uses a window
+increase function different from Reno.
 
 CUBIC uses the following window increase function:
 
