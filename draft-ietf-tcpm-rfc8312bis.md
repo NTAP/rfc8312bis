@@ -757,10 +757,9 @@ timeouts as the loss is only detected after receiving an ACK.
 An implementation MAY detect spurious timeouts based on the mechanisms
 described in Forward RTO-Recovery {{!RFC5682}}. Experimental alternative
 include Eifel {{?RFC3522}}. When a spurious timeout is detected,
-the sender MAY restore the congestion control state and adapt
-the retransmission timer to avoid further spurious timeouts. {{!RFC4015}}
-provides a response algorithm for a TCP implementation when a spurious timeout
-is detected.
+a TCP implementation MAY follow the response algorithm described in
+{{!RFC4015}} to restore the congestion control state and adapt
+the retransmission timer to avoid further spurious timeouts.
 
 ### Spurious loss detected by acknowledgements
 
