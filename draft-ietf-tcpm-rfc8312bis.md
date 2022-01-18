@@ -1089,6 +1089,8 @@ These individuals suggested improvements to this document:
 
 ## Since draft-ietf-tcpm-rfc8312bis-05
 
+- Clarify meaning of "application-limited" in Section 5.8
+  ([#137](https://github.com/NTAP/rfc8312bis/issues/137)
 - Brief discussion of convergence in Section 5.6
   ([#96](https://github.com/NTAP/rfc8312bis/issues/96))
 - Add more test results to Section 5 and update some references
