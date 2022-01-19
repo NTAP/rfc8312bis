@@ -486,7 +486,7 @@ cwnd                          &
 {: artwork-align="center" }
 
 The elapsed time *t* in {{eq1}} MUST NOT include periods during
-which *cwnd* has not been updated due application-limited behavior
+which *cwnd* has not been updated due to application-limited behavior
 (see {{app-limited}}).
 
 Depending on the value of the current congestion window size *cwnd*,
