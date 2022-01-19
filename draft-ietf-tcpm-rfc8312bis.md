@@ -1011,7 +1011,7 @@ This is not considered in the current CUBIC design.
 ## Behavior for Application-Limited Flows {#app-limited}
 
 A flow is application-limited if it is currently sending
-less than is allowed by the congestion window.
+less than what is allowed by the congestion window.
 This can happen if the flow is limited by either the
 sender application or the receiver application (via the receiver
 advertised window) instead of the sender's congestion window.
