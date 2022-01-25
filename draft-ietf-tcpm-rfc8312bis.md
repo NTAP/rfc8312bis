@@ -1014,7 +1014,8 @@ A flow is application-limited if it is currently sending
 less than what is allowed by the congestion window.
 This can happen if the flow is limited by either the
 sender application or the receiver application (via the receiver
-advertised window) and thus sends less data than what is allowed by the sender's congestion window.
+advertised window) and thus sends less data than what is allowed by
+the sender's congestion window.
 
 CUBIC does not increase its congestion window if a flow is application-limited.
 {{win-inc}} requires that *t* in {{eq1}} does not include
