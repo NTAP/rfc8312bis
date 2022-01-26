@@ -795,7 +795,7 @@ prior\_W\_{est} = W_{est} \\
 {: artwork-align="center" }
 
 Once the previously declared packet loss is confirmed to be spurious,
-CUBIC MAY restore the original values of above-mentioned variables
+CUBIC MAY restore the original values of the above-mentioned variables
 as follows if the current *cwnd* is lower than *prior_cwnd*.
 Restoring the original values ensures that CUBIC's
 performance is similar to what it would be without spurious losses.
