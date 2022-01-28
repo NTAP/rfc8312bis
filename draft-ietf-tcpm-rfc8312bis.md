@@ -1120,6 +1120,8 @@ These individuals suggested improvements to this document:
 
 - Clarify meaning of "application-limited" in Section 5.8
   ([#137](https://github.com/NTAP/rfc8312bis/issues/137)
+- Create new subsections for spurious timeouts and spurious loss via ACK
+  ([#90](https://github.com/NTAP/rfc8312bis/issues/90))
 - Brief discussion of convergence in Section 5.6
   ([#96](https://github.com/NTAP/rfc8312bis/issues/96))
 - Add more test results to Section 5 and update some references
@@ -1155,8 +1157,6 @@ These individuals suggested improvements to this document:
   ([#83](https://github.com/NTAP/rfc8312bis/issues/83))
 - Use FlightSize instead of cwnd to update ssthresh
   ([#114](https://github.com/NTAP/rfc8312bis/issues/114))
-- Create new subsections for spurious timeouts and spurious loss via ACK
-  ([#90](https://github.com/NTAP/rfc8312bis/issues/90))
 
 ## Since draft-ietf-tcpm-rfc8312bis-03
 
