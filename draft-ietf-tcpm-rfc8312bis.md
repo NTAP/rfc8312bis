@@ -1119,7 +1119,7 @@ These individuals suggested improvements to this document:
 ## Since draft-ietf-tcpm-rfc8312bis-05
 
 - Clarify meaning of "application-limited" in Section 5.8
-  ([#137](https://github.com/NTAP/rfc8312bis/issues/137)
+  ([#137](https://github.com/NTAP/rfc8312bis/issues/137))
 - Create new subsections for spurious timeouts and spurious loss via ACK
   ([#90](https://github.com/NTAP/rfc8312bis/issues/90))
 - Brief discussion of convergence in Section 5.6
