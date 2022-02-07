@@ -1106,7 +1106,6 @@ These individuals suggested improvements to this document:
 - Richard Scheffenegger
 - Rod Grimes
 - Tom Henderson
-- Tom Henderson
 - Tom Petch
 - Wesley Rosenblum
 - Yoshifumi Nishida
