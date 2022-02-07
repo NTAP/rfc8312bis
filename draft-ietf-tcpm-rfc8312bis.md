@@ -1110,7 +1110,6 @@ These individuals suggested improvements to this document:
 - Wesley Rosenblum
 - Yoshifumi Nishida
 - Yuchung Cheng
-- 
 <!-- Anyone else to acknowledge? -->
 
 # Evolution of CUBIC
