@@ -639,7 +639,11 @@ much lower value than necessary. To avoid suboptimal performance with
 such applications, the mechanisms described in {{?RFC7661}} can be used
 to mitigate this issue as it would allow using a value between *cwnd*
 and *flight_size* to calculate the new *ssthresh* in {{eqssthresh}}.
-Some implementations of CUBIC use *cwnd* instead of *flight_size*
+The congestion window growth mechanism defined in {{?RFC7661}} is safe
+to use even when *cwnd* increases beyond receive window as it
+validates *cwnd* based on the amount of data acknowledged by the network
+in an RTT which implicitly accounts for the allowed receive window.
+Some implementations of CUBIC currently use *cwnd* instead of *flight_size*
 when calculating a new *ssthresh* using {{eqssthresh}}.
 
 ~~~ math
@@ -1117,6 +1121,11 @@ These individuals suggested improvements to this document:
 
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
+
+## Since draft-ietf-tcpm-rfc8312bis-06
+
+- RFC7661 is safe even when cwnd grows beyond rwnd
+  ([#143](https://github.com/NTAP/rfc8312bis/issues/143))
 
 ## Since draft-ietf-tcpm-rfc8312bis-05
 
