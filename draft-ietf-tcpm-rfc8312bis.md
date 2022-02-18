@@ -640,7 +640,7 @@ such applications, the mechanisms described in {{?RFC7661}} can be used
 to mitigate this issue as it would allow using a value between *cwnd*
 and *flight_size* to calculate the new *ssthresh* in {{eqssthresh}}.
 The congestion window growth mechanism defined in {{?RFC7661}} is safe
-to use even when *cwnd* increases beyond receive window as it
+to use even when *cwnd* is greater than the receive window as it
 validates *cwnd* based on the amount of data acknowledged by the network
 in an RTT which implicitly accounts for the allowed receive window.
 Some implementations of CUBIC currently use *cwnd* instead of *flight_size*
