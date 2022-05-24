@@ -214,7 +214,7 @@ apply.
 
 Also, the wide deployment of CUBIC on the Internet was driven by
 direct adoption in most popular operating systems, and did not follow
-the practices documented in {{!RFC5033}}. However, due the resulting
+the practices documented in {{!RFC5033}}. However, due to the resulting
 extremely widespread deployment experience over a long period of
 time, the IETF has determined that CUBIC may be published as a
 standards-track specification.
