@@ -216,7 +216,9 @@ direct adoption in most of the popular operating systems, and did not follow
 the practices documented in {{!RFC5033}}. However, due to the resulting
 extremely widespread deployment experience over a long period of
 time, the IETF has determined that CUBIC may be published as a
-standards-track specification.
+standards-track specification. This decision by the IETF does not alter the general
+guidance in {{!RFC2914}}.
+
 
 In the following sections, we first briefly explain the design
 principles of CUBIC, then provide the exact specification of CUBIC,
