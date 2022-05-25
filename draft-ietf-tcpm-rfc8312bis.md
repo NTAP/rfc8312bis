@@ -213,7 +213,7 @@ outlined in {{!RFC2914}}, so the process in {{!RFC5033}} may not
 apply.
 
 Also, the wide deployment of CUBIC on the Internet was driven by
-direct adoption in most popular operating systems, and did not follow
+direct adoption in most of the popular operating systems, and did not follow
 the practices documented in {{!RFC5033}}. However, due to the resulting
 extremely widespread deployment experience over a long period of
 time, the IETF has determined that CUBIC may be published as a
