@@ -1146,6 +1146,11 @@ These individuals suggested improvements to this document:
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
 
+## Since draft-ietf-tcpm-rfc8312bis-07
+
+- Document the WG discussion and decision around {{!RFC5033}} and
+  {{!RFC2914}} ([#145](https://github.com/NTAP/rfc8312bis/pull/145))
+
 ## Since draft-ietf-tcpm-rfc8312bis-06
 
 - RFC7661 is safe even when cwnd grows beyond rwnd
