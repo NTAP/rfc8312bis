@@ -202,8 +202,7 @@ from the general congestion control principles outlined in
 {{!RFC2914}}. It describes what type of evaluation is expected by the
 IETF to understand the suitability of a new congestion control
 algorithm and the process to enable a specification to be approved
-for widespread deployment in the global Internet. The present
-document does not update that standing guidance by the IETF.
+for widespread deployment in the global Internet. 
 
 There are areas in which CUBIC differs from the congestion control
 algorithms previously specified in published RFCs, some of which have
