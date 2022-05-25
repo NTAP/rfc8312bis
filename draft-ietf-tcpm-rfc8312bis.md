@@ -205,8 +205,8 @@ algorithm and the process to enable a specification to be approved
 for widespread deployment in the global Internet. 
 
 There are areas in which CUBIC differs from the congestion control
-algorithms previously specified in published RFCs, some of which have
-been highlighted in this document. However, it is not obvious that
+algorithms previously specified in published RFCs, which are
+specified in this document. However, it is not obvious that
 these changes go beyond the general congestion control principles
 outlined in {{!RFC2914}}, so the process in {{!RFC5033}} may not
 apply.
