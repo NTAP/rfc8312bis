@@ -588,11 +588,10 @@ W_{est} = W_{est} + α_{cubic} * \frac{segments\_acked}{cwnd}
 ~~~
 {: #eq4 artwork-align="center" }
 
-Note that once *W<sub>est</sub>* reaches *W<sub>max</sub>*, that is,
-*W<sub>est</sub>* >= *W<sub>max</sub>*, CUBIC needs to start probing to
-determine the new value of *W<sub>max</sub>*. At this point,
-{{{α}{}}}*<sub>cubic</sub>* SHOULD be set to 1 to ensure that
-CUBIC can achieve the same congestion window increment as Reno,
+Once *W<sub>est</sub>* has grown to reach the *cwnd* at the time of
+the last congestion event, that is, *W<sub>est</sub>* >= *prior_cwnd*,
+the sender SHOULD set {{{α}{}}}*<sub>cubic</sub>* to 1 to ensure that
+it can achieve the same congestion window increment rate as Reno,
 which uses AIMD(1, 0.5).
 
 ## Concave Region
