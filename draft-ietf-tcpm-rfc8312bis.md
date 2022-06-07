@@ -1147,7 +1147,7 @@ These individuals suggested improvements to this document:
 
 ## Since draft-ietf-tcpm-rfc8312bis-08
 
-- Fix the text specifying when alpha_cubic SHOULD be set to 1 to 
+- Fix the text specifying when alpha_cubic SHOULD be set to 1 to
   indicate this should happen when cwnd >= prior_cwnd rather
   than cwnd >= W_max, since these are different in the
   fast convergence case
