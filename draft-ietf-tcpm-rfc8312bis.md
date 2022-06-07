@@ -408,6 +408,10 @@ Current congestion window in segments.
 *ssthresh*:
 Current slow start threshold in segments.
 
+*prior_cwnd*:
+Size of *cwnd* in segments just before *cwnd* was reduced in the last
+congestion event.
+
 *W<sub>max</sub>*:
 Size of *cwnd* in segments just before *cwnd* was reduced in the last
 congestion event when fast convergence is disabled. However, if fast
