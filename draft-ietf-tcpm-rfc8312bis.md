@@ -409,8 +409,9 @@ Current congestion window in segments.
 Current slow start threshold in segments.
 
 *prior_cwnd*:
-Size of *cwnd* in segments just before *cwnd* was reduced in the last
-congestion event.
+Size of *cwnd* in segments at the time of setting *ssthresh*
+most recently, either upon exiting the first slow start, or
+just before *cwnd* was reduced in the last congestion event.
 
 *W<sub>max</sub>*:
 Size of *cwnd* in segments just before *cwnd* was reduced in the last
@@ -593,7 +594,7 @@ W_{est} = W_{est} + α_{cubic} * \frac{segments\_acked}{cwnd}
 {: #eq4 artwork-align="center" }
 
 Once *W<sub>est</sub>* has grown to reach the *cwnd* at the time of
-the last congestion event, that is, *W<sub>est</sub>* >= *prior_cwnd*,
+most recently setting *ssthresh*, that is, *W<sub>est</sub>* >= *prior_cwnd*,
 the sender SHOULD set {{{α}{}}}*<sub>cubic</sub>* to 1 to ensure that
 it can achieve the same congestion window increment rate as Reno,
 which uses AIMD(1, 0.5).
@@ -679,6 +680,8 @@ when calculating a new *ssthresh* using {{eqssthresh}}.
 ssthresh = &
 flight\_size * β_{cubic} &
 \text{// new } ssthresh \\
+
+prior\_cwnd = cwnd \\
 
 cwnd = &
 \left\{
@@ -815,7 +818,6 @@ variables before the congestion window is reduced.
 
 ~~~ math
 \begin{array}{l}
-prior\_cwnd = cwnd \\
 prior\_ssthresh = ssthresh \\
 prior\_W_{max} = W_{max} \\
 prior\_K = K \\
@@ -867,7 +869,8 @@ multiplicative decrease of congestion avoidance work well together.
 When CUBIC uses HyStart++ {{!I-D.ietf-tcpm-hystartplusplus}}, it may
 exit the first slow start without incurring any packet loss and
 thus *W<sub>max</sub>* is undefined. In this special case, CUBIC
-switches to congestion avoidance and increases its congestion window
+sets *prior_cwnd = cwnd* and switches to congestion avoidance.
+It then increases its congestion window
 size using {{eq1}}, where *t* is the elapsed time since the beginning
 of the current congestion avoidance, *K* is set to 0,
 and *W<sub>max</sub>* is set to the congestion window size at the
