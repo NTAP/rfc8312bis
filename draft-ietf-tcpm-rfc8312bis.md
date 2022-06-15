@@ -819,7 +819,7 @@ variables before the congestion window is reduced.
 ~~~ math
 \begin{array}{l}
 undo\_cwnd = cwnd \\
-undo\_prior_cwnd = prior_cwnd \\
+undo\_prior\_cwnd = prior\_cwnd \\
 undo\_ssthresh = ssthresh \\
 undo\_W_{max} = W_{max} \\
 undo\_K = K \\
@@ -839,7 +839,7 @@ performance is similar to what it would be without spurious losses.
 \left.
 \begin{array}{l}
 cwnd = undo\_cwnd \\
-prior_cwnd = undo\_prior\_cwnd \\
+prior\_cwnd = undo\_prior\_cwnd \\
 ssthresh = undo\_ssthresh \\
 W_{max} = undo\_W_{max} \\
 K = undo\_K \\
