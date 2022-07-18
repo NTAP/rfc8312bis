@@ -663,16 +663,19 @@ or periods when unable to send at the full rate permitted by *cwnd*
 may easily encounter notable variations in the volume of data sent
 from one RTT to another, resulting in *flight_size* that is significantly
 less than *cwnd* on a congestion event. This may decrease *cwnd* to a
-much lower value than necessary. To avoid suboptimal performance with
-such applications, the mechanisms described in {{?RFC7661}} can be used
+much lower value than necessary. Some implementations of CUBIC currently
+use *cwnd* instead of *flight_size* when calculating a new *ssthresh*
+using {{eqssthresh}}. The implementations that use *cwnd* directly MUST
+use other measures to not allow *cwnd* to grow when *flight_size* is less
+than *1/2* of the *cwnd*. Both these approaches can result in suboptimal
+performance when *flight_size* is significantly lower than *cwnd* at the
+time of a congestion event. We recommend the mechanisms described in {{?RFC7661}}
 to mitigate this issue as it would allow using a value between *cwnd*
 and *flight_size* to calculate the new *ssthresh* in {{eqssthresh}}.
 The congestion window growth mechanism defined in {{?RFC7661}} is safe
 to use even when *cwnd* is greater than the receive window as it
 validates *cwnd* based on the amount of data acknowledged by the network
 in an RTT which implicitly accounts for the allowed receive window.
-Some implementations of CUBIC currently use *cwnd* instead of *flight_size*
-when calculating a new *ssthresh* using {{eqssthresh}}.
 
 ~~~ math
 \begin{array}{lll}
@@ -1162,6 +1165,8 @@ These individuals suggested improvements to this document:
   than cwnd >= W_max, since these are different in the
   fast convergence case
   ([#146](https://github.com/NTAP/rfc8312bis/pull/146))
+- Restrict use of *cwnd* directly on a congestion event
+  ([#14x](https://github.com/NTAP/rfc8312bis/pull/14x))
 
 ## Since draft-ietf-tcpm-rfc8312bis-07
 
