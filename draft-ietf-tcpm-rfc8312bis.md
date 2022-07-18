@@ -1166,7 +1166,7 @@ These individuals suggested improvements to this document:
   fast convergence case
   ([#146](https://github.com/NTAP/rfc8312bis/pull/146))
 - Restrict use of *cwnd* directly on a congestion event
-  ([#14x](https://github.com/NTAP/rfc8312bis/pull/14x))
+  ([#148](https://github.com/NTAP/rfc8312bis/pull/148))
 
 ## Since draft-ietf-tcpm-rfc8312bis-07
 
