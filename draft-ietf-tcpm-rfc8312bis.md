@@ -667,7 +667,7 @@ much lower value than necessary. Some implementations of CUBIC currently
 use *cwnd* instead of *flight_size* when calculating a new *ssthresh*
 using {{eqssthresh}}. The implementations that use *cwnd* directly MUST
 use other measures to not allow *cwnd* to grow when *flight_size* is less
-than *1/2* of the *cwnd*. Both these approaches can result in suboptimal
+than *cwnd/2*. Both these approaches can result in suboptimal
 performance when *flight_size* is significantly lower than *cwnd* at the
 time of a congestion event. We recommend the mechanisms described in {{?RFC7661}}
 to mitigate this issue as it would allow using a value between *cwnd*
