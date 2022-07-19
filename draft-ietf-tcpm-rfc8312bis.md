@@ -669,8 +669,8 @@ using {{eqssthresh}}. The implementations that use *cwnd* directly MUST
 use other measures to not allow *cwnd* to grow when *flight_size* is less
 than *cwnd/2*. Both these approaches can result in suboptimal
 performance when *flight_size* is significantly lower than *cwnd* at the
-time of a congestion event. We recommend the mechanisms described in {{?RFC7661}}
-to mitigate this issue as it would allow using a value between *cwnd*
+time of a congestion event. To mitigate this issue, the mechanisms described
+in {{?RFC7661}} can be used as it would allow using a value between *cwnd*
 and *flight_size* to calculate the new *ssthresh* in {{eqssthresh}}.
 The congestion window growth mechanism defined in {{?RFC7661}} is safe
 to use even when *cwnd* is greater than the receive window as it
