@@ -672,7 +672,17 @@ to use even when *cwnd* is greater than the receive window as it
 validates *cwnd* based on the amount of data acknowledged by the network
 in an RTT which implicitly accounts for the allowed receive window.
 Some implementations of CUBIC currently use *cwnd* instead of *flight_size*
-when calculating a new *ssthresh* using {{eqssthresh}}.
+when calculating a new *ssthresh* using {{eqssthresh}}. The implementations
+that use *cwnd* MUST use other measures to not allow *cwnd* to grow when
+bytes in flight is smaller than *cwnd*. That also effectively avoids *cwnd*
+from growing beyond the receive window. Such measures are important to
+prevent a CUBIC sender from using an arbitrarily high *cwnd* value in
+calculating the new value for *ssthresh* and *cwnd* when a congestion
+event is signalled, but it is not as robust as the mechanisms described
+in {{?RFC7661}}.
+Likewise, a QUIC sender that uses *cwnd* to calculate a new value
+for the congestion window and slow-start threshold on a congestion
+event is required to apply similar mechanisms {{!RFC9002}}.
 
 ~~~ math
 \begin{array}{lll}
@@ -1162,6 +1172,8 @@ These individuals suggested improvements to this document:
   than cwnd >= W_max, since these are different in the
   fast convergence case
   ([#146](https://github.com/NTAP/rfc8312bis/pull/146))
+- Restrict use of *cwnd* directly on a congestion event
+  ([#148](https://github.com/NTAP/rfc8312bis/pull/148))
 
 ## Since draft-ietf-tcpm-rfc8312bis-07
 
