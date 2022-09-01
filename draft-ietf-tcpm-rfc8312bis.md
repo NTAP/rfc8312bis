@@ -1134,29 +1134,30 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 These individuals suggested improvements to this document:
 
-- Bob Briscoe
-- Christian Huitema
-- Gorry Fairhurst
-- Jonathan Morton
-- Juhamatti Kuusisaari
-- Junho Choi
-- Markku Kojo
-- Martin Thomson
-- Matt Mathis
-- Matt Olson
-- Michael Welzl
-- Mirja Kühlewind
-- Mohit P. Tahiliani
-- Neal Cardwell
-- Praveen Balasubramanian
-- Randall Stewart
-- Richard Scheffenegger
-- Rod Grimes
-- Tom Henderson
-- Tom Petch
-- Wesley Rosenblum
-- Yoshifumi Nishida
-- Yuchung Cheng
+- {{{Bob Briscoe}}}
+- {{{Christian Huitema}}}
+- {{{Gorry Fairhurst}}}
+- {{{Jonathan Morton}}}
+- {{{Juhamatti Kuusisaari}}}
+- {{{Junho Choi}}}
+- {{{Markku Kojo}}}
+- {{{Martin Thomson}}}
+- {{{Matt Mathis}}}
+- {{{Matt Olson}}}
+- {{{Michael Welzl}}}
+- {{{Mirja Kühlewind}}}
+- {{{Mohit P. Tahiliani}}}
+- {{{Neal Cardwell}}}
+- {{{Praveen Balasubramanian}}}
+- {{{Randall Stewart}}}
+- {{{Richard Scheffenegger}}}
+- {{{Rod Grimes}}}
+- {{{Tom Henderson}}}
+- {{{Tom Petch}}}
+- {{{Wesley Rosenblum}}}
+- {{{Yoshifumi Nishida}}}
+- {{{Yuchung Cheng}}}
+{: spacing="compact"}
 
 <!-- Anyone else to acknowledge? -->
 
