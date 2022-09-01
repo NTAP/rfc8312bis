@@ -1134,29 +1134,29 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 These individuals suggested improvements to this document:
 
-- {{{Bob Briscoe}}}
-- {{{Christian Huitema}}}
-- {{{Gorry Fairhurst}}}
-- {{{Jonathan Morton}}}
-- {{{Juhamatti Kuusisaari}}}
-- {{{Junho Choi}}}
-- {{{Markku Kojo}}}
-- {{{Martin Thomson}}}
-- {{{Matt Mathis}}}
-- {{{Matt Olson}}}
-- {{{Michael Welzl}}}
-- {{{Mirja Kühlewind}}}
-- {{{Mohit P. Tahiliani}}}
-- {{{Neal Cardwell}}}
-- {{{Praveen Balasubramanian}}}
-- {{{Randall Stewart}}}
-- {{{Richard Scheffenegger}}}
-- {{{Rod Grimes}}}
-- {{{Tom Henderson}}}
-- {{{Tom Petch}}}
-- {{{Wesley Rosenblum}}}
-- {{{Yoshifumi Nishida}}}
-- {{{Yuchung Cheng}}}
+- <t>{{{Bob Briscoe}}}</t>
+- <t>{{{Christian Huitema}}}</t>
+- <t>{{{Gorry Fairhurst}}}</t>
+- <t>{{{Jonathan Morton}}}</t>
+- <t>{{{Juhamatti Kuusisaari}}}</t>
+- <t>{{{Junho Choi}}}</t>
+- <t>{{{Markku Kojo}}}</t>
+- <t>{{{Martin Thomson}}}</t>
+- <t>{{{Matt Mathis}}}</t>
+- <t>{{{Matt Olson}}}</t>
+- <t>{{{Michael Welzl}}}</t>
+- <t>{{{Mirja Kühlewind}}}</t>
+- <t>{{{Mohit P. Tahiliani}}}</t>
+- <t>{{{Neal Cardwell}}}</t>
+- <t>{{{Praveen Balasubramanian}}}</t>
+- <t>{{{Randall Stewart}}}</t>
+- <t>{{{Richard Scheffenegger}}}</t>
+- <t>{{{Rod Grimes}}}</t>
+- <t>{{{Tom Henderson}}}</t>
+- <t>{{{Tom Petch}}}</t>
+- <t>{{{Wesley Rosenblum}}}</t>
+- <t>{{{Yoshifumi Nishida}}}</t>
+- <t>{{{Yuchung Cheng}}}</t>
 {: spacing="compact"}
 
 <!-- Anyone else to acknowledge? -->
