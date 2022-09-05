@@ -1134,30 +1134,31 @@ Richard Scheffenegger and Alexander Zimmermann originally co-authored
 
 These individuals suggested improvements to this document:
 
-- <t>{{{Bob Briscoe}}}</t>
-- <t>{{{Christian Huitema}}}</t>
-- <t>{{{Gorry Fairhurst}}}</t>
-- <t>{{{Jonathan Morton}}}</t>
-- <t>{{{Juhamatti Kuusisaari}}}</t>
-- <t>{{{Junho Choi}}}</t>
-- <t>{{{Markku Kojo}}}</t>
-- <t>{{{Martin Thomson}}}</t>
-- <t>{{{Matt Mathis}}}</t>
-- <t>{{{Matt Olson}}}</t>
-- <t>{{{Michael Welzl}}}</t>
-- <t>{{{Mirja Kühlewind}}}</t>
-- <t>{{{Mohit P. Tahiliani}}}</t>
-- <t>{{{Neal Cardwell}}}</t>
-- <t>{{{Praveen Balasubramanian}}}</t>
-- <t>{{{Randall Stewart}}}</t>
-- <t>{{{Richard Scheffenegger}}}</t>
-- <t>{{{Rod Grimes}}}</t>
-- <t>{{{Tom Henderson}}}</t>
-- <t>{{{Tom Petch}}}</t>
-- <t>{{{Wesley Rosenblum}}}</t>
-- <t>{{{Yoshifumi Nishida}}}</t>
-- <t>{{{Yuchung Cheng}}}</t>
-{: spacing="compact"}
+<ul spacing="compact">
+<li><t><contact fullname="Bob Briscoe"/></t></li>
+<li><t><contact fullname="Christian Huitema"/></t></li>
+<li><t><contact fullname="Gorry Fairhurst"/></t></li>
+<li><t><contact fullname="Jonathan Morton"/></t></li>
+<li><t><contact fullname="Juhamatti Kuusisaari"/></t></li>
+<li><t><contact fullname="Junho Choi"/></t></li>
+<li><t><contact fullname="Markku Kojo"/></t></li>
+<li><t><contact fullname="Martin Thomson"/></t></li>
+<li><t><contact fullname="Matt Mathis"/></t></li>
+<li><t><contact fullname="Matt Olson"/></t></li>
+<li><t><contact fullname="Michael Welzl"/></t></li>
+<li><t><contact fullname="Mirja Kühlewind"/></t></li>
+<li><t><contact fullname="Mohit P. Tahiliani"/></t></li>
+<li><t><contact fullname="Neal Cardwell"/></t></li>
+<li><t><contact fullname="Praveen Balasubramanian"/></t></li>
+<li><t><contact fullname="Randall Stewart"/></t></li>
+<li><t><contact fullname="Richard Scheffenegger"/></t></li>
+<li><t><contact fullname="Rod Grimes"/></t></li>
+<li><t><contact fullname="Tom Henderson"/></t></li>
+<li><t><contact fullname="Tom Petch"/></t></li>
+<li><t><contact fullname="Wesley Rosenblum"/></t></li>
+<li><t><contact fullname="Yoshifumi Nishida"/></t></li>
+<li><t><contact fullname="Yuchung Cheng"/></t></li>
+</ul>
 
 <!-- Anyone else to acknowledge? -->
 
