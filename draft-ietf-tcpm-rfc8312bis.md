@@ -562,7 +562,7 @@ calculated using {{eq3}}.
 ~~~
 {: #eq3 artwork-align="center" }
 
-By the same analysis, to achieve similar average window size as Reno
+By the same analysis, to achieve a similar average window size as Reno
 that uses AIMD(1, 0.5), {{{α}{}}} must be equal to,
 
 ~~~ math
@@ -579,7 +579,7 @@ size *W<sub>est</sub>* in the Reno-friendly region with
 {: artwork-align="center" }
 
 which achieves approximately the same average window size as Reno in
-many cases. The model used to calculate the alpha_cubic value is not
+many cases. The model used to calculate {{{α}{}}}*<sub>cubic</sub>* is not
 absolutely precise, but analysis and simulation {{AIMD-friendliness}},
 as well as over a decade of experience with CUBIC in the public
 Internet, shows that this approach produces acceptable levels of
@@ -728,9 +728,9 @@ ssthresh = &
 {: #eqssthresh artwork-align="center" }
 
 A side effect of setting {{{β}{}}}*<sub>cubic</sub>* to a value bigger
-than 0.5 is that packet loss can happen for more than 1 round-trips in certain
+than 0.5 is that packet loss can happen for more than one round-trip in certain
 cases, but it can work efficiently in other cases, for example, when HyStart++
-is used along with CUBIC or when sending rate is limited by the application.
+is used along with CUBIC or when the sending rate is limited by the application.
 We believe that while a more adaptive setting of {{{β}{}}}*<sub>cubic</sub>*
 could help to limit packet loss to a single round, it will make the analysis
 of CUBIC much harder.
@@ -1032,7 +1032,7 @@ HSTCP, and CUBIC to achieve a certain throughput"}
 and CUBIC to achieve a certain throughput. We use 1500-byte packets
 and an *RTT* of 0.1 seconds.
 
-Our test results in {{HLRX07}} indicate that, in typical cases with a
+The test results in {{HLRX07}} indicate that, in typical cases with a
 degree of background traffic, CUBIC uses the spare
 bandwidth left unused by existing Reno TCP flows in the same
 bottleneck link without taking away much bandwidth from the existing
