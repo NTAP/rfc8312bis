@@ -167,8 +167,8 @@ applicable to all Reno-style standards and their variants, including
 TCP-Reno {{!RFC5681}}, TCP-NewReno {{!RFC6582}}{{!RFC6675}}, SCTP
 {{?RFC4960}}, TFRC {{!RFC5348}}, and QUIC congestion control
 {{!RFC9002}}, which use the same linear increase function for window
-growth.  We refer to all Reno-style standards and their variants
-collectively as "Reno" below.
+growth.  All Reno-style standards and their variants are
+collectively referred to as "Reno" in this document.
 
 CUBIC, originally proposed in {{HRX08}}, is a modification to the
 congestion control algorithm of classical Reno to remedy this
@@ -219,8 +219,8 @@ period of time, the IETF has determined that CUBIC may be published
 as a standards-track specification. This decision by the IETF does
 not alter the general guidance in {{!RFC2914}}.
 
-In the following sections, we first briefly explain the design
-principles of CUBIC, then provide the exact specification of CUBIC,
+The following sections first briefly explain the design
+principles of CUBIC, provide the exact specification of CUBIC,
 and finally discuss the safety features of CUBIC following the
 guidelines specified in {{!RFC5033}}.
 
@@ -307,8 +307,8 @@ less aggressively in small-BDP networks than in large-BDP networks.
 Furthermore, in cases when the cubic function of CUBIC would increase
 the congestion window less aggressively than Reno, CUBIC simply
 follows the window size of Reno to ensure that CUBIC achieves at
-least the same throughput as Reno in small-BDP networks. We call
-this region where CUBIC behaves like Reno the "Reno-friendly
+least the same throughput as Reno in small-BDP networks. The region
+where CUBIC behaves like Reno is called the "Reno-friendly
 region".
 
 ## Principle 3 for RTT Fairness
@@ -333,7 +333,7 @@ RTTs is quadratically proportional to the inverse of their RTT ratio
 CUBIC always ensures a linear throughput ratio independent of the
 amount of statistical multiplexing. This is an improvement over Reno.
 While there is no consensus on particular throughput ratios for
-different RTT flows, we believe that over wired Internet paths, use of
+different RTT flows, over wired Internet paths, use of
 a linear throughput ratio seems more reasonable than equal throughputs
 (i.e., the same throughput for flows with different RTTs) or a
 higher-order throughput ratio (e.g., a quadratical throughput ratio of
@@ -356,13 +356,13 @@ multiplexing.
 In such environments, even strict Multiplicative-Increase
 Multiplicative-Decrease (MIMD) can converge. CUBIC flows with the same
 RTT always converge to the same throughput independent of statistical
-multiplexing, thus achieving intra-algorithm fairness. We also find
-that in environments with sufficient statistical multiplexing, the
+multiplexing, thus achieving intra-algorithm fairness.
+In environments with sufficient statistical multiplexing, the
 convergence speed of CUBIC is reasonable.
 
 # CUBIC Congestion Control
 
-In this section, we discuss how the congestion window is updated
+This section discusses how the congestion window is updated
 during the different stages of the CUBIC congestion controller.
 
 ## Definitions
@@ -530,7 +530,7 @@ CUBIC runs in three different regions:
 3. The convex region, if CUBIC is not in the Reno-friendly region and
    *cwnd* is greater than *W<sub>max</sub>*.
 
-Below, we describe the exact actions taken by CUBIC in each region.
+The next sections describe the exact actions taken by CUBIC in each region.
 
 ## Reno-Friendly Region {#Reno-friendly}
 
@@ -630,7 +630,7 @@ Unless it is overridden by the AIMD window increase, CUBIC is very
 careful in this region. The convex profile aims to
 increase the window very slowly at the beginning when *cwnd* is
 around *W<sub>max</sub>* and then gradually increases its rate of increase.
-We also call this region the "maximum probing phase", since CUBIC is
+This region is also called the "maximum probing phase", since CUBIC is
 searching for a new *W<sub>max</sub>*. In this region, *cwnd* MUST be
 incremented by
 
@@ -678,7 +678,7 @@ bytes in flight is smaller than *cwnd*. That also effectively avoids *cwnd*
 from growing beyond the receive window. Such measures are important to
 prevent a CUBIC sender from using an arbitrarily high *cwnd* value in
 calculating the new value for *ssthresh* and *cwnd* when a congestion
-event is signalled, but it is not as robust as the mechanisms described
+event is signaled, but it is not as robust as the mechanisms described
 in {{?RFC7661}}.
 Likewise, a QUIC sender that uses *cwnd* to calculate a new value
 for the congestion window and slow-start threshold on a congestion
@@ -715,7 +715,7 @@ ssthresh = &
 {: #eqssthresh artwork-align="center" }
 
 A side effect of setting {{{β}{}}}*<sub>cubic</sub>* to a value bigger
-than 0.5 is slower convergence. We believe that while a more adaptive
+than 0.5 is slower convergence. While a more adaptive
 setting of {{{β}{}}}*<sub>cubic</sub>* could result in faster
 convergence, it will make the analysis of CUBIC much harder.
 
@@ -735,8 +735,8 @@ flows have been using all the network bandwidth. To speed up this
 bandwidth release by existing flows, the following "Fast Convergence"
 mechanism SHOULD be implemented.
 
-With Fast Convergence, when a congestion event occurs, we update
-*W<sub>max</sub>* as follows, before the window reduction as described
+With Fast Convergence, when a congestion event occurs, *W<sub>max</sub>*
+is updated as follows, before the window reduction described
 in {{mult-dec}}.
 
 ~~~ math
@@ -754,7 +754,7 @@ cwnd
 At a congestion event, if the current *cwnd* is less than
 *W<sub>max</sub>*, this indicates that the saturation point
 experienced by this flow is getting reduced because of a change in
-available bandwidth. Then we allow this flow to release more bandwidth
+available bandwidth. This flow can then release more bandwidth
 by reducing *W<sub>max</sub>* further. This action effectively
 lengthens the time for this flow to increase its congestion window,
 because the reduced *W<sub>max</sub>* forces the flow to plateau
@@ -816,7 +816,7 @@ spurious loss if a QUIC packet is acknowledged after it has been
 marked as lost and the original data has been retransmitted with
 a new QUIC packet.
 
-In this section, we specify a simple response algorithm when a spurious
+This section specifies a simple response algorithm when a spurious
 loss is detected by acknowledgements. Implementations would need to carefully
 evaluate the impact of using this algorithm in different environments
 that may experience sudden change in available capacity (e.g., due to variable
@@ -891,7 +891,7 @@ beginning of the current congestion avoidance stage.
 
 # Discussion {#discussion}
 
-In this section, we further discuss the safety features of CUBIC
+This section further discusses the safety features of CUBIC
 following the guidelines specified in {{!RFC5033}}.
 
 With a deterministic loss model where the number of packets between
@@ -914,8 +914,7 @@ AVG\_W_{cubic} = \sqrt[4]{\frac{C * 3.7}{1.2}} *
 ~~~
 {: #eq6 artwork-align="center" }
 
-We will determine the value of *C* in the following subsection using
-{{eq6}}.
+The following subsection will determine the value of *C* using {{eq6}}.
 
 ## Fairness to Reno
 
@@ -974,13 +973,13 @@ TCP can achieve an average rate of 1.44 Gbps. In this case, CUBIC with
 *C*=0.04 or *C*=0.4 achieves exactly the same rate as Reno TCP,
 whereas HSTCP is about ten times more aggressive than Reno TCP.
 
-We can see that *C* determines the aggressiveness of CUBIC in
+*C* determines the aggressiveness of CUBIC in
 competing with other congestion control algorithms for bandwidth.
 CUBIC is more friendly to Reno TCP, if the value of *C* is lower.
-However, we do not recommend setting *C* to a very low value like
+However, it is NOT RECOMMENDED to set *C* to a very low value like
 0.04, since CUBIC with a low *C* cannot efficiently use the bandwidth
 in fast and long-distance networks. Based on these observations and
-extensive deployment experience, we find *C*=0.4 gives a good balance
+extensive deployment experience, *C*=0.4 seems to give a good balance
 between Reno-friendliness and aggressiveness of window increase.
 Therefore, *C* SHOULD be set to 0.4. With *C* set to 0.4, {{eq6}} is
 reduced to:
@@ -1013,10 +1012,10 @@ loss rate of 2.9e-8.
 HSTCP, and CUBIC to achieve a certain throughput"}
 
 {{tab3}} describes the required packet loss rate for Reno TCP, HSTCP,
-and CUBIC to achieve a certain throughput. We use 1500-byte packets
+and CUBIC to achieve a certain throughput, with 1500-byte packets
 and an *RTT* of 0.1 seconds.
 
-Our test results in {{HLRX07}} indicate that CUBIC uses the spare
+The test results in {{HLRX07}} indicate that CUBIC uses the spare
 bandwidth left unused by existing Reno TCP flows in the same
 bottleneck link without taking away much bandwidth from the existing
 flows.
@@ -1349,8 +1348,8 @@ These individuals suggested improvements to this document:
 ## Since the Original Paper
 
 CUBIC has gone through a few changes since the initial release
-{{HRX08}} of its algorithm and implementation. Below we highlight the
-differences between its original paper and {{?RFC8312}}.
+{{HRX08}} of its algorithm and implementation. This section highlights the
+differences between the original paper and {{?RFC8312}}.
 
 - The original paper {{HRX08}} includes the pseudocode of CUBIC
   implementation using Linux's pluggable congestion control framework,
