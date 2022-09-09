@@ -101,6 +101,14 @@ informative:
     - ins: Sangtae Ha
     target: "https://web.archive.org/web/20161118125842/http://netsrv.csc.ncsu.edu/wiki/index.php/TCP_Testing"
 
+  AIMD-friendliness
+    title: Friendliness between AIMD Algorithms
+    date: 2022-08-08
+    author:
+    - ins: Bob Briscoe
+    - ins: Olga Albisser
+    target: "https://raw.githubusercontent.com/bbriscoe/cubic-reno/main/creno_tr.pdf"
+
   SXEZ19: DOI.10.1109/TNET.2021.3078161
   XHR04: DOI.10.1109/infcom.2004.1354672
   HLRX07: DOI.10.1016/j.comnet.2006.11.005
@@ -554,7 +562,7 @@ calculated using {{eq3}}.
 ~~~
 {: #eq3 artwork-align="center" }
 
-By the same analysis, to achieve the same average window size as Reno
+By the same analysis, to achieve similar average window size as Reno
 that uses AIMD(1, 0.5), {{{α}{}}} must be equal to,
 
 ~~~ math
@@ -570,7 +578,12 @@ size *W<sub>est</sub>* in the Reno-friendly region with
 ~~~
 {: artwork-align="center" }
 
-which achieves the same average window size as Reno. When
+which achieves approximately the same average window size as Reno in
+many cases. The model used to calculate the alpha_cubic value is not
+absolutely precise, but analysis and simulation {{AIMD-friendliness}},
+as well as over a decade of experience with CUBIC in the public
+Internet, shows that this approach produces acceptable levels of
+rate fairness between CUBIC and Reno flows. When
 receiving a new ACK in congestion avoidance (where *cwnd* could be
 greater than or less than *W<sub>max</sub>*), CUBIC checks whether
 W<sub>cubic</sub>(*t*) is less than *W<sub>est</sub>*. If so, CUBIC is
