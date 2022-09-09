@@ -732,8 +732,8 @@ than 0.5 is that packet loss can happen for more than one round-trip in certain
 cases, but it can work efficiently in other cases, for example, when HyStart++
 is used along with CUBIC or when the sending rate is limited by the application.
 We believe that while a more adaptive setting of {{{β}{}}}*<sub>cubic</sub>*
-could help to limit packet loss to a single round, it will make the analysis
-of CUBIC much harder.
+could help to limit packet loss to a single round, it would require detailed
+analyses and large-scale evaluations to validate such algorithms.
 
 Note that CUBIC MUST continue to reduce *cwnd* in response to congestion
 events due to ECN-Echo ACKs until it reaches a value of 1 MSS.
