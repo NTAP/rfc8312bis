@@ -168,7 +168,7 @@ TCP-Reno {{!RFC5681}}, TCP-NewReno {{!RFC6582}}{{!RFC6675}}, SCTP
 {{?RFC4960}}, TFRC {{!RFC5348}}, and QUIC congestion control
 {{!RFC9002}}, which use the same linear increase function for window
 growth.  All Reno-style standards and their variants are
-collectively referrd to as "Reno" in this document.
+collectively referred to as "Reno" in this document.
 
 CUBIC, originally proposed in {{HRX08}}, is a modification to the
 congestion control algorithm of classical Reno to remedy this
@@ -678,7 +678,7 @@ bytes in flight is smaller than *cwnd*. That also effectively avoids *cwnd*
 from growing beyond the receive window. Such measures are important to
 prevent a CUBIC sender from using an arbitrarily high *cwnd* value in
 calculating the new value for *ssthresh* and *cwnd* when a congestion
-event is signalled, but it is not as robust as the mechanisms described
+event is signaled, but it is not as robust as the mechanisms described
 in {{?RFC7661}}.
 Likewise, a QUIC sender that uses *cwnd* to calculate a new value
 for the congestion window and slow-start threshold on a congestion
