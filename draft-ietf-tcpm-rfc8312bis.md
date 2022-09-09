@@ -1184,6 +1184,12 @@ These individuals suggested improvements to this document:
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
 
+## Since draft-ietf-tcpm-rfc8312bis-09
+
+- Improve text for Reno friendliness, multiplicative decrease and
+  reference to HLRX07.
+  ([#152](https://github.com/NTAP/rfc8312bis/pull/152))
+
 ## Since draft-ietf-tcpm-rfc8312bis-08
 
 - Fix the text specifying when alpha_cubic SHOULD be set to 1 to
