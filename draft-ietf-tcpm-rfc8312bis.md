@@ -1016,7 +1016,8 @@ HSTCP, and CUBIC to achieve a certain throughput"}
 and CUBIC to achieve a certain throughput. We use 1500-byte packets
 and an *RTT* of 0.1 seconds.
 
-Our test results in {{HLRX07}} indicate that CUBIC uses the spare
+Our test results in {{HLRX07}} indicate that, in typical cases with a
+degree of background traffic, CUBIC uses the spare
 bandwidth left unused by existing Reno TCP flows in the same
 bottleneck link without taking away much bandwidth from the existing
 flows.
