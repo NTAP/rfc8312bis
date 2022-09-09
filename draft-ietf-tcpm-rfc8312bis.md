@@ -101,7 +101,7 @@ informative:
     - ins: Sangtae Ha
     target: "https://web.archive.org/web/20161118125842/http://netsrv.csc.ncsu.edu/wiki/index.php/TCP_Testing"
 
-  AIMD-friendliness
+  AIMD-friendliness:
     title: Friendliness between AIMD Algorithms
     date: 2022-08-08
     author:
