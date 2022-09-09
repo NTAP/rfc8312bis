@@ -583,7 +583,9 @@ many cases. The model used to calculate {{{α}{}}}*<sub>cubic</sub>* is not
 absolutely precise, but analysis and simulation {{AIMD-friendliness}},
 as well as over a decade of experience with CUBIC in the public
 Internet, shows that this approach produces acceptable levels of
-rate fairness between CUBIC and Reno flows. When
+rate fairness between CUBIC and Reno flows. Also, no significant
+drawbacks of the model have been reported. However, It would be
+beneficial to see continued detailed analysis on it. When
 receiving a new ACK in congestion avoidance (where *cwnd* could be
 greater than or less than *W<sub>max</sub>*), CUBIC checks whether
 W<sub>cubic</sub>(*t*) is less than *W<sub>est</sub>*. If so, CUBIC is
