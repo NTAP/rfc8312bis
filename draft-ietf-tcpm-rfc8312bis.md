@@ -36,7 +36,6 @@ author:
   org: University of Colorado at Boulder
   abbrev: Colorado
   street: Department of Computer Science
-  street: Department of Computer Science
   city: Boulder
   region: CO
   code: 80309-0430
