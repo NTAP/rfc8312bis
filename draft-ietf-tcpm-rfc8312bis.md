@@ -566,7 +566,7 @@ Thus, CUBIC uses {{eq4}} to estimate the window
 size *W<sub>est</sub>* in the Reno-friendly region with
 
 ~~~ math
-α_{cubic} = 3 * \frac{1 - β_{cubic}}{1 + β_{cubic}} \\
+α_{cubic} = 3 * \frac{1 - β_{cubic}}{1 + β_{cubic}}
 ~~~
 {: artwork-align="center" }
 
