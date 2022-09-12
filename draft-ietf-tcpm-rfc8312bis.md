@@ -98,15 +98,15 @@ informative:
     title: Simulation, Testbed, and Deployment Testing Results of CUBIC
     date: 2016-11-03
     author:
-    - ins: Sangtae Ha
+    - ins: S. Ha
     target: "https://web.archive.org/web/20161118125842/http://netsrv.csc.ncsu.edu/wiki/index.php/TCP_Testing"
 
   AIMD-friendliness:
     title: Friendliness between AIMD Algorithms
     date: 2022-08-08
     author:
-    - ins: Bob Briscoe
-    - ins: Olga Albisser
+    - ins: B. Briscoe
+    - ins: O. Albisser
     target: "https://raw.githubusercontent.com/bbriscoe/cubic-reno/main/creno_tr.pdf"
 
   SXEZ19: DOI.10.1109/TNET.2021.3078161
