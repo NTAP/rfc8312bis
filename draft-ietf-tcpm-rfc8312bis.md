@@ -189,12 +189,12 @@ This document updates the specification of CUBIC to include algorithmic
 improvements based on the Linux, Windows, and Apple implementations and
 recent academic work. Based on the extensive deployment experience with
 CUBIC, it also moves the specification to the Standards Track,
-obsoleting {{?RFC8312}}. This requires an update to {{!RFC5681}}, which
-limits the aggressiveness of Reno TCP implementations in its Section 3.
+obsoleting {{?RFC8312}}. This requires an update to {{Section3 of !RFC5681}}, which
+limits the aggressiveness of Reno TCP implementations.
 Since CUBIC is occasionally more aggressive than the {{!RFC5681}}
-algorithms, this document updates the first paragraph of Section 3 of
-{{!RFC5681}}, replacing it with a normative reference to guideline (1)
-in Section 3 of {{!RFC5033}}, which allows for CUBIC's behavior as defined
+algorithms, this document updates the first paragraph of {{Section 3 of
+!RFC5681}}, replacing it with a normative reference to guideline (1)
+in {{Section 3 of !RFC5033}}, which allows for CUBIC's behavior as defined
 in this document.
 
 Binary Increase Congestion Control (BIC-TCP) {{XHR04}}, a predecessor
