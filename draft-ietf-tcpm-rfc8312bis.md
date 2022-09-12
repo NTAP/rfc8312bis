@@ -193,7 +193,7 @@ limits the aggressiveness of Reno TCP implementations in its Section 3.
 Since CUBIC is occasionally more aggressive than the {{!RFC5681}}
 algorithms, this document updates the first paragraph of Section 3 of
 {{!RFC5681}}, replacing it with a normative reference to guideline (1)
-in Section 3 of {{!RFC5033}}, which allows for CUBIC's behavior defined
+in Section 3 of {{!RFC5033}}, which allows for CUBIC's behavior as defined
 in this document.
 
 Binary Increase Congestion Control (BIC-TCP) {{XHR04}}, a predecessor
@@ -584,9 +584,9 @@ which achieves approximately the same average window size as Reno in
 many cases. The model used to calculate {{{α}{}}}*<sub>cubic</sub>* is not
 absolutely precise, but analysis and simulation {{AIMD-friendliness}},
 as well as over a decade of experience with CUBIC in the public
-Internet, shows that this approach produces acceptable levels of
+Internet, show that this approach produces acceptable levels of
 rate fairness between CUBIC and Reno flows. Also, no significant
-drawbacks of the model have been reported. However, It would be
+drawbacks of the model have been reported. However, it would be
 beneficial to see continued detailed analysis on it. When
 receiving a new ACK in congestion avoidance (where *cwnd* could be
 greater than or less than *W<sub>max</sub>*), CUBIC checks whether
@@ -735,8 +735,8 @@ A side effect of setting {{{β}{}}}*<sub>cubic</sub>* to a value bigger
 than 0.5 is that packet loss can happen for more than one round-trip in certain
 cases, but it can work efficiently in other cases, for example, when HyStart++
 is used along with CUBIC or when the sending rate is limited by the application.
-We believe that while a more adaptive setting of {{{β}{}}}*<sub>cubic</sub>*
-could help to limit packet loss to a single round, it would require detailed
+While a more adaptive setting of {{{β}{}}}*<sub>cubic</sub>*
+could help limit packet loss to a single round, it would require detailed
 analyses and large-scale evaluations to validate such algorithms.
 
 Note that CUBIC MUST continue to reduce *cwnd* in response to congestion
