@@ -108,6 +108,7 @@ informative:
     - ins: B. Briscoe
     - ins: O. Albisser
     target: "https://raw.githubusercontent.com/bbriscoe/cubic-reno/main/creno_tr.pdf"
+    seriesinfo: RFC Editor, please replace this URL with the permanent arXiv one
 
   SXEZ19: DOI.10.1109/TNET.2021.3078161
   XHR04: DOI.10.1109/infcom.2004.1354672
