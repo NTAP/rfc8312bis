@@ -98,8 +98,17 @@ informative:
     title: Simulation, Testbed, and Deployment Testing Results of CUBIC
     date: 2016-11-03
     author:
-    - ins: Sangtae Ha
+    - ins: S. Ha
     target: "https://web.archive.org/web/20161118125842/http://netsrv.csc.ncsu.edu/wiki/index.php/TCP_Testing"
+
+  AIMD-friendliness:
+    title: Friendliness between AIMD Algorithms
+    date: 2022-08-08
+    author:
+    - ins: B. Briscoe
+    - ins: O. Albisser
+    target: "https://raw.githubusercontent.com/bbriscoe/cubic-reno/main/creno_tr.pdf"
+    seriesinfo: RFC Editor, please replace this URL with the permanent arXiv one
 
   SXEZ19: DOI.10.1109/TNET.2021.3078161
   XHR04: DOI.10.1109/infcom.2004.1354672
@@ -180,11 +189,13 @@ This document updates the specification of CUBIC to include algorithmic
 improvements based on the Linux, Windows, and Apple implementations and
 recent academic work. Based on the extensive deployment experience with
 CUBIC, it also moves the specification to the Standards Track,
-obsoleting {{?RFC8312}}. This requires an update to {{!RFC5681}}, which
-limits the aggressiveness of Reno TCP implementations in its Section 3.
+obsoleting {{?RFC8312}}. This requires an update to {{Section 3 of !RFC5681}}, which
+limits the aggressiveness of Reno TCP implementations.
 Since CUBIC is occasionally more aggressive than the {{!RFC5681}}
-algorithms, this document updates {{!RFC5681}} to allow for CUBIC's
-behavior.
+algorithms, this document updates the first paragraph of {{Section 3 of
+!RFC5681}}, replacing it with a normative reference to guideline (1)
+in {{Section 3 of !RFC5033}}, which allows for CUBIC's behavior as defined
+in this document.
 
 Binary Increase Congestion Control (BIC-TCP) {{XHR04}}, a predecessor
 of CUBIC, was selected as the default TCP congestion control algorithm
@@ -554,7 +565,7 @@ calculated using {{eq3}}.
 ~~~
 {: #eq3 artwork-align="center" }
 
-By the same analysis, to achieve the same average window size as Reno
+By the same analysis, to achieve a similar average window size as Reno
 that uses AIMD(1, 0.5), {{{α}{}}} must be equal to,
 
 ~~~ math
@@ -570,7 +581,14 @@ size *W<sub>est</sub>* in the Reno-friendly region with
 ~~~
 {: artwork-align="center" }
 
-which achieves the same average window size as Reno. When
+which achieves approximately the same average window size as Reno in
+many cases. The model used to calculate {{{α}{}}}*<sub>cubic</sub>* is not
+absolutely precise, but analysis and simulation {{AIMD-friendliness}},
+as well as over a decade of experience with CUBIC in the public
+Internet, show that this approach produces acceptable levels of
+rate fairness between CUBIC and Reno flows. Also, no significant
+drawbacks of the model have been reported. However, it would be
+beneficial to see continued detailed analysis on it. When
 receiving a new ACK in congestion avoidance (where *cwnd* could be
 greater than or less than *W<sub>max</sub>*), CUBIC checks whether
 W<sub>cubic</sub>(*t*) is less than *W<sub>est</sub>*. If so, CUBIC is
@@ -715,9 +733,12 @@ ssthresh = &
 {: #eqssthresh artwork-align="center" }
 
 A side effect of setting {{{β}{}}}*<sub>cubic</sub>* to a value bigger
-than 0.5 is slower convergence. While a more adaptive
-setting of {{{β}{}}}*<sub>cubic</sub>* could result in faster
-convergence, it will make the analysis of CUBIC much harder.
+than 0.5 is that packet loss can happen for more than one round-trip in certain
+cases, but it can work efficiently in other cases, for example, when HyStart++
+is used along with CUBIC or when the sending rate is limited by the application.
+While a more adaptive setting of {{{β}{}}}*<sub>cubic</sub>*
+could help limit packet loss to a single round, it would require detailed
+analyses and large-scale evaluations to validate such algorithms.
 
 Note that CUBIC MUST continue to reduce *cwnd* in response to congestion
 events due to ECN-Echo ACKs until it reaches a value of 1 MSS.
@@ -1015,7 +1036,8 @@ HSTCP, and CUBIC to achieve a certain throughput"}
 and CUBIC to achieve a certain throughput, with 1500-byte packets
 and an *RTT* of 0.1 seconds.
 
-The test results in {{HLRX07}} indicate that CUBIC uses the spare
+The test results in {{HLRX07}} indicate that, in typical cases with a
+degree of background traffic, CUBIC uses the spare
 bandwidth left unused by existing Reno TCP flows in the same
 bottleneck link without taking away much bandwidth from the existing
 flows.
@@ -1165,6 +1187,12 @@ These individuals suggested improvements to this document:
 
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
+
+## Since draft-ietf-tcpm-rfc8312bis-09
+
+- Improve text for Reno friendliness, multiplicative decrease and
+  reference to HLRX07.
+  ([#152](https://github.com/NTAP/rfc8312bis/pull/152))
 
 ## Since draft-ietf-tcpm-rfc8312bis-08
 
