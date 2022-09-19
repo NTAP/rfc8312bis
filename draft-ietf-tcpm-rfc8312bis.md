@@ -674,33 +674,36 @@ The parameter {{{β}{}}}*<sub>cubic</sub>* SHOULD be set to 0.7, which
 is different from the multiplicative decrease factor used in {{!RFC5681}}
 (and {{!RFC6675}}) during fast recovery.
 
-In {{eqssthresh}}, *flight_size* is the amount of outstanding data in
-the network, as defined in {{!RFC5681}}.
-Note that a rate-limited application with idle periods
+In {{eqssthresh}}, *flight_size* is the amount of outstanding
+(unacknowledged) data in the network, as defined in
+{{!RFC5681}}. Note that a rate-limited application with idle periods
 or periods when unable to send at the full rate permitted by *cwnd*
-may easily encounter notable variations in the volume of data sent
-from one RTT to another, resulting in *flight_size* that is significantly
-less than *cwnd* on a congestion event. This may decrease *cwnd* to a
-much lower value than necessary. To avoid suboptimal performance with
-such applications, the mechanisms described in {{?RFC7661}} can be used
-to mitigate this issue as it would allow using a value between *cwnd*
-and *flight_size* to calculate the new *ssthresh* in {{eqssthresh}}.
-The congestion window growth mechanism defined in {{?RFC7661}} is safe
-to use even when *cwnd* is greater than the receive window as it
-validates *cwnd* based on the amount of data acknowledged by the network
-in an RTT which implicitly accounts for the allowed receive window.
-Some implementations of CUBIC currently use *cwnd* instead of *flight_size*
-when calculating a new *ssthresh* using {{eqssthresh}}. The implementations
-that use *cwnd* MUST use other measures to not allow *cwnd* to grow when
-bytes in flight is smaller than *cwnd*. That also effectively avoids *cwnd*
-from growing beyond the receive window. Such measures are important to
-prevent a CUBIC sender from using an arbitrarily high *cwnd* value in
-calculating the new value for *ssthresh* and *cwnd* when a congestion
-event is signaled, but it is not as robust as the mechanisms described
-in {{?RFC7661}}.
-Likewise, a QUIC sender that uses *cwnd* to calculate a new value
-for the congestion window and slow-start threshold on a congestion
-event is required to apply similar mechanisms {{!RFC9002}}.
+could easily encounter notable variations in the volume of data sent
+from one RTT to another, resulting in *flight_size* that is
+significantly less than *cwnd* when there is a congestion event. The
+congestion response would therefore decrease *cwnd* to a much lower
+value than necessary. To avoid such suboptimal performance, the
+mechanisms described in {{?RFC7661}} can be used. These describe how
+to calculate a new *cwnd* for sending and after congestion, a
+new *ssthresh* with a value between the *cwnd* and *flight_size*. The
+mechanism defined in {{?RFC7661}} is safe to use even when *cwnd* is
+greater than the receive window, because it validates *cwnd* based on
+the amount of data acknowledged by the network in an RTT, which
+implicitly accounts for the allowed receive window.
+
+Some implementations of CUBIC currently use *cwnd* instead of
+*flight_size* when calculating a new *ssthresh*. Implementations that
+use *cwnd* MUST use other measures to prevent *cwnd* from growing when
+the volume of bytes in flight is smaller than *cwnd*. This also
+effectively avoids *cwnd* from growing beyond the receive window. Such
+measures are important to prevent a CUBIC sender from using an
+arbitrarily high cwnd *value* when calculating new values for
+*ssthresh* and *cwnd* when congestion is detected. This might not be as
+robust as the mechanisms described in {{?RFC7661}}.
+
+A QUIC sender that uses *cwnd* to calculate new values for *cwnd* and
+*ssthresh* after detecting a congestion event is REQUIRED to apply
+similar mechanisms {{?RFC9002}}.
 
 ~~~ math
 \begin{array}{lll}
@@ -1187,6 +1190,11 @@ These individuals suggested improvements to this document:
 
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
+
+## Since draft-ietf-tcpm-rfc8312bis-10
+
+- Improve text related to {{?RFC7661}}.
+  ([#149](https://github.com/NTAP/rfc8312bis/issues/149))
 
 ## Since draft-ietf-tcpm-rfc8312bis-09
 
