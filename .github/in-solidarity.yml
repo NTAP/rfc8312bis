@@ -1,2 +1,1 @@
-# use configuration from https://github.com/NTAP/isb-ietf-config
-_extends: NTAP/isb-ietf-config
+_extends: ietf/terminology
