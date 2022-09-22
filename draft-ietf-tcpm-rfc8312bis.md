@@ -419,7 +419,7 @@ Current congestion window in segments.
 *ssthresh*:
 Current slow start threshold in segments.
 
-*prior_cwnd*:
+*cwnd<sub>prior</sub>*:
 Size of *cwnd* in segments at the time of setting *ssthresh*
 most recently, either upon exiting the first slow start, or
 just before *cwnd* was reduced in the last congestion event.
@@ -435,16 +435,16 @@ The time period in seconds it takes to increase the congestion window
 size at the beginning of the current congestion avoidance stage to
 *W<sub>max</sub>*.
 
-*current_time*:
+*t<sub>current</sub>*:
 Current time of the system in seconds.
 
-*epoch<sub>start</sub>*:
+*t<sub>epoch</sub>*:
 The time in seconds at which the current congestion avoidance stage
 started.
 
-*cwnd<sub>start</sub>*:
+*cwnd<sub>epoch</sub>*:
 The *cwnd* at the beginning of the current congestion avoidance stage,
-i.e., at time *epoch<sub>start</sub>*.
+i.e., at time *t<sub>epoch</sub>*.
 
 W<sub>cubic</sub>(*t*):
 The congestion window in segments at time *t* in seconds
@@ -487,11 +487,11 @@ where *t* is the elapsed time in seconds from the beginning of the
 current congestion avoidance stage, that is,
 
 ~~~ math
-t = current\_time - epoch_{start}
+t = t_{current} - t_{epoch}
 ~~~
 {: artwork-align="center" }
 
-and where *epoch<sub>start</sub>* is the time at which the current
+and where *t<sub>epoch</sub>* is the time at which the current
 congestion avoidance stage starts. *K* is the time period that the
 above function takes to increase the congestion window size at the
 beginning of the current congestion avoidance stage to
@@ -503,7 +503,7 @@ K = \sqrt[3]{\frac{W_{max} - cwnd_{start}}{C}}
 ~~~
 {: #eq2 artwork-align="center" }
 
-where *cwnd<sub>start</sub>* is the congestion window at the beginning
+where *cwnd<sub>epoch</sub>* is the congestion window at the beginning
 of the current congestion avoidance stage.
 
 Upon receiving a new ACK during congestion avoidance, CUBIC computes the
@@ -595,7 +595,7 @@ W<sub>cubic</sub>(*t*) is less than *W<sub>est</sub>*. If so, CUBIC is
 in the Reno-friendly region and *cwnd* SHOULD be set to
 *W<sub>est</sub>* at each reception of a new ACK.
 
-*W<sub>est</sub>* is set equal to *cwnd<sub>start</sub>* at the start
+*W<sub>est</sub>* is set equal to *cwnd<sub>epoch</sub>* at the start
 of the congestion avoidance stage. After that, on every new ACK,
 *W<sub>est</sub>* is updated using {{eq4}}. Note that this equation
 is for a connection where Appropriate Byte Counting (ABC) {{?RFC3465}}
@@ -612,7 +612,7 @@ W_{est} = W_{est} + α_{cubic} * \frac{segments\_acked}{cwnd}
 {: #eq4 artwork-align="center" }
 
 Once *W<sub>est</sub>* has grown to reach the *cwnd* at the time of
-most recently setting *ssthresh*, that is, *W<sub>est</sub>* >= *prior_cwnd*,
+most recently setting *ssthresh*, that is, *W<sub>est</sub>* >= *cwnd<sub>prior</sub>*,
 the sender SHOULD set {{{α}{}}}*<sub>cubic</sub>* to 1 to ensure that
 it can achieve the same congestion window increment rate as Reno,
 which uses AIMD(1, 0.5).
@@ -710,9 +710,10 @@ similar mechanisms {{?RFC9002}}.
 
 ssthresh = &
 flight\_size * β_{cubic} &
-\text{// new } ssthresh \\
+\text{new } ssthresh \\
 
-prior\_cwnd = cwnd \\
+cwnd_{prior} = &
+cwnd \\
 
 cwnd = &
 \left\{
@@ -722,14 +723,14 @@ cwnd = &
 \end{array}
 \right. &
 \begin{array}{l}
-\text{// reduction on packet loss}, cwnd \text{ is at least 2 MSS} \\
-\text{// reduction on ECE}, cwnd \text{ is at least 1 MSS} \\
+\text{reduction on loss}, cwnd \text{ is at least 2 MSS} \\
+\text{reduction on ECE}, cwnd \text{ is at least 1 MSS} \\
 \end{array}
 \\
 
 ssthresh = &
 \mathrm{max}(ssthresh, 2) &
-\text{// } ssthresh \text{ is at least 2 MSS} \\
+ssthresh \text{ is at least 2 MSS} \\
 
 \end{array}
 ~~~
@@ -767,10 +768,10 @@ in {{mult-dec}}.
 W_{max} = \left\{
 \begin{array}{ll}
 cwnd * \frac{1 + β_{cubic}}{2}
-& \text{if } cwnd < W_{max} \text{ and fast convergence is enabled},\\
+& \text{if } cwnd < W_{max} \text{ and fast convergence enabled},\\
 & \text{further reduce } W_{max} \\
 cwnd
-&\text{otherwise, remember cwnd before reduction} \\
+&\text{otherwise, remember } cwnd \text{ before reduction} \\
 \end{array} \right.
 ~~~
 {: artwork-align="center" }
@@ -851,42 +852,69 @@ implementation MAY save the current value of the following
 variables before the congestion window is reduced.
 
 ~~~ math
-\begin{array}{l}
-undo\_cwnd = cwnd \\
-undo\_prior\_cwnd = prior\_cwnd \\
-undo\_ssthresh = ssthresh \\
-undo\_W_{max} = W_{max} \\
-undo\_K = K \\
-undo\_epoch_{start} = epoch_{start} \\
-undo\_W\_{est} = W_{est} \\
+\begin{array}{ll}
+undo\_cwnd = &
+cwnd \\
+
+undo\_cwnd_{prior} = &
+cwnd_{prior} \\
+
+undo\_ssthresh = &
+ssthresh \\
+
+undo\_W_{max} = &
+W_{max} \\
+
+undo\_K = &
+K \\
+
+undo\_t_{epoch} = &
+t_{epoch} \\
+
+undo\_W\_{est} = &
+W_{est} \\
 \end{array}
 ~~~
 {: artwork-align="center" }
 
 Once the previously declared packet loss is confirmed to be spurious,
 CUBIC MAY restore the original values of the above-mentioned variables
-as follows if the current *cwnd* is lower than *prior_cwnd*.
+as follows if the current *cwnd* is lower than *cwnd<sub>prior</sub>*.
 Restoring the original values ensures that CUBIC's
 performance is similar to what it would be without spurious losses.
 
 ~~~ math
 \left.
-\begin{array}{l}
-cwnd = undo\_cwnd \\
-prior\_cwnd = undo\_prior\_cwnd \\
-ssthresh = undo\_ssthresh \\
-W_{max} = undo\_W_{max} \\
-K = undo\_K \\
-epoch_{start} = undo\_epoch_{start} \\
-W_{est} = undo\_W_{est} \\
+\begin{array}{ll}
+cwnd = &
+undo\_cwnd \\
+
+cwnd_{prior} = &
+undo\_cwnd_{prior} \\
+
+ssthresh = &
+undo\_ssthresh \\
+
+W_{max} = &
+undo\_W_{max} \\
+
+K = &
+undo\_K \\
+
+t_{epoch} = &
+undo\_t_{epoch} \\
+
+W_{est} = &
+undo\_W_{est} \\
+
 \end{array}
 \right\}
-\text{if }cwnd < prior\_cwnd
+\text{if }cwnd < cwnd_{prior}
 ~~~
 {: artwork-align="center" }
 
 In rare cases, when the detection happens long after a spurious loss
-event and the current *cwnd* is already higher than *prior_cwnd*,
+event and the current *cwnd* is already higher than *cwnd<sub>prior</sub>*,
 CUBIC SHOULD continue to use the current and the most recent values of
 these variables.
 
@@ -906,7 +934,7 @@ multiplicative decrease of congestion avoidance work well together.
 When CUBIC uses HyStart++ {{!I-D.ietf-tcpm-hystartplusplus}}, it may
 exit the first slow start without incurring any packet loss and
 thus *W<sub>max</sub>* is undefined. In this special case, CUBIC
-sets *prior_cwnd = cwnd* and switches to congestion avoidance.
+sets *cwnd<sub>prior</sub> = cwnd* and switches to congestion avoidance.
 It then increases its congestion window
 size using {{eq1}}, where *t* is the elapsed time since the beginning
 of the current congestion avoidance, *K* is set to 0,
@@ -1205,7 +1233,7 @@ These individuals suggested improvements to this document:
 ## Since draft-ietf-tcpm-rfc8312bis-08
 
 - Fix the text specifying when alpha_cubic SHOULD be set to 1 to
-  indicate this should happen when cwnd >= prior_cwnd rather
+  indicate this should happen when cwnd >= cwnd<sub>prior</sub> rather
   than cwnd >= W_max, since these are different in the
   fast convergence case
   ([#146](https://github.com/NTAP/rfc8312bis/pull/146))
@@ -1249,7 +1277,7 @@ These individuals suggested improvements to this document:
   ([#101](https://github.com/NTAP/rfc8312bis/issues/101))
 - Rewrite the Responses to Sudden or Transient Events section
   ([#98](https://github.com/NTAP/rfc8312bis/issues/98))
-- Remove confusing text about *cwnd<sub>start</sub>* in Section 4.2
+- Remove confusing text about *cwnd<sub>epoch</sub>* in Section 4.2
   ([#100](https://github.com/NTAP/rfc8312bis/issues/100))
 - Change terminology from "AIMD" to "Reno"
   ([#108](https://github.com/NTAP/rfc8312bis/issues/108))
@@ -1319,7 +1347,7 @@ These individuals suggested improvements to this document:
 - fix a mistake in *W<sub>max</sub>* calculation in the fast convergence section.
   ([#51](https://github.com/NTAP/rfc8312bis/issues/51))
 
-- clarity on setting *ssthresh* and *cwnd<sub>start</sub>* during
+- clarity on setting *ssthresh* and *cwnd<sub>epoch</sub>* during
   multiplicative decrease.
   ([#53](https://github.com/NTAP/rfc8312bis/issues/53))
 
