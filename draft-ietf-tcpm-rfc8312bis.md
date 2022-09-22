@@ -684,8 +684,8 @@ significantly less than *cwnd* when there is a congestion event. The
 congestion response would therefore decrease *cwnd* to a much lower
 value than necessary. To avoid such suboptimal performance, the
 mechanisms described in {{?RFC7661}} can be used. These describe how
-to calculate a new *cwnd* for sending and after congestion, a
-new *ssthresh* with a value between the *cwnd* and *flight_size*. The
+to manage and use *cwnd* and *ssthresh* during a rate-limited Interval,
+and how to update *cwnd* and *ssthresh* after congestion has been detected. The
 mechanism defined in {{?RFC7661}} is safe to use even when *cwnd* is
 greater than the receive window, because it validates *cwnd* based on
 the amount of data acknowledged by the network in an RTT, which
