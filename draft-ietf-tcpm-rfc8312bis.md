@@ -1223,6 +1223,8 @@ These individuals suggested improvements to this document:
 
 - Improve text related to {{?RFC7661}}.
   ([#149](https://github.com/NTAP/rfc8312bis/issues/149))
+- Made variable naming a bit more consistent.
+  ([#156](https://github.com/NTAP/rfc8312bis/pull/156))
 
 ## Since draft-ietf-tcpm-rfc8312bis-09
 
