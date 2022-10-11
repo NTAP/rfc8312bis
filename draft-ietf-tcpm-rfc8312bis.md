@@ -1222,6 +1222,7 @@ These individuals suggested improvements to this document:
 ## Since draft-ietf-tcpm-rfc8312bis-11
 
 - Fix various nits.
+  ([#157](https://github.com/NTAP/rfc8312bis/pull/157))
 
 ## Since draft-ietf-tcpm-rfc8312bis-10
 
