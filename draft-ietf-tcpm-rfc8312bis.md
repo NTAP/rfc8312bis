@@ -162,7 +162,7 @@ that CUBIC is safe for deployment on the global Internet and delivers
 substantial benefits over classical Reno congestion control {{!RFC5681}}. It is
 therefore to be regarded as the currently most widely deployed
 standard for TCP congestion control. CUBIC can also be used for other
-transport protocols such as QUIC {{?RFC9000}} and SCTP {{?RFC4960}}
+transport protocols such as QUIC {{?RFC9000}} and SCTP {{?RFC9260}}
 as a default congestion controller.
 
 The design of CUBIC was motivated by the well-documented problem
@@ -174,7 +174,7 @@ problem is frequently observed even in the range of congestion window
 sizes over several hundreds of packets. This problem is equally
 applicable to all Reno-style standards and their variants, including
 TCP-Reno {{!RFC5681}}, TCP-NewReno {{!RFC6582}}{{!RFC6675}}, SCTP
-{{?RFC4960}}, TFRC {{!RFC5348}}, and QUIC congestion control
+{{?RFC9260}}, TFRC {{!RFC5348}}, and QUIC congestion control
 {{!RFC9002}}, which use the same linear increase function for window
 growth.  All Reno-style standards and their variants are
 collectively referred to as "Reno" in this document.
@@ -830,7 +830,7 @@ a TCP implementation MAY follow the response algorithm described in
 {{!RFC4015}} to restore the congestion control state and adapt
 the retransmission timer to avoid further spurious timeouts.
 
-### Spurious loss detected by acknowledgements
+### Spurious loss detected by acknowledgments
 
 Upon receiving an ACK, a TCP implementation MAY detect spurious losses
 either using TCP Timestamps or via D-SACK{{!RFC2883}}. Experimental
@@ -842,12 +842,12 @@ marked as lost and the original data has been retransmitted with
 a new QUIC packet.
 
 This section specifies a simple response algorithm when a spurious
-loss is detected by acknowledgements. Implementations would need to carefully
+loss is detected by acknowledgments. Implementations would need to carefully
 evaluate the impact of using this algorithm in different environments
 that may experience sudden change in available capacity (e.g., due to variable
 radio capacity, a routing change, or a mobility event).
 
-When a packet loss is detected via acknowledgements, a CUBIC
+When a packet loss is detected via acknowledgments, a CUBIC
 implementation MAY save the current value of the following
 variables before the congestion window is reduced.
 
@@ -1157,8 +1157,8 @@ capacity, a routing change, or a mobility event, CUBIC is designed to
 utilize the newly available capacity faster than Reno.
 
 On the other hand, if there is a sudden decrease in capacity, CUBIC
-reduces more slowly than Reno. This remains true whether or not CUBIC
-is in Reno-friendly mode and whether or not fast convergence is
+reduces more slowly than Reno. This remains true regardless of whether CUBIC
+is in Reno-friendly mode and regardless of whether fast convergence is
 enabled.
 
 ## Incremental Deployment
@@ -1218,6 +1218,10 @@ These individuals suggested improvements to this document:
 
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
+
+## Since draft-ietf-tcpm-rfc8312bis-11
+
+- Fix various nits.
 
 ## Since draft-ietf-tcpm-rfc8312bis-10
 
