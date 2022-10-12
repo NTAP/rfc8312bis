@@ -713,7 +713,8 @@ flight\_size * β_{cubic} &
 \text{new } ssthresh \\
 
 cwnd_{prior} = &
-cwnd \\
+cwnd &
+\text{save } cwnd \\
 
 cwnd = &
 \left\{
@@ -1218,6 +1219,10 @@ These individuals suggested improvements to this document:
 
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
+
+## Since draft-ietf-tcpm-rfc8312bis-12
+
+- Fix plaintext version of {{eqssthresh}}.
 
 ## Since draft-ietf-tcpm-rfc8312bis-11
 
