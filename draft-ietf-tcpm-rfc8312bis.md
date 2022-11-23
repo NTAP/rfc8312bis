@@ -542,6 +542,10 @@ CUBIC runs in three different regions:
 3. The convex region, if CUBIC is not in the Reno-friendly region and
    *cwnd* is greater than *W<sub>max</sub>*.
 
+To summarize, CUBIC computes both W<sub>cubic</sub>(*t*) and
+*W<sub>est</sub>* {{Reno-friendly}} on receiving a new ACK
+in congestion avoidance and choose the higher of the two values.
+
 The next sections describe the exact actions taken by CUBIC in each region.
 
 ## Reno-Friendly Region {#Reno-friendly}
