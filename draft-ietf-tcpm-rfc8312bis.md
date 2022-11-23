@@ -426,9 +426,10 @@ just before *cwnd* was reduced in the last congestion event.
 
 *W<sub>max</sub>*:
 Size of *cwnd* in segments just before *cwnd* was reduced in the last
-congestion event when fast convergence is disabled. However, if fast
-convergence is enabled, the size may be further reduced based on the
-current saturation point.
+congestion event when fast convergence is disabled (same as
+*cwnd<sub>prior</sub>* on a congestion event). However, if fast
+convergence is enabled, *W<sub>max</sub>* may be further reduced
+based on the current saturation point.
 
 *K*:
 The time period in seconds it takes to increase the congestion window
