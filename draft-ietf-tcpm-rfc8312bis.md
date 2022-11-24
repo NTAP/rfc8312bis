@@ -623,7 +623,7 @@ it can achieve the same congestion window increment rate as Reno,
 which uses AIMD(1, 0.5).
 
 In the next two sections, CUBIC is not in the Reno-friendly region and
-uses the window increase function described in {{win-inc}}. Although the
+uses the window increase function described in {{win-inc}}. Although 
 *cwnd* is incremented in the same way using {{eq1}} for both concave and
 convex regions, they are discussed separately to analyze and understand
 the difference between the two regions.
