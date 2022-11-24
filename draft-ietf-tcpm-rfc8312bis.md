@@ -1147,7 +1147,8 @@ as mentioned in {{prin-beta}}.
 
 ## Performance with Misbehaving Nodes and Outside Attackers
 
-This is not considered in the current CUBIC design.
+CUBIC does not introduce new entities or signals, so its vulnerability to
+misbehaving nodes or attackers is unchanged from Reno.
 
 ## Behavior for Application-Limited Flows {#app-limited}
 
