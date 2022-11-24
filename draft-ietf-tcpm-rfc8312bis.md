@@ -335,20 +335,22 @@ different RTTs have similar congestion window sizes under steady state
 when they operate outside the Reno-friendly region.
 
 This notion of a linear throughput ratio is similar to that of Reno
-under high statistical multiplexing where packet loss is
-independent of individual flow rates. However, under low statistical
-multiplexing, the throughput ratio of Reno flows with different
-RTTs is quadratically proportional to the inverse of their RTT ratio
-{{XHR04}}.
+under an asynchronous loss model where packet loss is
+independent of individual flow rates and thus flows with different
+RTTs experience loss events at different times. However, under a synchronous
+loss model, flows with different RTTs experience loss events at the same
+time and thus have different packet loss rates. Under this model, the
+throughput ratio of Reno flows with different RTTs is quadratically
+proportional to the inverse of their RTT ratio {{XHR04}}.
 
 CUBIC always ensures a linear throughput ratio independent of the
-amount of statistical multiplexing. This is an improvement over Reno.
+loss environment. This is an improvement over Reno.
 While there is no consensus on particular throughput ratios for
 different RTT flows, over wired Internet paths, use of
 a linear throughput ratio seems more reasonable than equal throughputs
 (i.e., the same throughput for flows with different RTTs) or a
 higher-order throughput ratio (e.g., a quadratical throughput ratio of
-Reno under low statistical multiplexing environments).
+Reno under synchronous loss environments).
 
 ## Principle 4 for the CUBIC Decrease Factor {#prin-beta}
 
