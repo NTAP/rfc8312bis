@@ -335,12 +335,11 @@ different RTTs have similar congestion window sizes under steady state
 when they operate outside the Reno-friendly region.
 
 This notion of a linear throughput ratio is similar to that of Reno
-under an asynchronous loss model where packet loss is
-independent of individual flow rates and thus flows with different
-RTTs experience loss events at different times. However, under a synchronous
-loss model, flows with different RTTs experience loss events at the same
-time and thus have different packet loss rates. Under this model, the
-throughput ratio of Reno flows with different RTTs is quadratically
+under an asynchronous loss model where flows with different RTTs
+have the same packet loss rate but experience loss events at different
+times. However, under a synchronous loss model, where flows with different
+RTTs experience loss events at the same time but have different packet loss
+rates, the throughput ratio of Reno flows with different RTTs is quadratically
 proportional to the inverse of their RTT ratio {{XHR04}}.
 
 CUBIC always ensures a linear throughput ratio independent of the
