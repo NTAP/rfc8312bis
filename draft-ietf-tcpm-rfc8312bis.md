@@ -344,7 +344,7 @@ proportional to the inverse of their RTT ratio {{XHR04}}.
 
 CUBIC always ensures a linear throughput ratio independent of the
 loss environment. This is an improvement over Reno.
-While there is no consensus on the optimal throughput ratios for
+While there is no consensus on the optimal throughput ratio for
 different RTT flows, over wired Internet paths, use of
 a linear throughput ratio seems more reasonable than equal throughputs
 (i.e., the same throughput for flows with different RTTs) or a
