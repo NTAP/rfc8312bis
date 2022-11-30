@@ -349,7 +349,7 @@ different RTT flows, over wired Internet paths, use of
 a linear throughput ratio seems more reasonable than equal throughputs
 (i.e., the same throughput for flows with different RTTs) or a
 higher-order throughput ratio (e.g., a quadratical throughput ratio of
-Reno under synchronous loss environments).
+Reno in synchronous loss environments).
 
 ## Principle 4 for the CUBIC Decrease Factor {#prin-beta}
 
