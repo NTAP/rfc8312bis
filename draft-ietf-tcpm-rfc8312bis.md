@@ -110,6 +110,13 @@ informative:
     target: "https://raw.githubusercontent.com/bbriscoe/cubic-reno/main/creno_tr.pdf"
     seriesinfo: RFC Editor, please replace this URL with the permanent arXiv one
 
+  Average-Cubic-Window:
+    title: Proof of the average CUBIC window size
+    date: 2022-11-23
+    author:
+    - ins: L. Xu
+    target: "https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf"
+
   SXEZ19: DOI.10.1109/TNET.2021.3078161
   XHR04: DOI.10.1109/infcom.2004.1354672
   HLRX07: DOI.10.1016/j.comnet.2006.11.005
@@ -962,8 +969,8 @@ following the guidelines specified in {{!RFC5033}}.
 With a deterministic loss model where the number of packets between
 two successive packet losses is always *1/p*, CUBIC always operates
 with the concave window profile, which greatly simplifies the
-performance analysis of CUBIC. The average window size of CUBIC can be
-obtained by the following function:
+performance analysis of CUBIC. The average window size of CUBIC {{Average-Cubic-Window}}
+can be obtained by the following function:
 
 ~~~ math
 AVG\_W_{cubic} = \sqrt[4]{\frac{C * (3 + β_{cubic})}{4 * (1 - β_{cubic})}} * \frac{\sqrt[4]{RTT^3}}{\sqrt[4]{p^3}}
