@@ -545,7 +545,7 @@ CUBIC runs in three different regions:
 
 To summarize, CUBIC computes both W<sub>cubic</sub>(*t*) and
 *W<sub>est</sub>* (see {{Reno-friendly}}) on receiving a new ACK
-in congestion avoidance and choose the higher of the two values.
+in congestion avoidance and chooses the larger of the two values.
 
 The next sections describe the exact actions taken by CUBIC in each region.
 
