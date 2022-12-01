@@ -1502,7 +1502,8 @@ the window size in the first RTT (i.e., *n*=1 or equivalently *t*=0) is
 &
 =-C * RTT^3 * \sum_{n=1}^{\frac{K}{RTT}} n^3+W_{max} * \frac{K}{RTT} \\
 &
- \approx-C * RTT^3 * \frac{1}{4} *\left(\frac{K}{RTT}\right)^{4}+W_{max} * \frac{K}{RTT} \\
+\approx-C * RTT^3 * \frac{1}{4} *
+\left(\frac{K}{RTT}\right)^{4}+W_{max} * \frac{K}{RTT} \\
 &
 =-C * \frac{1}{4} * \frac{K^{4}}{RTT}+W_{max} * \frac{K}{RTT}
 \end{array}
@@ -1512,14 +1513,15 @@ the window size in the first RTT (i.e., *n*=1 or equivalently *t*=0) is
 After solving {{peq2}} and {{peq3}} for *K* and *W<sub>max</sub>*, we have
 
 ~~~ math
-K=\sqrt[4]{\frac{4 * \left(1-β_{cubic}\right)}{C * \left(3+β_{cubic}\right)} *  \frac{RTT}{p}}
+K=\sqrt[4]{\frac{4 * \left(1-β_{cubic}\right)}
+{C * \left(3+β_{cubic}\right)} *  \frac{RTT}{p}}
 ~~~
 {: #peq4 artwork-align="center" }
 
-The average CUBIC window size *AVG_W<sub>cubic</sub>* can be obtained by substituting *K* with {{peq4}} in {{peq1}}
+The average CUBIC window size *AVG_W<sub>cubic</sub>* can be obtained by
+substituting *K* with {{peq4}} in {{peq1}}
 
 ~~~ math
 AVG\_W_{cubic}=\frac{\frac{1}{p}}{\frac{K}{RTT}}=\sqrt[4]{\frac{C * \left(3+β_{cubic}\right)}{4 * \left(1-β_{cubic}\right)} * \frac{RTT^3}{p^3}}
 ~~~
 {: artwork-align="center" }
-
