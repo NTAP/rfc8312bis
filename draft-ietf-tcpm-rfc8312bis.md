@@ -611,13 +611,12 @@ in the Reno-friendly region and *cwnd* SHOULD be set to
 *W<sub>est</sub>* is set equal to *cwnd<sub>epoch</sub>* at the start
 of the congestion avoidance stage. After that, on every new ACK,
 *W<sub>est</sub>* is updated using {{eq4}}. Note that this equation
-is for a connection where Appropriate Byte Counting (ABC)
-is disabled. For a connection with ABC enabled, this equation SHOULD be
-adjusted by using the number of acknowledged bytes instead of acknowledged
-segments. Also note that this equation works for connections with
-enabled or disabled Delayed ACKs {{!RFC5681}}, as
-*segments_acked* will be different based on
-the segments actually acknowledged by a new ACK.
+uses *segments_acked* and *cwnd* is measured in segments. An implementation
+that measures *cwnd* in bytes should adjust the equation accordingly using
+number of acknowledged bytes and MSS. Also note that this equation works for
+connections with enabled or disabled Delayed ACKs {{!RFC5681}}, as
+*segments_acked* will be different based on the segments actually
+acknowledged by a new ACK.
 
 ~~~ math
 W_{est} = W_{est} + α_{cubic} * \frac{segments\_acked}{cwnd}
