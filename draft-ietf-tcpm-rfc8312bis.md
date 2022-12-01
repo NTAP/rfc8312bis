@@ -342,7 +342,7 @@ different RTTs have similar congestion window sizes under steady state
 when they operate outside the Reno-friendly region.
 
 This notion of a linear throughput ratio is similar to that of Reno
-under an asynchronous loss model where flows with different RTTs
+under an asynchronous loss model, where flows with different RTTs
 have the same packet loss rate but experience loss events at different
 times. However, under a synchronous loss model, where flows with different
 RTTs experience loss events at the same time but have different packet loss
