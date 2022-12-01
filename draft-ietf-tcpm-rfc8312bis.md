@@ -1522,6 +1522,9 @@ The average CUBIC window size *AVG_W<sub>cubic</sub>* can be obtained by
 substituting *K* with {{peq4}} in {{peq1}}
 
 ~~~ math
-AVG\_W_{cubic}=\frac{\frac{1}{p}}{\frac{K}{RTT}}=\sqrt[4]{\frac{C * \left(3+β_{cubic}\right)}{4 * \left(1-β_{cubic}\right)} * \frac{RTT^3}{p^3}}
+AVG\_W_{cubic}=
+\frac{\frac{1}{p}}{\frac{K}{RTT}}=
+\sqrt[4]{\frac{C * \left(3+β_{cubic}\right)}
+{4 * \left(1-β_{cubic}\right)} * \frac{RTT^3}{p^3}}
 ~~~
 {: artwork-align="center" }
