@@ -589,7 +589,7 @@ size *W<sub>est</sub>* in the Reno-friendly region with
 
 which achieves approximately the same average window size as Reno in
 many cases. The model used to calculate {{{α}{}}}*<sub>cubic</sub>* is not
-absolutely precise, but analysis and simulation {{AIMD-friendliness}},
+absolutely precise, but analysis and simulation in {{AIMD-friendliness}},
 as well as over a decade of experience with CUBIC in the public
 Internet, show that this approach produces acceptable levels of
 rate fairness between CUBIC and Reno flows. Also, no significant
@@ -961,7 +961,7 @@ following the guidelines specified in {{!RFC5033}}.
 With a deterministic loss model where the number of packets between
 two successive packet losses is always *1/p*, CUBIC always operates
 with the concave window profile, which greatly simplifies the
-performance analysis of CUBIC. The average window size of CUBIC {{proof-avg-window}}
+performance analysis of CUBIC. The average window size of CUBIC ({{proof-avg-window}})
 can be obtained by the following function:
 
 ~~~ math
