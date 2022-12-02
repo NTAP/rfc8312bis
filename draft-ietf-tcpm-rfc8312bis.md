@@ -1239,6 +1239,11 @@ These individuals suggested improvements to this document:
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
 
+## Since draft-ietf-tcpm-rfc8312bis-13
+
+- Add contents of [](https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf) to
+  {{proof-avg-window}}.
+
 ## Since draft-ietf-tcpm-rfc8312bis-12
 
 - Fix plaintext version of {{eqssthresh}}.
@@ -1470,3 +1475,75 @@ differences between the original paper and {{?RFC8312}}.
 
 - Its AIMD-friendly window was *W<sub>tcp</sub>* while {{?RFC8312}} used
   *W<sub>est</sub>*.
+
+# Proof of the Average CUBIC Window Size {#proof-avg-window}
+
+This appendix contains a proof for the average CUBIC window
+size *AVG_W<sub>cubic</sub>* in {{eq5}}.
+
+We find *AVG_W<sub>cubic</sub>* under a deterministic loss model, where the
+number of packets between two successive packet losses is 1/*p*. With this
+model, CUBIC always operates with the concave window profile and the time period
+between two successive packet losses is *K*.
+
+The average window size *AVG_W<sub>cubic</sub>* is defined as follows, where the
+numerator 1/*p* is the total number of packets between two successive packet
+losses, and the denominator *K*/*RTT* is the total number of RTTs between two
+successive packet losses.
+
+~~~ math
+AVG\_W_{cubic}=\frac{\frac{1}{p}}{\frac{K}{RTT}}
+~~~
+{: #peq1 artwork-align="center" }
+
+Below, we find *K* as a function of CUBIC parameters {{{β}{}}}*<sub>cubic</sub>*
+and *C*, and network parameters *p* and *RTT*. According to the definition of
+*K* in {{eq2}}, we have
+
+~~~ math
+K=\sqrt[3]{\frac{W_{max} - W_{max} * β_{cubic}}{C}}
+~~~
+{: #peq2 artwork-align="center" }
+
+The total number of packets between two successive packet losses can also be
+obtained as follows using the window increase function in {{eq1}}. Specifically,
+the window size in the first RTT (i.e., *n*=1 or equivalently *t*=0) is
+*C*(-*K*)<sup>3</sup>+*W<sub>max</sub>* and the window size in the last RTT
+(i.e., *n*=*K*/*RTT* or equivalently *t*=*K*-*RTT*) is
+*C*(-*RTT*)<sup>3</sup>+*W<sub>max</sub>*.
+
+~~~ math
+\begin{array}{ll}
+\frac{1}{p} &
+=\sum_{n=1}^{\frac{K}{RTT}}\left(C((n-1) RTT-K)^3+W_{max}\right) \\
+&
+=\sum_{n=1}^{\frac{K}{RTT}}\left(C * RTT^3(-n)^3+W_{max}\right) \\
+&
+=-C * RTT^3 * \sum_{n=1}^{\frac{K}{RTT}} n^3+W_{max} * \frac{K}{RTT} \\
+&
+\approx-C * RTT^3 * \frac{1}{4} *
+\left(\frac{K}{RTT}\right)^{4}+W_{max} * \frac{K}{RTT} \\
+&
+=-C * \frac{1}{4} * \frac{K^{4}}{RTT}+W_{max} * \frac{K}{RTT}
+\end{array}
+~~~
+{: #peq3 artwork-align="center" }
+
+After solving {{peq2}} and {{peq3}} for *K* and *W<sub>max</sub>*, we have
+
+~~~ math
+K=\sqrt[4]{\frac{4 * \left(1-β_{cubic}\right)}
+{C * \left(3+β_{cubic}\right)} *  \frac{RTT}{p}}
+~~~
+{: #peq4 artwork-align="center" }
+
+The average CUBIC window size *AVG_W<sub>cubic</sub>* can be obtained by
+substituting *K* with {{peq4}} in {{peq1}}
+
+~~~ math
+AVG\_W_{cubic}=
+\frac{\frac{1}{p}}{\frac{K}{RTT}}=
+\sqrt[4]{\frac{C * \left(3+β_{cubic}\right)}
+{4 * \left(1-β_{cubic}\right)} * \frac{RTT^3}{p^3}}
+~~~
+{: artwork-align="center" }
