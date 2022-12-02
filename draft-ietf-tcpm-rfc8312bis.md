@@ -1207,6 +1207,7 @@ These individuals suggested improvements to this document:
 <li><t><contact fullname="Juhamatti Kuusisaari"/></t></li>
 <li><t><contact fullname="Junho Choi"/></t></li>
 <li><t><contact fullname="Markku Kojo"/></t></li>
+<li><t><contact fullname="Martin Duke"/></t></li>
 <li><t><contact fullname="Martin Thomson"/></t></li>
 <li><t><contact fullname="Matt Mathis"/></t></li>
 <li><t><contact fullname="Matt Olson"/></t></li>
@@ -1236,6 +1237,12 @@ These individuals suggested improvements to this document:
 
 - Add contents of [](https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf) to
   {{proof-avg-window}}.
+
+- Multiple comments from Martin, define synchronized/asynchronized
+  loss model, clean up 3465 reference, clarficiation for when Cubic
+  is not in Reno-friendly region, referring to proof of avg Cubic window,
+  better text for misbehaving nodes and fix typo in *cwnd<sub>epoch</sub>*.
+  ([#158](https://github.com/NTAP/rfc8312bis/pull/158))
 
 ## Since draft-ietf-tcpm-rfc8312bis-12
 
