@@ -961,7 +961,7 @@ following the guidelines specified in {{!RFC5033}}.
 With a deterministic loss model where the number of packets between
 two successive packet losses is always *1/p*, CUBIC always operates
 with the concave window profile, which greatly simplifies the
-performance analysis of CUBIC. The average window size of CUBIC ({{proof-avg-window}})
+performance analysis of CUBIC. The average window size of CUBIC (see {{proof-avg-window}})
 can be obtained by the following function:
 
 ~~~ math
