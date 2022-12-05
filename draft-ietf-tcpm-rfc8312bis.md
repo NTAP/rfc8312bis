@@ -335,20 +335,21 @@ different RTTs have similar congestion window sizes under steady state
 when they operate outside the Reno-friendly region.
 
 This notion of a linear throughput ratio is similar to that of Reno
-under high statistical multiplexing where packet loss is
-independent of individual flow rates. However, under low statistical
-multiplexing, the throughput ratio of Reno flows with different
-RTTs is quadratically proportional to the inverse of their RTT ratio
-{{XHR04}}.
+under an asynchronous loss model, where flows with different RTTs
+have the same packet loss rate but experience loss events at different
+times. However, under a synchronous loss model, where flows with different
+RTTs experience loss events at the same time but have different packet loss
+rates, the throughput ratio of Reno flows with different RTTs is quadratically
+proportional to the inverse of their RTT ratio {{XHR04}}.
 
 CUBIC always ensures a linear throughput ratio independent of the
-amount of statistical multiplexing. This is an improvement over Reno.
-While there is no consensus on particular throughput ratios for
+loss environment. This is an improvement over Reno.
+While there is no consensus on the optimal throughput ratio for
 different RTT flows, over wired Internet paths, use of
 a linear throughput ratio seems more reasonable than equal throughputs
 (i.e., the same throughput for flows with different RTTs) or a
 higher-order throughput ratio (e.g., a quadratical throughput ratio of
-Reno under low statistical multiplexing environments).
+Reno in synchronous loss environments).
 
 ## Principle 4 for the CUBIC Decrease Factor {#prin-beta}
 
@@ -426,9 +427,10 @@ just before *cwnd* was reduced in the last congestion event.
 
 *W<sub>max</sub>*:
 Size of *cwnd* in segments just before *cwnd* was reduced in the last
-congestion event when fast convergence is disabled. However, if fast
-convergence is enabled, the size may be further reduced based on the
-current saturation point.
+congestion event when fast convergence is disabled (same as
+*cwnd<sub>prior</sub>* on a congestion event). However, if fast
+convergence is enabled, *W<sub>max</sub>* may be further reduced
+based on the current saturation point.
 
 *K*:
 The time period in seconds it takes to increase the congestion window
@@ -499,7 +501,7 @@ beginning of the current congestion avoidance stage to
 calculated using the following equation:
 
 ~~~ math
-K = \sqrt[3]{\frac{W_{max} - cwnd_{start}}{C}}
+K = \sqrt[3]{\frac{W_{max} - cwnd_{epoch}}{C}}
 ~~~
 {: #eq2 artwork-align="center" }
 
@@ -540,6 +542,10 @@ CUBIC runs in three different regions:
 
 3. The convex region, if CUBIC is not in the Reno-friendly region and
    *cwnd* is greater than *W<sub>max</sub>*.
+
+To summarize, CUBIC computes both W<sub>cubic</sub>(*t*) and
+*W<sub>est</sub>* (see {{Reno-friendly}}) on receiving a new ACK
+in congestion avoidance and chooses the larger of the two values.
 
 The next sections describe the exact actions taken by CUBIC in each region.
 
@@ -583,7 +589,7 @@ size *W<sub>est</sub>* in the Reno-friendly region with
 
 which achieves approximately the same average window size as Reno in
 many cases. The model used to calculate {{{α}{}}}*<sub>cubic</sub>* is not
-absolutely precise, but analysis and simulation {{AIMD-friendliness}},
+absolutely precise, but analysis and simulation in {{AIMD-friendliness}},
 as well as over a decade of experience with CUBIC in the public
 Internet, show that this approach produces acceptable levels of
 rate fairness between CUBIC and Reno flows. Also, no significant
@@ -598,13 +604,12 @@ in the Reno-friendly region and *cwnd* SHOULD be set to
 *W<sub>est</sub>* is set equal to *cwnd<sub>epoch</sub>* at the start
 of the congestion avoidance stage. After that, on every new ACK,
 *W<sub>est</sub>* is updated using {{eq4}}. Note that this equation
-is for a connection where Appropriate Byte Counting (ABC) {{?RFC3465}}
-is disabled. For a connection with ABC enabled, this equation SHOULD be
-adjusted by using the number of acknowledged bytes instead of acknowledged
-segments. Also note that this equation works for connections with
-enabled or disabled Delayed ACKs {{!RFC5681}}, as
-*segments_acked* will be different based on
-the segments actually acknowledged by a new ACK.
+uses *segments_acked* and *cwnd* is measured in segments. An implementation
+that measures *cwnd* in bytes should adjust the equation accordingly using
+number of acknowledged bytes and MSS. Also note that this equation works for
+connections with enabled or disabled Delayed ACKs {{!RFC5681}}, as
+*segments_acked* will be different based on the segments actually
+acknowledged by a new ACK.
 
 ~~~ math
 W_{est} = W_{est} + α_{cubic} * \frac{segments\_acked}{cwnd}
@@ -616,6 +621,12 @@ most recently setting *ssthresh*, that is, *W<sub>est</sub>* >= *cwnd<sub>prior<
 the sender SHOULD set {{{α}{}}}*<sub>cubic</sub>* to 1 to ensure that
 it can achieve the same congestion window increment rate as Reno,
 which uses AIMD(1, 0.5).
+
+The next two sections assume that CUBIC is not in the Reno-friendly region and
+uses the window increase function described in {{win-inc}}. Although
+*cwnd* is incremented in the same way for both concave and convex regions,
+they are discussed separately to analyze and understand the difference
+between the two regions.
 
 ## Concave Region
 
@@ -950,8 +961,8 @@ following the guidelines specified in {{!RFC5033}}.
 With a deterministic loss model where the number of packets between
 two successive packet losses is always *1/p*, CUBIC always operates
 with the concave window profile, which greatly simplifies the
-performance analysis of CUBIC. The average window size of CUBIC can be
-obtained by the following function:
+performance analysis of CUBIC. The average window size of CUBIC (see {{proof-avg-window}})
+can be obtained by the following function:
 
 ~~~ math
 AVG\_W_{cubic} = \sqrt[4]{\frac{C * (3 + β_{cubic})}{4 * (1 - β_{cubic})}} * \frac{\sqrt[4]{RTT^3}}{\sqrt[4]{p^3}}
@@ -1134,7 +1145,8 @@ as mentioned in {{prin-beta}}.
 
 ## Performance with Misbehaving Nodes and Outside Attackers
 
-This is not considered in the current CUBIC design.
+CUBIC does not introduce new entities or signals, so its vulnerability to
+misbehaving nodes or attackers is unchanged from Reno.
 
 ## Behavior for Application-Limited Flows {#app-limited}
 
@@ -1195,6 +1207,7 @@ These individuals suggested improvements to this document:
 <li><t><contact fullname="Juhamatti Kuusisaari"/></t></li>
 <li><t><contact fullname="Junho Choi"/></t></li>
 <li><t><contact fullname="Markku Kojo"/></t></li>
+<li><t><contact fullname="Martin Duke"/></t></li>
 <li><t><contact fullname="Martin Thomson"/></t></li>
 <li><t><contact fullname="Matt Mathis"/></t></li>
 <li><t><contact fullname="Matt Olson"/></t></li>
@@ -1224,6 +1237,12 @@ These individuals suggested improvements to this document:
 
 - Add contents of [](https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf) to
   {{proof-avg-window}}.
+
+- Multiple comments from Martin, define synchronized/asynchronized
+  loss model, clean up 3465 reference, clarficiation for when Cubic
+  is not in Reno-friendly region, referring to proof of avg Cubic window,
+  better text for misbehaving nodes and fix typo in *cwnd<sub>epoch</sub>*.
+  ([#158](https://github.com/NTAP/rfc8312bis/pull/158))
 
 ## Since draft-ietf-tcpm-rfc8312bis-12
 
