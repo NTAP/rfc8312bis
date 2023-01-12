@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2022-12-25T00:05:34.032135+00:00",
+  "timestamp": "2023-01-12T00:05:29.973399+00:00",
   "repo": "NTAP/rfc8312bis",
   "labels": [
     {
@@ -5216,9 +5216,31 @@
       "labels": [],
       "body": "The text rendering in [Appendix C](https://ntap.github.io/rfc8312bis/draft-ietf-tcpm-rfc8312bis.html#appendix-C) is a bit ambiguous:\r\n\r\n```\r\n                                           1\r\n                                           -\r\n                                           p\r\n                             AVG_W      = ---\r\n                                  cubic    K\r\n                                          ---\r\n                                          RTT\r\n```\r\n\r\nThis might be fixed by expressing this as $\\frac{RTT}{pK}$ or - perhaps cleaner - defining a variable for $\\frac{K}{RTT}$ that can be substituted in with $\\frac{1}{pT_{I}}$ or something like that.  The $\\frac{K}{RTT}$ expression is used a lot in subsequent formulae, so it might help with comprehension there.",
       "createdAt": "2022-12-23T03:26:53Z",
-      "updatedAt": "2022-12-23T03:27:29Z",
+      "updatedAt": "2023-01-11T19:02:19Z",
       "closedAt": null,
-      "comments": []
+      "comments": [
+        {
+          "author": "larseggert",
+          "authorAssociation": "MEMBER",
+          "body": "Authors, do we want to change that?",
+          "createdAt": "2023-01-11T15:16:07Z",
+          "updatedAt": "2023-01-11T15:16:07Z"
+        },
+        {
+          "author": "lisongxu",
+          "authorAssociation": "COLLABORATOR",
+          "body": "Instead of defining new variables, how about rewriting the formula as follows?\r\n\r\n                                             1\r\n                                            ---\r\n                                             p\r\n                             AVG_W      = --------\r\n                                  cubic      K\r\n                                            ---\r\n                                            RTT\r\n\r\n\r\n\r\n \r\n\r\n",
+          "createdAt": "2023-01-11T18:36:23Z",
+          "updatedAt": "2023-01-11T18:36:23Z"
+        },
+        {
+          "author": "larseggert",
+          "authorAssociation": "MEMBER",
+          "body": "It's generate automatically, so we can't tweak the ASCII.",
+          "createdAt": "2023-01-11T19:02:19Z",
+          "updatedAt": "2023-01-11T19:02:19Z"
+        }
+      ]
     }
   ],
   "pulls": [
