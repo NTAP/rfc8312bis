@@ -1192,7 +1192,6 @@ or to convince it that there is no congestion when congestion does exist, and us
 the CUBIC implementation as an attack vector against other hosts. These attacks
 are not new to CUBIC and are inherently part of any transport protocol like TCP.
 
-
 # IANA Considerations
 
 This document does not require any IANA actions.
