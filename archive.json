@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-01-12T00:05:29.973399+00:00",
+  "timestamp": "2023-01-15T00:05:46.355289+00:00",
   "repo": "NTAP/rfc8312bis",
   "labels": [
     {
@@ -5216,7 +5216,7 @@
       "labels": [],
       "body": "The text rendering in [Appendix C](https://ntap.github.io/rfc8312bis/draft-ietf-tcpm-rfc8312bis.html#appendix-C) is a bit ambiguous:\r\n\r\n```\r\n                                           1\r\n                                           -\r\n                                           p\r\n                             AVG_W      = ---\r\n                                  cubic    K\r\n                                          ---\r\n                                          RTT\r\n```\r\n\r\nThis might be fixed by expressing this as $\\frac{RTT}{pK}$ or - perhaps cleaner - defining a variable for $\\frac{K}{RTT}$ that can be substituted in with $\\frac{1}{pT_{I}}$ or something like that.  The $\\frac{K}{RTT}$ expression is used a lot in subsequent formulae, so it might help with comprehension there.",
       "createdAt": "2022-12-23T03:26:53Z",
-      "updatedAt": "2023-01-11T19:02:19Z",
+      "updatedAt": "2023-01-13T02:44:13Z",
       "closedAt": null,
       "comments": [
         {
@@ -5239,6 +5239,13 @@
           "body": "It's generate automatically, so we can't tweak the ASCII.",
           "createdAt": "2023-01-11T19:02:19Z",
           "updatedAt": "2023-01-11T19:02:19Z"
+        },
+        {
+          "author": "goelvidhi",
+          "authorAssociation": "COLLABORATOR",
+          "body": "I am fine with the way it is.",
+          "createdAt": "2023-01-13T02:44:13Z",
+          "updatedAt": "2023-01-13T02:44:13Z"
         }
       ]
     }
@@ -16677,6 +16684,162 @@
           "createdAt": "2022-12-01T17:30:23Z",
           "updatedAt": "2022-12-01T17:30:23Z",
           "comments": []
+        }
+      ]
+    },
+    {
+      "number": 162,
+      "id": "PR_kwDOEpK-U85HS5PD",
+      "title": "address Yoav's review",
+      "url": "https://github.com/NTAP/rfc8312bis/pull/162",
+      "state": "OPEN",
+      "author": "goelvidhi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-01-13T03:05:59Z",
+      "updatedAt": "2023-01-13T07:27:42Z",
+      "baseRepository": "NTAP/rfc8312bis",
+      "baseRefName": "main",
+      "baseRefOid": "730bff553bd17a92dad0c110b512e66988feb0b6",
+      "headRepository": "goelvidhi/rfc8312bis",
+      "headRefName": "yoav_review",
+      "headRefOid": "8d6a74ece3e20c0c59f584970eaf81224a429611",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEpK-U85KUdn0",
+          "commit": {
+            "abbreviatedOid": "8d6a74e"
+          },
+          "author": "lisongxu",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-01-13T04:06:58Z",
+          "updatedAt": "2023-01-13T04:06:58Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOEpK-U85KVD1m",
+          "commit": {
+            "abbreviatedOid": "8d6a74e"
+          },
+          "author": "larseggert",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "One nit, otherwise LGTM.",
+          "createdAt": "2023-01-13T07:27:04Z",
+          "updatedAt": "2023-01-13T07:27:42Z",
+          "comments": [
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\nand inherits the general security concerns described in {{!RFC5681}}.\r\n```",
+              "createdAt": "2023-01-13T07:27:04Z",
+              "updatedAt": "2023-01-13T07:27:42Z"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "number": 163,
+      "id": "PR_kwDOEpK-U85HTB7H",
+      "title": "address spencer's comments",
+      "url": "https://github.com/NTAP/rfc8312bis/pull/163",
+      "state": "OPEN",
+      "author": "goelvidhi",
+      "authorAssociation": "COLLABORATOR",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-01-13T04:09:33Z",
+      "updatedAt": "2023-01-13T07:35:37Z",
+      "baseRepository": "NTAP/rfc8312bis",
+      "baseRefName": "main",
+      "baseRefOid": "730bff553bd17a92dad0c110b512e66988feb0b6",
+      "headRepository": "goelvidhi/rfc8312bis",
+      "headRefName": "Spencer_review",
+      "headRefOid": "000c2494b639e520d5df072dba9a6c6b2da1cf6d",
+      "closedAt": null,
+      "mergedAt": null,
+      "mergedBy": null,
+      "mergeCommit": null,
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEpK-U85KUkpN",
+          "commit": {
+            "abbreviatedOid": "000c249"
+          },
+          "author": "lisongxu",
+          "authorAssociation": "COLLABORATOR",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-01-13T05:05:36Z",
+          "updatedAt": "2023-01-13T05:05:36Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOEpK-U85KVFGr",
+          "commit": {
+            "abbreviatedOid": "000c249"
+          },
+          "author": "larseggert",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-01-13T07:31:53Z",
+          "updatedAt": "2023-01-13T07:35:37Z",
+          "comments": [
+            {
+              "originalPosition": 4,
+              "body": "```suggestion\r\nSpecifically, CUBIC may increase the congestion window more aggressively than\r\n```",
+              "createdAt": "2023-01-13T07:31:53Z",
+              "updatedAt": "2023-01-13T07:35:37Z"
+            },
+            {
+              "originalPosition": 6,
+              "body": "```suggestion\r\nduring congestion avoidance, the sender must not increment cwnd by more than\r\n```",
+              "createdAt": "2023-01-13T07:32:09Z",
+              "updatedAt": "2023-01-13T07:35:38Z"
+            },
+            {
+              "originalPosition": 7,
+              "body": "```suggestion\r\nSMSS bytes once per RTT, whereas CUBIC may increase cwnd much more\r\n```",
+              "createdAt": "2023-01-13T07:32:23Z",
+              "updatedAt": "2023-01-13T07:35:38Z"
+            },
+            {
+              "originalPosition": 8,
+              "body": "```suggestion\r\naggressively. Additionally, CUBIC recommends the HyStart++\r\n```",
+              "createdAt": "2023-01-13T07:32:39Z",
+              "updatedAt": "2023-01-13T07:35:38Z"
+            },
+            {
+              "originalPosition": 9,
+              "body": "```suggestion\r\nalgorithm {{!I-D.ietf-tcpm-hystartplusplus}} for slow start, which allows for cwnd increases of more than SMSS\r\n```",
+              "createdAt": "2023-01-13T07:33:55Z",
+              "updatedAt": "2023-01-13T07:35:38Z"
+            },
+            {
+              "originalPosition": 10,
+              "body": "```suggestion\r\nbytes for incoming acknowledgments during slow start, while this behavior\r\n```",
+              "createdAt": "2023-01-13T07:34:07Z",
+              "updatedAt": "2023-01-13T07:35:38Z"
+            },
+            {
+              "originalPosition": 25,
+              "body": "Didn't we have a long discussion earlier that resulted in this text? Would not like to reopen that can of worms.",
+              "createdAt": "2023-01-13T07:34:54Z",
+              "updatedAt": "2023-01-13T07:35:38Z"
+            }
+          ]
         }
       ]
     }
