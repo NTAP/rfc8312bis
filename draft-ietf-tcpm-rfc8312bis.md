@@ -1184,7 +1184,7 @@ changes to routers and does not require any assistance from routers.
 # Security Considerations
 
 CUBIC makes no changes to the underlying security of a transport protocol
-and inherits general security concerns described in {{!RFC5681}}.
+and inherits the general security concerns described in {{!RFC5681}}.
 Specifically, changing the window computation on the sender may
 allow an attacker, through dropping or injecting ACKs (as described in
 {{!RFC5681}}), to either force the CUBIC implementation to reduce its bandwidth,
