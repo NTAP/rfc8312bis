@@ -1183,8 +1183,14 @@ changes to routers and does not require any assistance from routers.
 
 # Security Considerations
 
-CUBIC makes no changes to the underlying security of TCP. More
-information about TCP security concerns can be found in {{!RFC5681}}.
+CUBIC makes no changes to the underlying security of a transport protocol
+and inherits the general security concerns described in {{!RFC5681}}.
+Specifically, changing the window computation on the sender may
+allow an attacker, through dropping or injecting ACKs (as described in
+{{!RFC5681}}), to either force the CUBIC implementation to reduce its bandwidth,
+or to convince it that there is no congestion when congestion does exist, and use
+the CUBIC implementation as an attack vector against other hosts. These attacks
+are not new to CUBIC and are inherently part of any transport protocol like TCP.
 
 # IANA Considerations
 
@@ -1232,6 +1238,10 @@ These individuals suggested improvements to this document:
 
 <!-- For future PRs, please include a bullet below that summarizes the change
      and link the issue number to the GitHub issue page. -->
+
+## Since draft-ietf-tcpm-rfc8312bis-14
+
+- Specify how security considerations of TCP applies to CUBIC.
 
 ## Since draft-ietf-tcpm-rfc8312bis-13
 
