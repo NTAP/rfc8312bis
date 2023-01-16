@@ -27,14 +27,14 @@ for CUBIC's occasionally more aggressive sending behavior.
 <meta content="draft-ietf-tcpm-rfc8312bis-latest" name="ietf.draft">
 <!-- Generator version information:
   xml2rfc 3.15.3
-    Python 3.10.8
+    Python 3.10.9
     appdirs 1.4.4
     ConfigArgParse 1.5.3
     google-i18n-address 2.5.2
     html5lib 1.1
     intervaltree 3.1.0
     Jinja2 3.1.2
-    lxml 4.9.1
+    lxml 4.9.2
     MarkupSafe 2.1.1
     pycountry 22.3.5
     PyYAML 6.0
@@ -408,7 +408,7 @@ dl > dd > dl {
   margin-top: 0.5em;
   margin-bottom: 0;
 }
-dl .break {
+:is(dd, span).break {
   display: none;
 }
 
@@ -428,7 +428,7 @@ a[href]:hover {
 a[href].selfRef:hover {
   background-color: var(--highlight-color);
 }
-a.xref {
+a.xref:is(.cite, .auto), :is(#status-of-memo, #copyright) a {
   white-space: nowrap;
 }
 
@@ -440,7 +440,9 @@ tt, code, pre {
 tt, code {
   /* changing the font for inline elements leads to different ascender
      and descender heights; as we want to retain baseline alignment,
-     remove leading to avoid altering the final height of lines */
+     remove leading to avoid altering the final height of lines
+     note: this fails if these blocks take an entire line,
+     a different solution would be great */
   line-height: 0;
 }
 :is(h1, h2, h3, h4, h5, h6) :is(tt, code) {
@@ -1037,7 +1039,7 @@ svg :is([stroke="white"], [stroke^="#fff"]) {
 svg :is([fill="black"], [fill^="#000"], :not([fill])) {
   fill: var(--text-color);
 }
-svg :is([stroke="fill"], [fill^="#fff"]) {
+svg :is([fill="white"], [fill^="#fff"]) {
   fill: var(--background-color);
 }
 </style>
@@ -1048,11 +1050,11 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <thead><tr>
 <td class="left">Internet-Draft</td>
 <td class="center">TCP CUBIC</td>
-<td class="right">December 2022</td>
+<td class="right">January 2023</td>
 </tr></thead>
 <tfoot><tr>
 <td class="left">Xu, et al.</td>
-<td class="center">Expires 8 June 2023</td>
+<td class="center">Expires 20 July 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1071,12 +1073,12 @@ svg :is([stroke="fill"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc5681" class="eref">5681</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2022-12-05" class="published">5 December 2022</time>
+<time datetime="2023-01-16" class="published">16 January 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-06-08">8 June 2023</time></dd>
+<dd class="expires"><time datetime="2023-07-20">20 July 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1166,7 +1168,7 @@ do this.<a href="#section-note.2-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 8 June 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 20 July 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1175,7 +1177,7 @@ do this.<a href="#section-note.2-3" class="pilcrow">¶</a></p>
 <a href="#name-copyright-notice" class="section-name selfRef">Copyright Notice</a>
         </h2>
 <p id="section-boilerplate.2-1">
-            Copyright (c) 2022 IETF Trust and the persons identified as the
+            Copyright (c) 2023 IETF Trust and the persons identified as the
             document authors. All rights reserved.<a href="#section-boilerplate.2-1" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.2-2">
             This document is subject to BCP 78 and the IETF Trust's Legal
@@ -1328,64 +1330,67 @@ do this.<a href="#section-note.2-3" class="pilcrow">¶</a></p>
             <p id="section-toc.1-1.10.1"><a href="#appendix-B" class="auto internal xref">Appendix B</a>.  <a href="#name-evolution-of-cubic" class="internal xref">Evolution of CUBIC</a></p>
 <ul class="compact toc ulBare ulEmpty">
 <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.1">
-                <p id="section-toc.1-1.10.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-since-draft-ietf-tcpm-rfc83" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-13</a></p>
+                <p id="section-toc.1-1.10.2.1.1"><a href="#appendix-B.1" class="auto internal xref">B.1</a>.  <a href="#name-since-draft-ietf-tcpm-rfc83" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-14</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.2">
-                <p id="section-toc.1-1.10.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-since-draft-ietf-tcpm-rfc831" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-12</a></p>
+                <p id="section-toc.1-1.10.2.2.1"><a href="#appendix-B.2" class="auto internal xref">B.2</a>.  <a href="#name-since-draft-ietf-tcpm-rfc831" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-13</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.3">
-                <p id="section-toc.1-1.10.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-11</a></p>
+                <p id="section-toc.1-1.10.2.3.1"><a href="#appendix-B.3" class="auto internal xref">B.3</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-12</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.4">
-                <p id="section-toc.1-1.10.2.4.1"><a href="#appendix-B.4" class="auto internal xref">B.4</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312b" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-10</a></p>
+                <p id="section-toc.1-1.10.2.4.1"><a href="#appendix-B.4" class="auto internal xref">B.4</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312b" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-11</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.5">
-                <p id="section-toc.1-1.10.2.5.1"><a href="#appendix-B.5" class="auto internal xref">B.5</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312bi" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-09</a></p>
+                <p id="section-toc.1-1.10.2.5.1"><a href="#appendix-B.5" class="auto internal xref">B.5</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312bi" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-10</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.6">
-                <p id="section-toc.1-1.10.2.6.1"><a href="#appendix-B.6" class="auto internal xref">B.6</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312bis" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-08</a></p>
+                <p id="section-toc.1-1.10.2.6.1"><a href="#appendix-B.6" class="auto internal xref">B.6</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312bis" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-09</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.7">
-                <p id="section-toc.1-1.10.2.7.1"><a href="#appendix-B.7" class="auto internal xref">B.7</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312bis-" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-07</a></p>
+                <p id="section-toc.1-1.10.2.7.1"><a href="#appendix-B.7" class="auto internal xref">B.7</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312bis-" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-08</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.8">
-                <p id="section-toc.1-1.10.2.8.1"><a href="#appendix-B.8" class="auto internal xref">B.8</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312bis-0" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-06</a></p>
+                <p id="section-toc.1-1.10.2.8.1"><a href="#appendix-B.8" class="auto internal xref">B.8</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312bis-0" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-07</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.9">
-                <p id="section-toc.1-1.10.2.9.1"><a href="#appendix-B.9" class="auto internal xref">B.9</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312bis-05" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-05</a></p>
+                <p id="section-toc.1-1.10.2.9.1"><a href="#appendix-B.9" class="auto internal xref">B.9</a>.  <a href="#name-since-draft-ietf-tcpm-rfc8312bis-06" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-06</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.10">
-                <p id="section-toc.1-1.10.2.10.1"><a href="#appendix-B.10" class="auto internal xref">B.10</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-04" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-04</a></p>
+                <p id="section-toc.1-1.10.2.10.1"><a href="#appendix-B.10" class="auto internal xref">B.10</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-05" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-05</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.11">
-                <p id="section-toc.1-1.10.2.11.1"><a href="#appendix-B.11" class="auto internal xref">B.11</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-03" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-03</a></p>
+                <p id="section-toc.1-1.10.2.11.1"><a href="#appendix-B.11" class="auto internal xref">B.11</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-04" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-04</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.12">
-                <p id="section-toc.1-1.10.2.12.1"><a href="#appendix-B.12" class="auto internal xref">B.12</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-02" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-02</a></p>
+                <p id="section-toc.1-1.10.2.12.1"><a href="#appendix-B.12" class="auto internal xref">B.12</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-03" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-03</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.13">
-                <p id="section-toc.1-1.10.2.13.1"><a href="#appendix-B.13" class="auto internal xref">B.13</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-01" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-01</a></p>
+                <p id="section-toc.1-1.10.2.13.1"><a href="#appendix-B.13" class="auto internal xref">B.13</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-02" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-02</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.14">
-                <p id="section-toc.1-1.10.2.14.1"><a href="#appendix-B.14" class="auto internal xref">B.14</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-00" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-00</a></p>
+                <p id="section-toc.1-1.10.2.14.1"><a href="#appendix-B.14" class="auto internal xref">B.14</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-01" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-01</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.15">
-                <p id="section-toc.1-1.10.2.15.1"><a href="#appendix-B.15" class="auto internal xref">B.15</a>. <a href="#name-since-draft-eggert-tcpm-rfc" class="internal xref">Since draft-eggert-tcpm-rfc8312bis-03</a></p>
+                <p id="section-toc.1-1.10.2.15.1"><a href="#appendix-B.15" class="auto internal xref">B.15</a>. <a href="#name-since-draft-ietf-tcpm-rfc8312bis-00" class="internal xref">Since draft-ietf-tcpm-rfc8312bis-00</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.16">
-                <p id="section-toc.1-1.10.2.16.1"><a href="#appendix-B.16" class="auto internal xref">B.16</a>. <a href="#name-since-draft-eggert-tcpm-rfc8" class="internal xref">Since draft-eggert-tcpm-rfc8312bis-02</a></p>
+                <p id="section-toc.1-1.10.2.16.1"><a href="#appendix-B.16" class="auto internal xref">B.16</a>. <a href="#name-since-draft-eggert-tcpm-rfc" class="internal xref">Since draft-eggert-tcpm-rfc8312bis-03</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.17">
-                <p id="section-toc.1-1.10.2.17.1"><a href="#appendix-B.17" class="auto internal xref">B.17</a>. <a href="#name-since-draft-eggert-tcpm-rfc83" class="internal xref">Since draft-eggert-tcpm-rfc8312bis-01</a></p>
+                <p id="section-toc.1-1.10.2.17.1"><a href="#appendix-B.17" class="auto internal xref">B.17</a>. <a href="#name-since-draft-eggert-tcpm-rfc8" class="internal xref">Since draft-eggert-tcpm-rfc8312bis-02</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.18">
-                <p id="section-toc.1-1.10.2.18.1"><a href="#appendix-B.18" class="auto internal xref">B.18</a>. <a href="#name-since-draft-eggert-tcpm-rfc831" class="internal xref">Since draft-eggert-tcpm-rfc8312bis-00</a></p>
+                <p id="section-toc.1-1.10.2.18.1"><a href="#appendix-B.18" class="auto internal xref">B.18</a>. <a href="#name-since-draft-eggert-tcpm-rfc83" class="internal xref">Since draft-eggert-tcpm-rfc8312bis-01</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.19">
-                <p id="section-toc.1-1.10.2.19.1"><a href="#appendix-B.19" class="auto internal xref">B.19</a>. <a href="#name-since-rfc8312" class="internal xref">Since RFC8312</a></p>
+                <p id="section-toc.1-1.10.2.19.1"><a href="#appendix-B.19" class="auto internal xref">B.19</a>. <a href="#name-since-draft-eggert-tcpm-rfc831" class="internal xref">Since draft-eggert-tcpm-rfc8312bis-00</a></p>
 </li>
               <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.20">
-                <p id="section-toc.1-1.10.2.20.1"><a href="#appendix-B.20" class="auto internal xref">B.20</a>. <a href="#name-since-the-original-paper" class="internal xref">Since the Original Paper</a></p>
+                <p id="section-toc.1-1.10.2.20.1"><a href="#appendix-B.20" class="auto internal xref">B.20</a>. <a href="#name-since-rfc8312" class="internal xref">Since RFC8312</a></p>
+</li>
+              <li class="compact toc ulBare ulEmpty" id="section-toc.1-1.10.2.21">
+                <p id="section-toc.1-1.10.2.21.1"><a href="#appendix-B.21" class="auto internal xref">B.21</a>. <a href="#name-since-the-original-paper" class="internal xref">Since the Original Paper</a></p>
 </li>
             </ul>
 </li>
@@ -4546,8 +4551,14 @@ changes to routers and does not require any assistance from routers.<a href="#se
       <h2 id="name-security-considerations">
 <a href="#section-6" class="section-number selfRef">6. </a><a href="#name-security-considerations" class="section-name selfRef">Security Considerations</a>
       </h2>
-<p id="section-6-1">CUBIC makes no changes to the underlying security of TCP. More
-information about TCP security concerns can be found in <span>[<a href="#RFC5681" class="cite xref">RFC5681</a>]</span>.<a href="#section-6-1" class="pilcrow">¶</a></p>
+<p id="section-6-1">CUBIC makes no changes to the underlying security of a transport protocol
+and inherits the general security concerns described in <span>[<a href="#RFC5681" class="cite xref">RFC5681</a>]</span>.
+Specifically, changing the window computation on the sender may
+allow an attacker, through dropping or injecting ACKs (as described in
+<span>[<a href="#RFC5681" class="cite xref">RFC5681</a>]</span>), to either force the CUBIC implementation to reduce its bandwidth,
+or to convince it that there is no congestion when congestion does exist, and use
+the CUBIC implementation as an attack vector against other hosts. These attacks
+are not new to CUBIC and are inherently part of any transport protocol like TCP.<a href="#section-6-1" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="iana-considerations">
@@ -4569,7 +4580,7 @@ information about TCP security concerns can be found in <span>[<a href="#RFC5681
 <dl class="references">
 <dt id="I-D.ietf-tcpm-hystartplusplus">[I-D.ietf-tcpm-hystartplusplus]</dt>
         <dd>
-<span class="refAuthor">Balasubramanian, P.</span>, <span class="refAuthor">Huang, Y.</span>, and <span class="refAuthor">M. Olson</span>, <span class="refTitle">"HyStart++: Modified Slow Start for TCP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tcpm-hystartplusplus-11</span>, <time datetime="2022-11-07" class="refDate">7 November 2022</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tcpm-hystartplusplus-11">https://datatracker.ietf.org/doc/html/draft-ietf-tcpm-hystartplusplus-11</a>&gt;</span>. </dd>
+<span class="refAuthor">Balasubramanian, P.</span>, <span class="refAuthor">Huang, Y.</span>, and <span class="refAuthor">M. Olson</span>, <span class="refTitle">"HyStart++: Modified Slow Start for TCP"</span>, <span class="refContent">Work in Progress</span>, <span class="seriesInfo">Internet-Draft, draft-ietf-tcpm-hystartplusplus-12</span>, <time datetime="2023-01-09" class="refDate">9 January 2023</time>, <span>&lt;<a href="https://datatracker.ietf.org/doc/html/draft-ietf-tcpm-hystartplusplus-12">https://datatracker.ietf.org/doc/html/draft-ietf-tcpm-hystartplusplus-12</a>&gt;</span>. </dd>
 <dd class="break"></dd>
 <dt id="RFC2119">[RFC2119]</dt>
         <dd>
@@ -4830,397 +4841,408 @@ information about TCP security concerns can be found in <span>[<a href="#RFC5681
       <h2 id="name-evolution-of-cubic">
 <a href="#appendix-B" class="section-number selfRef">Appendix B. </a><a href="#name-evolution-of-cubic" class="section-name selfRef">Evolution of CUBIC</a>
       </h2>
-<div id="since-draft-ietf-tcpm-rfc8312bis-13">
+<div id="since-draft-ietf-tcpm-rfc8312bis-14">
 <section id="appendix-B.1">
         <h3 id="name-since-draft-ietf-tcpm-rfc83">
-<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-since-draft-ietf-tcpm-rfc83" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-13</a>
+<a href="#appendix-B.1" class="section-number selfRef">B.1. </a><a href="#name-since-draft-ietf-tcpm-rfc83" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-14</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.1-1.1">Add contents of <span><a href="https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf">https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf</a></span> to
-<a href="#proof-avg-window" class="auto internal xref">Appendix C</a>.<a href="#appendix-B.1-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.1-1.1">Specify how security considerations of TCP applies to CUBIC.<a href="#appendix-B.1-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.1-1.2">Multiple comments from Martin, define synchronized/asynchronized
+        </ul>
+</section>
+</div>
+<div id="since-draft-ietf-tcpm-rfc8312bis-13">
+<section id="appendix-B.2">
+        <h3 id="name-since-draft-ietf-tcpm-rfc831">
+<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-since-draft-ietf-tcpm-rfc831" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-13</a>
+        </h3>
+<ul class="normal">
+<li class="normal" id="appendix-B.2-1.1">Add contents of <span><a href="https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf">https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf</a></span> to
+<a href="#proof-avg-window" class="auto internal xref">Appendix C</a>.<a href="#appendix-B.2-1.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-B.2-1.2">Multiple comments from Martin, define synchronized/asynchronized
 loss model, clean up 3465 reference, clarficiation for when Cubic
 is not in Reno-friendly region, referring to proof of avg Cubic window,
 better text for misbehaving nodes and fix typo in <em>cwnd<sub>epoch</sub></em>.
-(<a href="https://github.com/NTAP/rfc8312bis/pull/158">#158</a>)<a href="#appendix-B.1-1.2" class="pilcrow">¶</a>
+(<a href="https://github.com/NTAP/rfc8312bis/pull/158">#158</a>)<a href="#appendix-B.2-1.2" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-12">
-<section id="appendix-B.2">
-        <h3 id="name-since-draft-ietf-tcpm-rfc831">
-<a href="#appendix-B.2" class="section-number selfRef">B.2. </a><a href="#name-since-draft-ietf-tcpm-rfc831" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-12</a>
+<section id="appendix-B.3">
+        <h3 id="name-since-draft-ietf-tcpm-rfc8312">
+<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-since-draft-ietf-tcpm-rfc8312" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-12</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.2-1.1">Fix plaintext version of <a href="#eqssthresh" class="auto internal xref">Figure 5</a>.<a href="#appendix-B.2-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.3-1.1">Fix plaintext version of <a href="#eqssthresh" class="auto internal xref">Figure 5</a>.<a href="#appendix-B.3-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-11">
-<section id="appendix-B.3">
-        <h3 id="name-since-draft-ietf-tcpm-rfc8312">
-<a href="#appendix-B.3" class="section-number selfRef">B.3. </a><a href="#name-since-draft-ietf-tcpm-rfc8312" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-11</a>
+<section id="appendix-B.4">
+        <h3 id="name-since-draft-ietf-tcpm-rfc8312b">
+<a href="#appendix-B.4" class="section-number selfRef">B.4. </a><a href="#name-since-draft-ietf-tcpm-rfc8312b" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-11</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.3-1.1">Fix various nits.
-(<a href="https://github.com/NTAP/rfc8312bis/pull/157">#157</a>)<a href="#appendix-B.3-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.4-1.1">Fix various nits.
+(<a href="https://github.com/NTAP/rfc8312bis/pull/157">#157</a>)<a href="#appendix-B.4-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-10">
-<section id="appendix-B.4">
-        <h3 id="name-since-draft-ietf-tcpm-rfc8312b">
-<a href="#appendix-B.4" class="section-number selfRef">B.4. </a><a href="#name-since-draft-ietf-tcpm-rfc8312b" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-10</a>
+<section id="appendix-B.5">
+        <h3 id="name-since-draft-ietf-tcpm-rfc8312bi">
+<a href="#appendix-B.5" class="section-number selfRef">B.5. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bi" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-10</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.4-1.1">Improve text related to <span>[<a href="#RFC7661" class="cite xref">RFC7661</a>]</span>.
-(<a href="https://github.com/NTAP/rfc8312bis/issues/149">#149</a>)<a href="#appendix-B.4-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.5-1.1">Improve text related to <span>[<a href="#RFC7661" class="cite xref">RFC7661</a>]</span>.
+(<a href="https://github.com/NTAP/rfc8312bis/issues/149">#149</a>)<a href="#appendix-B.5-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.4-1.2">Made variable naming a bit more consistent.
-(<a href="https://github.com/NTAP/rfc8312bis/pull/156">#156</a>)<a href="#appendix-B.4-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.5-1.2">Made variable naming a bit more consistent.
+(<a href="https://github.com/NTAP/rfc8312bis/pull/156">#156</a>)<a href="#appendix-B.5-1.2" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-09">
-<section id="appendix-B.5">
-        <h3 id="name-since-draft-ietf-tcpm-rfc8312bi">
-<a href="#appendix-B.5" class="section-number selfRef">B.5. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bi" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-09</a>
+<section id="appendix-B.6">
+        <h3 id="name-since-draft-ietf-tcpm-rfc8312bis">
+<a href="#appendix-B.6" class="section-number selfRef">B.6. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-09</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.5-1.1">Improve text for Reno friendliness, multiplicative decrease and
+<li class="normal" id="appendix-B.6-1.1">Improve text for Reno friendliness, multiplicative decrease and
 reference to HLRX07.
-(<a href="https://github.com/NTAP/rfc8312bis/pull/152">#152</a>)<a href="#appendix-B.5-1.1" class="pilcrow">¶</a>
+(<a href="https://github.com/NTAP/rfc8312bis/pull/152">#152</a>)<a href="#appendix-B.6-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-08">
-<section id="appendix-B.6">
-        <h3 id="name-since-draft-ietf-tcpm-rfc8312bis">
-<a href="#appendix-B.6" class="section-number selfRef">B.6. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-08</a>
+<section id="appendix-B.7">
+        <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-">
+<a href="#appendix-B.7" class="section-number selfRef">B.7. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-08</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.6-1.1">Fix the text specifying when alpha_cubic <span class="bcp14">SHOULD</span> be set to 1 to
+<li class="normal" id="appendix-B.7-1.1">Fix the text specifying when alpha_cubic <span class="bcp14">SHOULD</span> be set to 1 to
 indicate this should happen when cwnd &gt;= cwnd<sub>prior</sub> rather
 than cwnd &gt;= W_max, since these are different in the
 fast convergence case
-(<a href="https://github.com/NTAP/rfc8312bis/pull/146">#146</a>)<a href="#appendix-B.6-1.1" class="pilcrow">¶</a>
+(<a href="https://github.com/NTAP/rfc8312bis/pull/146">#146</a>)<a href="#appendix-B.7-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.6-1.2">Restrict use of <em>cwnd</em> directly on a congestion event
-(<a href="https://github.com/NTAP/rfc8312bis/pull/148">#148</a>)<a href="#appendix-B.6-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.7-1.2">Restrict use of <em>cwnd</em> directly on a congestion event
+(<a href="https://github.com/NTAP/rfc8312bis/pull/148">#148</a>)<a href="#appendix-B.7-1.2" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-07">
-<section id="appendix-B.7">
-        <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-">
-<a href="#appendix-B.7" class="section-number selfRef">B.7. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-07</a>
+<section id="appendix-B.8">
+        <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-0">
+<a href="#appendix-B.8" class="section-number selfRef">B.8. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-0" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-07</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.7-1.1">Document the WG discussion and decision around <span>[<a href="#RFC5033" class="cite xref">RFC5033</a>]</span> and
-<span>[<a href="#RFC2914" class="cite xref">RFC2914</a>]</span> (<a href="https://github.com/NTAP/rfc8312bis/pull/145">#145</a>)<a href="#appendix-B.7-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.8-1.1">Document the WG discussion and decision around <span>[<a href="#RFC5033" class="cite xref">RFC5033</a>]</span> and
+<span>[<a href="#RFC2914" class="cite xref">RFC2914</a>]</span> (<a href="https://github.com/NTAP/rfc8312bis/pull/145">#145</a>)<a href="#appendix-B.8-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-06">
-<section id="appendix-B.8">
-        <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-0">
-<a href="#appendix-B.8" class="section-number selfRef">B.8. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-0" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-06</a>
+<section id="appendix-B.9">
+        <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-06">
+<a href="#appendix-B.9" class="section-number selfRef">B.9. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-06" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-06</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.8-1.1">RFC7661 is safe even when cwnd grows beyond rwnd
-(<a href="https://github.com/NTAP/rfc8312bis/issues/143">#143</a>)<a href="#appendix-B.8-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.9-1.1">RFC7661 is safe even when cwnd grows beyond rwnd
+(<a href="https://github.com/NTAP/rfc8312bis/issues/143">#143</a>)<a href="#appendix-B.9-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-05">
-<section id="appendix-B.9">
+<section id="appendix-B.10">
         <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-05">
-<a href="#appendix-B.9" class="section-number selfRef">B.9. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-05" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-05</a>
+<a href="#appendix-B.10" class="section-number selfRef">B.10. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-05" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-05</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.9-1.1">Clarify meaning of "application-limited" in Section 5.8
-(<a href="https://github.com/NTAP/rfc8312bis/issues/137">#137</a>)<a href="#appendix-B.9-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.10-1.1">Clarify meaning of "application-limited" in Section 5.8
+(<a href="https://github.com/NTAP/rfc8312bis/issues/137">#137</a>)<a href="#appendix-B.10-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.9-1.2">Create new subsections for spurious timeouts and spurious loss via ACK
-(<a href="https://github.com/NTAP/rfc8312bis/issues/90">#90</a>)<a href="#appendix-B.9-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.10-1.2">Create new subsections for spurious timeouts and spurious loss via ACK
+(<a href="https://github.com/NTAP/rfc8312bis/issues/90">#90</a>)<a href="#appendix-B.10-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.9-1.3">Brief discussion of convergence in Section 5.6
-(<a href="https://github.com/NTAP/rfc8312bis/issues/96">#96</a>)<a href="#appendix-B.9-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.10-1.3">Brief discussion of convergence in Section 5.6
+(<a href="https://github.com/NTAP/rfc8312bis/issues/96">#96</a>)<a href="#appendix-B.10-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.9-1.4">Add more test results to Section 5 and update some references
-(<a href="https://github.com/NTAP/rfc8312bis/issues/91">#91</a>)<a href="#appendix-B.9-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.10-1.4">Add more test results to Section 5 and update some references
+(<a href="https://github.com/NTAP/rfc8312bis/issues/91">#91</a>)<a href="#appendix-B.10-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.9-1.5">Change wording around setting ssthresh
-(<a href="https://github.com/NTAP/rfc8312bis/issues/131">#131</a>)<a href="#appendix-B.9-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.10-1.5">Change wording around setting ssthresh
+(<a href="https://github.com/NTAP/rfc8312bis/issues/131">#131</a>)<a href="#appendix-B.10-1.5" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-04">
-<section id="appendix-B.10">
+<section id="appendix-B.11">
         <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-04">
-<a href="#appendix-B.10" class="section-number selfRef">B.10. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-04" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-04</a>
+<a href="#appendix-B.11" class="section-number selfRef">B.11. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-04" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-04</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.10-1.1">Fix incorrect math
-(<a href="https://github.com/NTAP/rfc8312bis/issues/106">#106</a>)<a href="#appendix-B.10-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.11-1.1">Fix incorrect math
+(<a href="https://github.com/NTAP/rfc8312bis/issues/106">#106</a>)<a href="#appendix-B.11-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.2">Update RFC5681
-(<a href="https://github.com/NTAP/rfc8312bis/issues/99">#99</a>)<a href="#appendix-B.10-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.11-1.2">Update RFC5681
+(<a href="https://github.com/NTAP/rfc8312bis/issues/99">#99</a>)<a href="#appendix-B.11-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.3">Rephrase text around algorithmic alternatives, add HyStart++
+          <li class="normal" id="appendix-B.11-1.3">Rephrase text around algorithmic alternatives, add HyStart++
 (<a href="https://github.com/NTAP/rfc8312bis/issues/85">#85</a>,
 <a href="https://github.com/NTAP/rfc8312bis/issues/86">#86</a>,
-<a href="https://github.com/NTAP/rfc8312bis/issues/90">#90</a>)<a href="#appendix-B.10-1.3" class="pilcrow">¶</a>
+<a href="https://github.com/NTAP/rfc8312bis/issues/90">#90</a>)<a href="#appendix-B.11-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.4">Clarify what we mean by "new ACK" and use it in the text in more places.
-(<a href="https://github.com/NTAP/rfc8312bis/issues/101">#101</a>)<a href="#appendix-B.10-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.11-1.4">Clarify what we mean by "new ACK" and use it in the text in more places.
+(<a href="https://github.com/NTAP/rfc8312bis/issues/101">#101</a>)<a href="#appendix-B.11-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.5">Rewrite the Responses to Sudden or Transient Events section
-(<a href="https://github.com/NTAP/rfc8312bis/issues/98">#98</a>)<a href="#appendix-B.10-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.11-1.5">Rewrite the Responses to Sudden or Transient Events section
+(<a href="https://github.com/NTAP/rfc8312bis/issues/98">#98</a>)<a href="#appendix-B.11-1.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.6">Remove confusing text about <em>cwnd<sub>epoch</sub></em> in Section 4.2
-(<a href="https://github.com/NTAP/rfc8312bis/issues/100">#100</a>)<a href="#appendix-B.10-1.6" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.11-1.6">Remove confusing text about <em>cwnd<sub>epoch</sub></em> in Section 4.2
+(<a href="https://github.com/NTAP/rfc8312bis/issues/100">#100</a>)<a href="#appendix-B.11-1.6" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.7">Change terminology from "AIMD" to "Reno"
-(<a href="https://github.com/NTAP/rfc8312bis/issues/108">#108</a>)<a href="#appendix-B.10-1.7" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.11-1.7">Change terminology from "AIMD" to "Reno"
+(<a href="https://github.com/NTAP/rfc8312bis/issues/108">#108</a>)<a href="#appendix-B.11-1.7" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.8">Moved <span class="bcp14">MUST NOT</span> from app-limited section to main cubic AI section
-(<a href="https://github.com/NTAP/rfc8312bis/issues/97">#97</a>)<a href="#appendix-B.10-1.8" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.11-1.8">Moved <span class="bcp14">MUST NOT</span> from app-limited section to main cubic AI section
+(<a href="https://github.com/NTAP/rfc8312bis/issues/97">#97</a>)<a href="#appendix-B.11-1.8" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.9">Clarify cwnd decrease during multiplicative decrease
-(<a href="https://github.com/NTAP/rfc8312bis/issues/102">#102</a>)<a href="#appendix-B.10-1.9" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.11-1.9">Clarify cwnd decrease during multiplicative decrease
+(<a href="https://github.com/NTAP/rfc8312bis/issues/102">#102</a>)<a href="#appendix-B.11-1.9" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.10">Clarify text around queuing and slow adaptation of CUBIC in wireless environments
-(<a href="https://github.com/NTAP/rfc8312bis/issues/94">#94</a>)<a href="#appendix-B.10-1.10" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.11-1.10">Clarify text around queuing and slow adaptation of CUBIC in wireless environments
+(<a href="https://github.com/NTAP/rfc8312bis/issues/94">#94</a>)<a href="#appendix-B.11-1.10" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.11">Set lower bound of cwnd to 1 MSS and use retransmit timer thereafter
-(<a href="https://github.com/NTAP/rfc8312bis/issues/83">#83</a>)<a href="#appendix-B.10-1.11" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.11-1.11">Set lower bound of cwnd to 1 MSS and use retransmit timer thereafter
+(<a href="https://github.com/NTAP/rfc8312bis/issues/83">#83</a>)<a href="#appendix-B.11-1.11" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.10-1.12">Use FlightSize instead of cwnd to update ssthresh
-(<a href="https://github.com/NTAP/rfc8312bis/issues/114">#114</a>)<a href="#appendix-B.10-1.12" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.11-1.12">Use FlightSize instead of cwnd to update ssthresh
+(<a href="https://github.com/NTAP/rfc8312bis/issues/114">#114</a>)<a href="#appendix-B.11-1.12" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-03">
-<section id="appendix-B.11">
+<section id="appendix-B.12">
         <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-03">
-<a href="#appendix-B.11" class="section-number selfRef">B.11. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-03" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-03</a>
+<a href="#appendix-B.12" class="section-number selfRef">B.12. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-03" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-03</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.11-1.1">Remove reference from abstract
-(<a href="https://github.com/NTAP/rfc8312bis/pull/82">#82</a>)<a href="#appendix-B.11-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.12-1.1">Remove reference from abstract
+(<a href="https://github.com/NTAP/rfc8312bis/pull/82">#82</a>)<a href="#appendix-B.12-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-02">
-<section id="appendix-B.12">
+<section id="appendix-B.13">
         <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-02">
-<a href="#appendix-B.12" class="section-number selfRef">B.12. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-02" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-02</a>
+<a href="#appendix-B.13" class="section-number selfRef">B.13. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-02" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.12-1.1">Description of packet loss rate <em>p</em>
-(<a href="https://github.com/NTAP/rfc8312bis/issues/65">#65</a>)<a href="#appendix-B.12-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.13-1.1">Description of packet loss rate <em>p</em>
+(<a href="https://github.com/NTAP/rfc8312bis/issues/65">#65</a>)<a href="#appendix-B.13-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.12-1.2">Clarification of TCP Friendly Equation for ABC and Delayed ACK
-(<a href="https://github.com/NTAP/rfc8312bis/issues/66">#66</a>)<a href="#appendix-B.12-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.13-1.2">Clarification of TCP Friendly Equation for ABC and Delayed ACK
+(<a href="https://github.com/NTAP/rfc8312bis/issues/66">#66</a>)<a href="#appendix-B.13-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.12-1.3">add applicability to QUIC and SCTP
-(<a href="https://github.com/NTAP/rfc8312bis/issues/61">#61</a>)<a href="#appendix-B.12-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.13-1.3">add applicability to QUIC and SCTP
+(<a href="https://github.com/NTAP/rfc8312bis/issues/61">#61</a>)<a href="#appendix-B.13-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.12-1.4">clarity on setting alpha<em><sub>aimd</sub></em> to 1
-(<a href="https://github.com/NTAP/rfc8312bis/issues/68">#68</a>)<a href="#appendix-B.12-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.13-1.4">clarity on setting alpha<em><sub>aimd</sub></em> to 1
+(<a href="https://github.com/NTAP/rfc8312bis/issues/68">#68</a>)<a href="#appendix-B.13-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.12-1.5">introduce alpha<em><sub>cubic</sub></em>
-(<a href="https://github.com/NTAP/rfc8312bis/issues/64">#64</a>)<a href="#appendix-B.12-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.13-1.5">introduce alpha<em><sub>cubic</sub></em>
+(<a href="https://github.com/NTAP/rfc8312bis/issues/64">#64</a>)<a href="#appendix-B.13-1.5" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.12-1.6">clarify <em>cwnd</em> growth in convex region
-(<a href="https://github.com/NTAP/rfc8312bis/issues/69">#69</a>)<a href="#appendix-B.12-1.6" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.13-1.6">clarify <em>cwnd</em> growth in convex region
+(<a href="https://github.com/NTAP/rfc8312bis/issues/69">#69</a>)<a href="#appendix-B.13-1.6" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.12-1.7">add guidance for using bytes and mention that segments count is decimal
-(<a href="https://github.com/NTAP/rfc8312bis/issues/67">#67</a>)<a href="#appendix-B.12-1.7" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.13-1.7">add guidance for using bytes and mention that segments count is decimal
+(<a href="https://github.com/NTAP/rfc8312bis/issues/67">#67</a>)<a href="#appendix-B.13-1.7" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.12-1.8">add loss events detected by RACK and QUIC loss detection
-(<a href="https://github.com/NTAP/rfc8312bis/issues/62">#62</a>)<a href="#appendix-B.12-1.8" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.13-1.8">add loss events detected by RACK and QUIC loss detection
+(<a href="https://github.com/NTAP/rfc8312bis/issues/62">#62</a>)<a href="#appendix-B.13-1.8" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-01">
-<section id="appendix-B.13">
+<section id="appendix-B.14">
         <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-01">
-<a href="#appendix-B.13" class="section-number selfRef">B.13. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-01" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-01</a>
+<a href="#appendix-B.14" class="section-number selfRef">B.14. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-01" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.13-1.1">address Michael Scharf's editorial suggestions.
-(<a href="https://github.com/NTAP/rfc8312bis/issues/59">#59</a>)<a href="#appendix-B.13-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.14-1.1">address Michael Scharf's editorial suggestions.
+(<a href="https://github.com/NTAP/rfc8312bis/issues/59">#59</a>)<a href="#appendix-B.14-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.13-1.2">add "Note to the RFC Editor" about removing underscores<a href="#appendix-B.13-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.14-1.2">add "Note to the RFC Editor" about removing underscores<a href="#appendix-B.14-1.2" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-ietf-tcpm-rfc8312bis-00">
-<section id="appendix-B.14">
+<section id="appendix-B.15">
         <h3 id="name-since-draft-ietf-tcpm-rfc8312bis-00">
-<a href="#appendix-B.14" class="section-number selfRef">B.14. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-00" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-00</a>
+<a href="#appendix-B.15" class="section-number selfRef">B.15. </a><a href="#name-since-draft-ietf-tcpm-rfc8312bis-00" class="section-name selfRef">Since draft-ietf-tcpm-rfc8312bis-00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.14-1.1">use updated xml2rfc with better text rendering of subscripts<a href="#appendix-B.14-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.15-1.1">use updated xml2rfc with better text rendering of subscripts<a href="#appendix-B.15-1.1" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-eggert-tcpm-rfc8312bis-03">
-<section id="appendix-B.15">
+<section id="appendix-B.16">
         <h3 id="name-since-draft-eggert-tcpm-rfc">
-<a href="#appendix-B.15" class="section-number selfRef">B.15. </a><a href="#name-since-draft-eggert-tcpm-rfc" class="section-name selfRef">Since draft-eggert-tcpm-rfc8312bis-03</a>
+<a href="#appendix-B.16" class="section-number selfRef">B.16. </a><a href="#name-since-draft-eggert-tcpm-rfc" class="section-name selfRef">Since draft-eggert-tcpm-rfc8312bis-03</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.15-1.1">fix spelling nits<a href="#appendix-B.15-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.16-1.1">fix spelling nits<a href="#appendix-B.16-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.15-1.2">rename to draft-ietf<a href="#appendix-B.15-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.16-1.2">rename to draft-ietf<a href="#appendix-B.16-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.15-1.3">define <em>W<sub>max</sub></em> more clearly<a href="#appendix-B.15-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.16-1.3">define <em>W<sub>max</sub></em> more clearly<a href="#appendix-B.16-1.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-eggert-tcpm-rfc8312bis-02">
-<section id="appendix-B.16">
+<section id="appendix-B.17">
         <h3 id="name-since-draft-eggert-tcpm-rfc8">
-<a href="#appendix-B.16" class="section-number selfRef">B.16. </a><a href="#name-since-draft-eggert-tcpm-rfc8" class="section-name selfRef">Since draft-eggert-tcpm-rfc8312bis-02</a>
+<a href="#appendix-B.17" class="section-number selfRef">B.17. </a><a href="#name-since-draft-eggert-tcpm-rfc8" class="section-name selfRef">Since draft-eggert-tcpm-rfc8312bis-02</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.16-1.1">add definition for segments_acked and alpha<em><sub>aimd</sub></em>.
-(<a href="https://github.com/NTAP/rfc8312bis/issues/47">#47</a>)<a href="#appendix-B.16-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.17-1.1">add definition for segments_acked and alpha<em><sub>aimd</sub></em>.
+(<a href="https://github.com/NTAP/rfc8312bis/issues/47">#47</a>)<a href="#appendix-B.17-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.16-1.2">fix a mistake in <em>W<sub>max</sub></em> calculation in the fast convergence section.
-(<a href="https://github.com/NTAP/rfc8312bis/issues/51">#51</a>)<a href="#appendix-B.16-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.17-1.2">fix a mistake in <em>W<sub>max</sub></em> calculation in the fast convergence section.
+(<a href="https://github.com/NTAP/rfc8312bis/issues/51">#51</a>)<a href="#appendix-B.17-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.16-1.3">clarity on setting <em>ssthresh</em> and <em>cwnd<sub>epoch</sub></em> during
+          <li class="normal" id="appendix-B.17-1.3">clarity on setting <em>ssthresh</em> and <em>cwnd<sub>epoch</sub></em> during
 multiplicative decrease.
-(<a href="https://github.com/NTAP/rfc8312bis/issues/53">#53</a>)<a href="#appendix-B.16-1.3" class="pilcrow">¶</a>
+(<a href="https://github.com/NTAP/rfc8312bis/issues/53">#53</a>)<a href="#appendix-B.17-1.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-eggert-tcpm-rfc8312bis-01">
-<section id="appendix-B.17">
+<section id="appendix-B.18">
         <h3 id="name-since-draft-eggert-tcpm-rfc83">
-<a href="#appendix-B.17" class="section-number selfRef">B.17. </a><a href="#name-since-draft-eggert-tcpm-rfc83" class="section-name selfRef">Since draft-eggert-tcpm-rfc8312bis-01</a>
+<a href="#appendix-B.18" class="section-number selfRef">B.18. </a><a href="#name-since-draft-eggert-tcpm-rfc83" class="section-name selfRef">Since draft-eggert-tcpm-rfc8312bis-01</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.17-1.1">rename TCP-Friendly to AIMD-Friendly and rename Standard TCP to AIMD
+<li class="normal" id="appendix-B.18-1.1">rename TCP-Friendly to AIMD-Friendly and rename Standard TCP to AIMD
 TCP to avoid confusion as CUBIC has been widely used on the Internet.
-(<a href="https://github.com/NTAP/rfc8312bis/issues/38">#38</a>)<a href="#appendix-B.17-1.1" class="pilcrow">¶</a>
+(<a href="https://github.com/NTAP/rfc8312bis/issues/38">#38</a>)<a href="#appendix-B.18-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.17-1.2">change introductory text to reflect the significant broader
+          <li class="normal" id="appendix-B.18-1.2">change introductory text to reflect the significant broader
 deployment of CUBIC on the Internet.
-(<a href="https://github.com/NTAP/rfc8312bis/issues/39">#39</a>)<a href="#appendix-B.17-1.2" class="pilcrow">¶</a>
+(<a href="https://github.com/NTAP/rfc8312bis/issues/39">#39</a>)<a href="#appendix-B.18-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.17-1.3">rephrase introduction to avoid referring to variables that have not
-been defined yet.<a href="#appendix-B.17-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.18-1.3">rephrase introduction to avoid referring to variables that have not
+been defined yet.<a href="#appendix-B.18-1.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-draft-eggert-tcpm-rfc8312bis-00">
-<section id="appendix-B.18">
+<section id="appendix-B.19">
         <h3 id="name-since-draft-eggert-tcpm-rfc831">
-<a href="#appendix-B.18" class="section-number selfRef">B.18. </a><a href="#name-since-draft-eggert-tcpm-rfc831" class="section-name selfRef">Since draft-eggert-tcpm-rfc8312bis-00</a>
+<a href="#appendix-B.19" class="section-number selfRef">B.19. </a><a href="#name-since-draft-eggert-tcpm-rfc831" class="section-name selfRef">Since draft-eggert-tcpm-rfc8312bis-00</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.18-1.1">acknowledge former co-authors
-(<a href="https://github.com/NTAP/rfc8312bis/issues/15">#15</a>)<a href="#appendix-B.18-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.19-1.1">acknowledge former co-authors
+(<a href="https://github.com/NTAP/rfc8312bis/issues/15">#15</a>)<a href="#appendix-B.19-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.18-1.2">prevent <em>cwnd</em> from becoming less than two
-(<a href="https://github.com/NTAP/rfc8312bis/issues/7">#7</a>)<a href="#appendix-B.18-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.19-1.2">prevent <em>cwnd</em> from becoming less than two
+(<a href="https://github.com/NTAP/rfc8312bis/issues/7">#7</a>)<a href="#appendix-B.19-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.18-1.3">add list of variables and constants
+          <li class="normal" id="appendix-B.19-1.3">add list of variables and constants
 (<a href="https://github.com/NTAP/rfc8312bis/issues/5">#5</a>,
-<a href="https://github.com/NTAP/rfc8312bis/issues/6">#6</a>)<a href="#appendix-B.18-1.3" class="pilcrow">¶</a>
+<a href="https://github.com/NTAP/rfc8312bis/issues/6">#6</a>)<a href="#appendix-B.19-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.18-1.4">update <em>K</em>'s definition and add bounds for CUBIC <em>target</em> <em>cwnd</em>
+          <li class="normal" id="appendix-B.19-1.4">update <em>K</em>'s definition and add bounds for CUBIC <em>target</em> <em>cwnd</em>
             <span>[<a href="#SXEZ19" class="cite xref">SXEZ19</a>]</span> (<a href="https://github.com/NTAP/rfc8312bis/issues/1">#1</a>,
-<a href="https://github.com/NTAP/rfc8312bis/issues/14">#14</a>)<a href="#appendix-B.18-1.4" class="pilcrow">¶</a>
+<a href="https://github.com/NTAP/rfc8312bis/issues/14">#14</a>)<a href="#appendix-B.19-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.18-1.5">update <em>W<sub>est</sub></em> to use AIMD approach
-(<a href="https://github.com/NTAP/rfc8312bis/issues/20">#20</a>)<a href="#appendix-B.18-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.19-1.5">update <em>W<sub>est</sub></em> to use AIMD approach
+(<a href="https://github.com/NTAP/rfc8312bis/issues/20">#20</a>)<a href="#appendix-B.19-1.5" class="pilcrow">¶</a>
 </li>
         </ul>
 <ul class="normal">
-<li class="normal" id="appendix-B.18-2.1">set alpha<em><sub>aimd</sub></em> to 1 once
+<li class="normal" id="appendix-B.19-2.1">set alpha<em><sub>aimd</sub></em> to 1 once
 <em>W<sub>est</sub></em> reaches <em>W<sub>max</sub></em>
-(<a href="https://github.com/NTAP/rfc8312bis/issues/2">#2</a>)<a href="#appendix-B.18-2.1" class="pilcrow">¶</a>
+(<a href="https://github.com/NTAP/rfc8312bis/issues/2">#2</a>)<a href="#appendix-B.19-2.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.18-2.2">add Vidhi as co-author
-(<a href="https://github.com/NTAP/rfc8312bis/issues/17">#17</a>)<a href="#appendix-B.18-2.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.19-2.2">add Vidhi as co-author
+(<a href="https://github.com/NTAP/rfc8312bis/issues/17">#17</a>)<a href="#appendix-B.19-2.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.18-2.3">note for Fast Recovery during <em>cwnd</em> decrease due to congestion
-event (<a href="https://github.com/NTAP/rfc8312bis/issues/11">#11</a>)<a href="#appendix-B.18-2.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.19-2.3">note for Fast Recovery during <em>cwnd</em> decrease due to congestion
+event (<a href="https://github.com/NTAP/rfc8312bis/issues/11">#11</a>)<a href="#appendix-B.19-2.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.18-2.4">add section for spurious congestion events
-(<a href="https://github.com/NTAP/rfc8312bis/issues/23">#23</a>)<a href="#appendix-B.18-2.4" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.19-2.4">add section for spurious congestion events
+(<a href="https://github.com/NTAP/rfc8312bis/issues/23">#23</a>)<a href="#appendix-B.19-2.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.18-2.5">initialize <em>W<sub>est</sub></em> after timeout and remove variable
+          <li class="normal" id="appendix-B.19-2.5">initialize <em>W<sub>est</sub></em> after timeout and remove variable
 <em>W<sub>last_max</sub></em>
-(<a href="https://github.com/NTAP/rfc8312bis/issues/28">#28</a>)<a href="#appendix-B.18-2.5" class="pilcrow">¶</a>
+(<a href="https://github.com/NTAP/rfc8312bis/issues/28">#28</a>)<a href="#appendix-B.19-2.5" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-rfc8312">
-<section id="appendix-B.19">
+<section id="appendix-B.20">
         <h3 id="name-since-rfc8312">
-<a href="#appendix-B.19" class="section-number selfRef">B.19. </a><a href="#name-since-rfc8312" class="section-name selfRef">Since RFC8312</a>
+<a href="#appendix-B.20" class="section-number selfRef">B.20. </a><a href="#name-since-rfc8312" class="section-name selfRef">Since RFC8312</a>
         </h3>
 <ul class="normal">
-<li class="normal" id="appendix-B.19-1.1">converted to Markdown and xml2rfc v3<a href="#appendix-B.19-1.1" class="pilcrow">¶</a>
+<li class="normal" id="appendix-B.20-1.1">converted to Markdown and xml2rfc v3<a href="#appendix-B.20-1.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.19-1.2">updated references (as part of the conversion)<a href="#appendix-B.19-1.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.20-1.2">updated references (as part of the conversion)<a href="#appendix-B.20-1.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.19-1.3">updated author information<a href="#appendix-B.19-1.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.20-1.3">updated author information<a href="#appendix-B.20-1.3" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.19-1.4">various formatting changes<a href="#appendix-B.19-1.4" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.20-1.4">various formatting changes<a href="#appendix-B.20-1.4" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.19-1.5">move to Standards Track<a href="#appendix-B.19-1.5" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.20-1.5">move to Standards Track<a href="#appendix-B.20-1.5" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>
 </div>
 <div id="since-the-original-paper">
-<section id="appendix-B.20">
+<section id="appendix-B.21">
         <h3 id="name-since-the-original-paper">
-<a href="#appendix-B.20" class="section-number selfRef">B.20. </a><a href="#name-since-the-original-paper" class="section-name selfRef">Since the Original Paper</a>
+<a href="#appendix-B.21" class="section-number selfRef">B.21. </a><a href="#name-since-the-original-paper" class="section-name selfRef">Since the Original Paper</a>
         </h3>
-<p id="appendix-B.20-1">CUBIC has gone through a few changes since the initial release
+<p id="appendix-B.21-1">CUBIC has gone through a few changes since the initial release
 <span>[<a href="#HRX08" class="cite xref">HRX08</a>]</span> of its algorithm and implementation. This section highlights the
-differences between the original paper and <span>[<a href="#RFC8312" class="cite xref">RFC8312</a>]</span>.<a href="#appendix-B.20-1" class="pilcrow">¶</a></p>
+differences between the original paper and <span>[<a href="#RFC8312" class="cite xref">RFC8312</a>]</span>.<a href="#appendix-B.21-1" class="pilcrow">¶</a></p>
 <ul class="normal">
-<li class="normal" id="appendix-B.20-2.1">The original paper <span>[<a href="#HRX08" class="cite xref">HRX08</a>]</span> includes the pseudocode of CUBIC
+<li class="normal" id="appendix-B.21-2.1">The original paper <span>[<a href="#HRX08" class="cite xref">HRX08</a>]</span> includes the pseudocode of CUBIC
 implementation using Linux's pluggable congestion control framework,
 which excludes system-specific optimizations. The simplified
-pseudocode might be a good source to start with and understand CUBIC.<a href="#appendix-B.20-2.1" class="pilcrow">¶</a>
+pseudocode might be a good source to start with and understand CUBIC.<a href="#appendix-B.21-2.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.20-2.2">
+          <li class="normal" id="appendix-B.21-2.2">
             <span>[<a href="#HRX08" class="cite xref">HRX08</a>]</span> also includes experimental results showing its performance
-and fairness.<a href="#appendix-B.20-2.2" class="pilcrow">¶</a>
+and fairness.<a href="#appendix-B.21-2.2" class="pilcrow">¶</a>
 </li>
         </ul>
 <ul class="normal">
-<li class="normal" id="appendix-B.20-3.1">The definition of beta<em><sub>cubic</sub></em> constant
+<li class="normal" id="appendix-B.21-3.1">The definition of beta<em><sub>cubic</sub></em> constant
 was changed in <span>[<a href="#RFC8312" class="cite xref">RFC8312</a>]</span>. For example,
 beta<em><sub>cubic</sub></em> in the original paper was the
 window decrease constant while <span>[<a href="#RFC8312" class="cite xref">RFC8312</a>]</span> changed it to CUBIC
@@ -5228,13 +5250,13 @@ multiplication decrease factor. With this change, the current
 congestion window size after a congestion event in <span>[<a href="#RFC8312" class="cite xref">RFC8312</a>]</span> was
 beta<em><sub>cubic</sub></em> * <em>W<sub>max</sub></em> while it was
 (1-beta<em><sub>cubic</sub></em>) * <em>W<sub>max</sub></em> in the
-original paper.<a href="#appendix-B.20-3.1" class="pilcrow">¶</a>
+original paper.<a href="#appendix-B.21-3.1" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.20-3.2">Its pseudocode used <em>W<sub>last_max</sub></em> while <span>[<a href="#RFC8312" class="cite xref">RFC8312</a>]</span> used
-<em>W<sub>max</sub></em>.<a href="#appendix-B.20-3.2" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.21-3.2">Its pseudocode used <em>W<sub>last_max</sub></em> while <span>[<a href="#RFC8312" class="cite xref">RFC8312</a>]</span> used
+<em>W<sub>max</sub></em>.<a href="#appendix-B.21-3.2" class="pilcrow">¶</a>
 </li>
-          <li class="normal" id="appendix-B.20-3.3">Its AIMD-friendly window was <em>W<sub>tcp</sub></em> while <span>[<a href="#RFC8312" class="cite xref">RFC8312</a>]</span> used
-<em>W<sub>est</sub></em>.<a href="#appendix-B.20-3.3" class="pilcrow">¶</a>
+          <li class="normal" id="appendix-B.21-3.3">Its AIMD-friendly window was <em>W<sub>tcp</sub></em> while <span>[<a href="#RFC8312" class="cite xref">RFC8312</a>]</span> used
+<em>W<sub>est</sub></em>.<a href="#appendix-B.21-3.3" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>

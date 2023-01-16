@@ -7,12 +7,12 @@ Internet-Draft                                                       UNL
 Obsoletes: 8312 (if approved)                                      S. Ha
 Updates: 5681 (if approved)                                     Colorado
 Intended status: Standards Track                                 I. Rhee
-Expires: 8 June 2023                                              Bowery
+Expires: 20 July 2023                                             Bowery
                                                                  V. Goel
                                                               Apple Inc.
                                                           L. Eggert, Ed.
                                                                   NetApp
-                                                         5 December 2022
+                                                         16 January 2023
 
 
                CUBIC for Fast and Long-Distance Networks
@@ -77,11 +77,11 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 8 June 2023.
+   This Internet-Draft will expire on 20 July 2023.
 
 Copyright Notice
 
-   Copyright (c) 2022 IETF Trust and the persons identified as the
+   Copyright (c) 2023 IETF Trust and the persons identified as the
    document authors.  All rights reserved.
 
    This document is subject to BCP 78 and the IETF Trust's Legal
@@ -136,26 +136,27 @@ Table of Contents
      8.2.  Informative References
    Appendix A.  Acknowledgments
    Appendix B.  Evolution of CUBIC
-     B.1.  Since draft-ietf-tcpm-rfc8312bis-13
-     B.2.  Since draft-ietf-tcpm-rfc8312bis-12
-     B.3.  Since draft-ietf-tcpm-rfc8312bis-11
-     B.4.  Since draft-ietf-tcpm-rfc8312bis-10
-     B.5.  Since draft-ietf-tcpm-rfc8312bis-09
-     B.6.  Since draft-ietf-tcpm-rfc8312bis-08
-     B.7.  Since draft-ietf-tcpm-rfc8312bis-07
-     B.8.  Since draft-ietf-tcpm-rfc8312bis-06
-     B.9.  Since draft-ietf-tcpm-rfc8312bis-05
-     B.10. Since draft-ietf-tcpm-rfc8312bis-04
-     B.11. Since draft-ietf-tcpm-rfc8312bis-03
-     B.12. Since draft-ietf-tcpm-rfc8312bis-02
-     B.13. Since draft-ietf-tcpm-rfc8312bis-01
-     B.14. Since draft-ietf-tcpm-rfc8312bis-00
-     B.15. Since draft-eggert-tcpm-rfc8312bis-03
-     B.16. Since draft-eggert-tcpm-rfc8312bis-02
-     B.17. Since draft-eggert-tcpm-rfc8312bis-01
-     B.18. Since draft-eggert-tcpm-rfc8312bis-00
-     B.19. Since RFC8312
-     B.20. Since the Original Paper
+     B.1.  Since draft-ietf-tcpm-rfc8312bis-14
+     B.2.  Since draft-ietf-tcpm-rfc8312bis-13
+     B.3.  Since draft-ietf-tcpm-rfc8312bis-12
+     B.4.  Since draft-ietf-tcpm-rfc8312bis-11
+     B.5.  Since draft-ietf-tcpm-rfc8312bis-10
+     B.6.  Since draft-ietf-tcpm-rfc8312bis-09
+     B.7.  Since draft-ietf-tcpm-rfc8312bis-08
+     B.8.  Since draft-ietf-tcpm-rfc8312bis-07
+     B.9.  Since draft-ietf-tcpm-rfc8312bis-06
+     B.10. Since draft-ietf-tcpm-rfc8312bis-05
+     B.11. Since draft-ietf-tcpm-rfc8312bis-04
+     B.12. Since draft-ietf-tcpm-rfc8312bis-03
+     B.13. Since draft-ietf-tcpm-rfc8312bis-02
+     B.14. Since draft-ietf-tcpm-rfc8312bis-01
+     B.15. Since draft-ietf-tcpm-rfc8312bis-00
+     B.16. Since draft-eggert-tcpm-rfc8312bis-03
+     B.17. Since draft-eggert-tcpm-rfc8312bis-02
+     B.18. Since draft-eggert-tcpm-rfc8312bis-01
+     B.19. Since draft-eggert-tcpm-rfc8312bis-00
+     B.20. Since RFC8312
+     B.21. Since the Original Paper
    Appendix C.  Proof of the Average CUBIC Window Size
    Authors' Addresses
 
@@ -1186,8 +1187,15 @@ ssthresh =
 
 6.  Security Considerations
 
-   CUBIC makes no changes to the underlying security of TCP.  More
-   information about TCP security concerns can be found in [RFC5681].
+   CUBIC makes no changes to the underlying security of a transport
+   protocol and inherits the general security concerns described in
+   [RFC5681].  Specifically, changing the window computation on the
+   sender may allow an attacker, through dropping or injecting ACKs (as
+   described in [RFC5681]), to either force the CUBIC implementation to
+   reduce its bandwidth, or to convince it that there is no congestion
+   when congestion does exist, and use the CUBIC implementation as an
+   attack vector against other hosts.  These attacks are not new to
+   CUBIC and are inherently part of any transport protocol like TCP.
 
 7.  IANA Considerations
 
@@ -1200,9 +1208,9 @@ ssthresh =
    [I-D.ietf-tcpm-hystartplusplus]
               Balasubramanian, P., Huang, Y., and M. Olson, "HyStart++:
               Modified Slow Start for TCP", Work in Progress, Internet-
-              Draft, draft-ietf-tcpm-hystartplusplus-11, 7 November
-              2022, <https://datatracker.ietf.org/doc/html/draft-ietf-
-              tcpm-hystartplusplus-11>.
+              Draft, draft-ietf-tcpm-hystartplusplus-12, 9 January 2023,
+              <https://datatracker.ietf.org/doc/html/draft-ietf-tcpm-
+              hystartplusplus-12>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1448,7 +1456,11 @@ Appendix A.  Acknowledgments
 
 Appendix B.  Evolution of CUBIC
 
-B.1.  Since draft-ietf-tcpm-rfc8312bis-13
+B.1.  Since draft-ietf-tcpm-rfc8312bis-14
+
+   *  Specify how security considerations of TCP applies to CUBIC.
+
+B.2.  Since draft-ietf-tcpm-rfc8312bis-13
 
    *  Add contents of https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf to
       Appendix C.
@@ -1459,16 +1471,16 @@ B.1.  Since draft-ietf-tcpm-rfc8312bis-13
       window, better text for misbehaving nodes and fix typo in
       _cwnd_epoch_. (#158 (https://github.com/NTAP/rfc8312bis/pull/158))
 
-B.2.  Since draft-ietf-tcpm-rfc8312bis-12
+B.3.  Since draft-ietf-tcpm-rfc8312bis-12
 
    *  Fix plaintext version of Figure 5.
 
-B.3.  Since draft-ietf-tcpm-rfc8312bis-11
+B.4.  Since draft-ietf-tcpm-rfc8312bis-11
 
    *  Fix various nits. (#157 (https://github.com/NTAP/rfc8312bis/
       pull/157))
 
-B.4.  Since draft-ietf-tcpm-rfc8312bis-10
+B.5.  Since draft-ietf-tcpm-rfc8312bis-10
 
    *  Improve text related to [RFC7661]. (#149
       (https://github.com/NTAP/rfc8312bis/issues/149))
@@ -1476,13 +1488,13 @@ B.4.  Since draft-ietf-tcpm-rfc8312bis-10
    *  Made variable naming a bit more consistent. (#156
       (https://github.com/NTAP/rfc8312bis/pull/156))
 
-B.5.  Since draft-ietf-tcpm-rfc8312bis-09
+B.6.  Since draft-ietf-tcpm-rfc8312bis-09
 
    *  Improve text for Reno friendliness, multiplicative decrease and
       reference to HLRX07. (#152 (https://github.com/NTAP/rfc8312bis/
       pull/152))
 
-B.6.  Since draft-ietf-tcpm-rfc8312bis-08
+B.7.  Since draft-ietf-tcpm-rfc8312bis-08
 
    *  Fix the text specifying when alpha_cubic SHOULD be set to 1 to
       indicate this should happen when cwnd >= cwnd_prior rather than
@@ -1492,17 +1504,17 @@ B.6.  Since draft-ietf-tcpm-rfc8312bis-08
    *  Restrict use of _cwnd_ directly on a congestion event (#148
       (https://github.com/NTAP/rfc8312bis/pull/148))
 
-B.7.  Since draft-ietf-tcpm-rfc8312bis-07
+B.8.  Since draft-ietf-tcpm-rfc8312bis-07
 
    *  Document the WG discussion and decision around [RFC5033] and
       [RFC2914] (#145 (https://github.com/NTAP/rfc8312bis/pull/145))
 
-B.8.  Since draft-ietf-tcpm-rfc8312bis-06
+B.9.  Since draft-ietf-tcpm-rfc8312bis-06
 
    *  RFC7661 is safe even when cwnd grows beyond rwnd (#143
       (https://github.com/NTAP/rfc8312bis/issues/143))
 
-B.9.  Since draft-ietf-tcpm-rfc8312bis-05
+B.10.  Since draft-ietf-tcpm-rfc8312bis-05
 
    *  Clarify meaning of "application-limited" in Section 5.8 (#137
       (https://github.com/NTAP/rfc8312bis/issues/137))
@@ -1519,7 +1531,7 @@ B.9.  Since draft-ietf-tcpm-rfc8312bis-05
    *  Change wording around setting ssthresh (#131
       (https://github.com/NTAP/rfc8312bis/issues/131))
 
-B.10.  Since draft-ietf-tcpm-rfc8312bis-04
+B.11.  Since draft-ietf-tcpm-rfc8312bis-04
 
    *  Fix incorrect math (#106 (https://github.com/NTAP/rfc8312bis/
       issues/106))
@@ -1560,12 +1572,12 @@ B.10.  Since draft-ietf-tcpm-rfc8312bis-04
    *  Use FlightSize instead of cwnd to update ssthresh (#114
       (https://github.com/NTAP/rfc8312bis/issues/114))
 
-B.11.  Since draft-ietf-tcpm-rfc8312bis-03
+B.12.  Since draft-ietf-tcpm-rfc8312bis-03
 
    *  Remove reference from abstract (#82
       (https://github.com/NTAP/rfc8312bis/pull/82))
 
-B.12.  Since draft-ietf-tcpm-rfc8312bis-02
+B.13.  Since draft-ietf-tcpm-rfc8312bis-02
 
    *  Description of packet loss rate _p_ (#65
       (https://github.com/NTAP/rfc8312bis/issues/65))
@@ -1591,18 +1603,18 @@ B.12.  Since draft-ietf-tcpm-rfc8312bis-02
    *  add loss events detected by RACK and QUIC loss detection (#62
       (https://github.com/NTAP/rfc8312bis/issues/62))
 
-B.13.  Since draft-ietf-tcpm-rfc8312bis-01
+B.14.  Since draft-ietf-tcpm-rfc8312bis-01
 
    *  address Michael Scharf's editorial suggestions. (#59
       (https://github.com/NTAP/rfc8312bis/issues/59))
 
    *  add "Note to the RFC Editor" about removing underscores
 
-B.14.  Since draft-ietf-tcpm-rfc8312bis-00
+B.15.  Since draft-ietf-tcpm-rfc8312bis-00
 
    *  use updated xml2rfc with better text rendering of subscripts
 
-B.15.  Since draft-eggert-tcpm-rfc8312bis-03
+B.16.  Since draft-eggert-tcpm-rfc8312bis-03
 
    *  fix spelling nits
 
@@ -1610,7 +1622,7 @@ B.15.  Since draft-eggert-tcpm-rfc8312bis-03
 
    *  define _W_max_ more clearly
 
-B.16.  Since draft-eggert-tcpm-rfc8312bis-02
+B.17.  Since draft-eggert-tcpm-rfc8312bis-02
 
    *  add definition for segments_acked and alpha__aimd_. (#47
       (https://github.com/NTAP/rfc8312bis/issues/47))
@@ -1622,7 +1634,7 @@ B.16.  Since draft-eggert-tcpm-rfc8312bis-02
       multiplicative decrease. (#53 (https://github.com/NTAP/rfc8312bis/
       issues/53))
 
-B.17.  Since draft-eggert-tcpm-rfc8312bis-01
+B.18.  Since draft-eggert-tcpm-rfc8312bis-01
 
    *  rename TCP-Friendly to AIMD-Friendly and rename Standard TCP to
       AIMD TCP to avoid confusion as CUBIC has been widely used on the
@@ -1635,7 +1647,7 @@ B.17.  Since draft-eggert-tcpm-rfc8312bis-01
    *  rephrase introduction to avoid referring to variables that have
       not been defined yet.
 
-B.18.  Since draft-eggert-tcpm-rfc8312bis-00
+B.19.  Since draft-eggert-tcpm-rfc8312bis-00
 
    *  acknowledge former co-authors (#15
       (https://github.com/NTAP/rfc8312bis/issues/15))
@@ -1670,7 +1682,7 @@ B.18.  Since draft-eggert-tcpm-rfc8312bis-00
       _W_(last_max)_ (#28 (https://github.com/NTAP/rfc8312bis/
       issues/28))
 
-B.19.  Since RFC8312
+B.20.  Since RFC8312
 
    *  converted to Markdown and xml2rfc v3
 
@@ -1682,7 +1694,7 @@ B.19.  Since RFC8312
 
    *  move to Standards Track
 
-B.20.  Since the Original Paper
+B.21.  Since the Original Paper
 
    CUBIC has gone through a few changes since the initial release
    [HRX08] of its algorithm and implementation.  This section highlights
