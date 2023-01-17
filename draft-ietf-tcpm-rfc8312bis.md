@@ -201,7 +201,7 @@ Specifically, CUBIC may increase the congestion window more aggressively than
 Reno during the congestion avoidance phase. According to {{!RFC5681}},
 during congestion avoidance, the sender must not increment cwnd by more than
 SMSS bytes once per RTT, whereas CUBIC may increase cwnd much more
-aggressively than SMSS bytes per RTT. Additionally, CUBIC recommends HyStart++
+aggressively. Additionally, CUBIC recommends the HyStart++
 algorithm for slow start which allows for cwnd increases of more than SMSS
 bytes for incoming acknowledgments during slow start while this behavior
 is not allowed as part of {{!RFC5681}} standard.
