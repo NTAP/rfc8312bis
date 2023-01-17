@@ -197,7 +197,7 @@ algorithms, this document updates the first paragraph of {{Section 3 of
 in {{Section 3 of !RFC5033}}, which allows for CUBIC's behavior as defined
 in this document.
 
-Specifically, CUBIC may increase congestion window more aggressively than
+Specifically, CUBIC may increase the congestion window more aggressively than
 Reno during the congestion avoidance phase. According to {{!RFC5681}},
 during congestion avoidance, sender must not increment cwnd by more than
 SMSS bytes once per RTT whereas CUBIC may increase cwnd much more
