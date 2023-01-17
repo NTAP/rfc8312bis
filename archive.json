@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-01-15T00:05:46.355289+00:00",
+  "timestamp": "2023-01-17T00:05:22.050815+00:00",
   "repo": "NTAP/rfc8312bis",
   "labels": [
     {
@@ -16692,24 +16692,26 @@
       "id": "PR_kwDOEpK-U85HS5PD",
       "title": "address Yoav's review",
       "url": "https://github.com/NTAP/rfc8312bis/pull/162",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "goelvidhi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2023-01-13T03:05:59Z",
-      "updatedAt": "2023-01-13T07:27:42Z",
+      "updatedAt": "2023-01-16T08:51:00Z",
       "baseRepository": "NTAP/rfc8312bis",
       "baseRefName": "main",
       "baseRefOid": "730bff553bd17a92dad0c110b512e66988feb0b6",
       "headRepository": "goelvidhi/rfc8312bis",
       "headRefName": "yoav_review",
-      "headRefOid": "8d6a74ece3e20c0c59f584970eaf81224a429611",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "headRefOid": "b0d407577146e93b9badb8570b621379cd672ecd",
+      "closedAt": "2023-01-16T08:51:00Z",
+      "mergedAt": "2023-01-16T08:51:00Z",
+      "mergedBy": "larseggert",
+      "mergeCommit": {
+        "oid": "db7dc3163b7b8d6e8308b836f1da34a2d9100b6c"
+      },
       "comments": [],
       "reviews": [
         {
@@ -16719,10 +16721,10 @@
           },
           "author": "lisongxu",
           "authorAssociation": "COLLABORATOR",
-          "state": "APPROVED",
+          "state": "DISMISSED",
           "body": "",
           "createdAt": "2023-01-13T04:06:58Z",
-          "updatedAt": "2023-01-13T04:06:58Z",
+          "updatedAt": "2023-01-16T08:48:28Z",
           "comments": []
         },
         {
@@ -16732,10 +16734,10 @@
           },
           "author": "larseggert",
           "authorAssociation": "MEMBER",
-          "state": "APPROVED",
+          "state": "DISMISSED",
           "body": "One nit, otherwise LGTM.",
           "createdAt": "2023-01-13T07:27:04Z",
-          "updatedAt": "2023-01-13T07:27:42Z",
+          "updatedAt": "2023-01-16T08:48:28Z",
           "comments": [
             {
               "originalPosition": 7,
@@ -16744,6 +16746,19 @@
               "updatedAt": "2023-01-13T07:27:42Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOEpK-U85Kfc9q",
+          "commit": {
+            "abbreviatedOid": "b0d4075"
+          },
+          "author": "larseggert",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-01-16T08:48:44Z",
+          "updatedAt": "2023-01-16T08:48:44Z",
+          "comments": []
         }
       ]
     },
