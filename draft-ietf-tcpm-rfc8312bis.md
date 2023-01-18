@@ -1252,6 +1252,8 @@ These individuals suggested improvements to this document:
 
 - Specify how security considerations of TCP applies to CUBIC.
 
+- Elaborate differences between RFC 5681 and Cubic.
+
 ## Since draft-ietf-tcpm-rfc8312bis-13
 
 - Add contents of [](https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf) to
