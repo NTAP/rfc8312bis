@@ -1235,9 +1235,11 @@ These individuals suggested improvements to this document:
 <li><t><contact fullname="Randall Stewart"/></t></li>
 <li><t><contact fullname="Richard Scheffenegger"/></t></li>
 <li><t><contact fullname="Rod Grimes"/></t></li>
+<li><t><contact fullname="Spencer Dawkins"/></t></li>
 <li><t><contact fullname="Tom Henderson"/></t></li>
 <li><t><contact fullname="Tom Petch"/></t></li>
 <li><t><contact fullname="Wesley Rosenblum"/></t></li>
+<li><t><contact fullname="Yoav Nir"/></t></li>
 <li><t><contact fullname="Yoshifumi Nishida"/></t></li>
 <li><t><contact fullname="Yuchung Cheng"/></t></li>
 </ul>
