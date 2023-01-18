@@ -202,9 +202,10 @@ Reno during the congestion avoidance phase. According to {{!RFC5681}},
 during congestion avoidance, the sender must not increment cwnd by more than
 SMSS bytes once per RTT, whereas CUBIC may increase cwnd much more
 aggressively. Additionally, CUBIC recommends the HyStart++
-algorithm {{!I-D.ietf-tcpm-hystartplusplus}} for slow start, which allows for cwnd increases of more than SMSS
-bytes for incoming acknowledgments during slow start, while this behavior
-is not allowed as part of {{!RFC5681}} standard.
+algorithm {{!I-D.ietf-tcpm-hystartplusplus}} for slow start, which allows for
+cwnd increases of more than SMSS bytes for incoming acknowledgments during
+slow start, while this behavior is not allowed as part of {{!RFC5681}}
+standard.
 
 Binary Increase Congestion Control (BIC-TCP) {{XHR04}}, a predecessor
 of CUBIC, was selected as the default TCP congestion control algorithm
