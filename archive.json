@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-01-17T00:05:22.050815+00:00",
+  "timestamp": "2023-01-19T00:05:39.089193+00:00",
   "repo": "NTAP/rfc8312bis",
   "labels": [
     {
@@ -16774,13 +16774,13 @@
       "labels": [],
       "body": "",
       "createdAt": "2023-01-13T04:09:33Z",
-      "updatedAt": "2023-01-13T07:35:37Z",
+      "updatedAt": "2023-01-18T20:56:13Z",
       "baseRepository": "NTAP/rfc8312bis",
       "baseRefName": "main",
-      "baseRefOid": "730bff553bd17a92dad0c110b512e66988feb0b6",
+      "baseRefOid": "db7dc3163b7b8d6e8308b836f1da34a2d9100b6c",
       "headRepository": "goelvidhi/rfc8312bis",
       "headRefName": "Spencer_review",
-      "headRefOid": "000c2494b639e520d5df072dba9a6c6b2da1cf6d",
+      "headRefOid": "3db393460a940b0b52840be79dc79c028ab03584",
       "closedAt": null,
       "mergedAt": null,
       "mergedBy": null,
@@ -16794,10 +16794,10 @@
           },
           "author": "lisongxu",
           "authorAssociation": "COLLABORATOR",
-          "state": "APPROVED",
+          "state": "DISMISSED",
           "body": "",
           "createdAt": "2023-01-13T05:05:36Z",
-          "updatedAt": "2023-01-13T05:05:36Z",
+          "updatedAt": "2023-01-17T23:40:31Z",
           "comments": []
         },
         {
@@ -16853,6 +16853,112 @@
               "body": "Didn't we have a long discussion earlier that resulted in this text? Would not like to reopen that can of worms.",
               "createdAt": "2023-01-13T07:34:54Z",
               "updatedAt": "2023-01-13T07:35:38Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEpK-U85KqaAE",
+          "commit": {
+            "abbreviatedOid": "000c249"
+          },
+          "author": "goelvidhi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-01-17T23:49:12Z",
+          "updatedAt": "2023-01-17T23:49:13Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Can you remind me about the previous discussion (my memory is failing me)? AFAICS, this text is same as the original RFC 8312.",
+              "createdAt": "2023-01-17T23:49:12Z",
+              "updatedAt": "2023-01-17T23:49:13Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEpK-U85KrjRP",
+          "commit": {
+            "abbreviatedOid": "000c249"
+          },
+          "author": "larseggert",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-01-18T07:15:32Z",
+          "updatedAt": "2023-01-18T07:15:33Z",
+          "comments": [
+            {
+              "originalPosition": 25,
+              "body": "Maybe I am misremembering, and we discussed another section...",
+              "createdAt": "2023-01-18T07:15:32Z",
+              "updatedAt": "2023-01-18T07:15:51Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEpK-U85Krjq8",
+          "commit": {
+            "abbreviatedOid": "90ab7c2"
+          },
+          "author": "larseggert",
+          "authorAssociation": "MEMBER",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-01-18T07:17:16Z",
+          "updatedAt": "2023-01-18T07:17:17Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "```suggestion\r\nexperiences problems when transmitting over\r\npaths with large bandwidth-delay products.\r\n```",
+              "createdAt": "2023-01-18T07:17:16Z",
+              "updatedAt": "2023-01-18T07:17:17Z"
+            }
+          ]
+        },
+        {
+          "id": "PRR_kwDOEpK-U85Krjtg",
+          "commit": {
+            "abbreviatedOid": "90ab7c2"
+          },
+          "author": "larseggert",
+          "authorAssociation": "MEMBER",
+          "state": "DISMISSED",
+          "body": "",
+          "createdAt": "2023-01-18T07:17:28Z",
+          "updatedAt": "2023-01-18T20:56:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOEpK-U85KuZjg",
+          "commit": {
+            "abbreviatedOid": "90ab7c2"
+          },
+          "author": "lisongxu",
+          "authorAssociation": "COLLABORATOR",
+          "state": "DISMISSED",
+          "body": "",
+          "createdAt": "2023-01-18T15:11:50Z",
+          "updatedAt": "2023-01-18T20:56:13Z",
+          "comments": []
+        },
+        {
+          "id": "PRR_kwDOEpK-U85LJZAC",
+          "commit": {
+            "abbreviatedOid": "90ab7c2"
+          },
+          "author": "goelvidhi",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "",
+          "createdAt": "2023-01-18T20:53:20Z",
+          "updatedAt": "2023-01-18T20:53:20Z",
+          "comments": [
+            {
+              "originalPosition": 26,
+              "body": "This text is about poor scalability of Reno on large BDP paths, so we ought to mention bandwidth utilization in some form. Suggestion, `when attempting to fully utilize the bandwidth on paths with large`?",
+              "createdAt": "2023-01-18T20:53:20Z",
+              "updatedAt": "2023-01-18T20:53:20Z"
             }
           ]
         }
