@@ -41,7 +41,7 @@ for CUBIC's occasionally more aggressive sending behavior.
     requests 2.28.1
     setuptools 65.6.0
     six 1.16.0
-    wcwidth 0.2.5
+    wcwidth 0.2.6
 -->
 <link href="draft-ietf-tcpm-rfc8312bis.xml" rel="alternate" type="application/rfc+xml">
 <link href="#copyright" rel="license">
@@ -385,7 +385,7 @@ dl {
 dl > dt {
   float: left;
   margin-right: 1em;
-  min-width: 12ch;
+  min-width: 8ch;
 }
 dl.dlNewline > dt {
   float: none;
@@ -1054,7 +1054,7 @@ svg :is([fill="white"], [fill^="#fff"]) {
 </tr></thead>
 <tfoot><tr>
 <td class="left">Xu, et al.</td>
-<td class="center">Expires 20 July 2023</td>
+<td class="center">Expires 23 July 2023</td>
 <td class="right">[Page]</td>
 </tr></tfoot>
 </table>
@@ -1073,12 +1073,12 @@ svg :is([fill="white"], [fill^="#fff"]) {
 <a href="https://www.rfc-editor.org/rfc/rfc5681" class="eref">5681</a> (if approved)</dd>
 <dt class="label-published">Published:</dt>
 <dd class="published">
-<time datetime="2023-01-16" class="published">16 January 2023</time>
+<time datetime="2023-01-19" class="published">19 January 2023</time>
     </dd>
 <dt class="label-intended-status">Intended Status:</dt>
 <dd class="intended-status">Standards Track</dd>
 <dt class="label-expires">Expires:</dt>
-<dd class="expires"><time datetime="2023-07-20">20 July 2023</time></dd>
+<dd class="expires"><time datetime="2023-07-23">23 July 2023</time></dd>
 <dt class="label-authors">Authors:</dt>
 <dd class="authors">
 <div class="author">
@@ -1168,7 +1168,7 @@ do this.<a href="#section-note.2-3" class="pilcrow">¶</a></p>
         time. It is inappropriate to use Internet-Drafts as reference
         material or to cite them other than as "work in progress."<a href="#section-boilerplate.1-3" class="pilcrow">¶</a></p>
 <p id="section-boilerplate.1-4">
-        This Internet-Draft will expire on 20 July 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
+        This Internet-Draft will expire on 23 July 2023.<a href="#section-boilerplate.1-4" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="copyright">
@@ -1447,38 +1447,47 @@ Since CUBIC is occasionally more aggressive than the <span>[<a href="#RFC5681" c
 algorithms, this document updates the first paragraph of <span><a href="https://rfc-editor.org/rfc/rfc5681#section-3" class="relref">Section 3</a> of [<a href="#RFC5681" class="cite xref">RFC5681</a>]</span>, replacing it with a normative reference to guideline (1)
 in <span><a href="https://rfc-editor.org/rfc/rfc5033#section-3" class="relref">Section 3</a> of [<a href="#RFC5033" class="cite xref">RFC5033</a>]</span>, which allows for CUBIC's behavior as defined
 in this document.<a href="#section-1-4" class="pilcrow">¶</a></p>
-<p id="section-1-5">Binary Increase Congestion Control (BIC-TCP) <span>[<a href="#XHR04" class="cite xref">XHR04</a>]</span>, a predecessor
+<p id="section-1-5">Specifically, CUBIC may increase the congestion window more aggressively than
+Reno during the congestion avoidance phase. According to <span>[<a href="#RFC5681" class="cite xref">RFC5681</a>]</span>,
+during congestion avoidance, the sender must not increment cwnd by more than
+SMSS bytes once per RTT, whereas CUBIC may increase cwnd much more
+aggressively. Additionally, CUBIC recommends the HyStart++
+algorithm <span>[<a href="#I-D.ietf-tcpm-hystartplusplus" class="cite xref">I-D.ietf-tcpm-hystartplusplus</a>]</span> for slow start, which allows for
+cwnd increases of more than SMSS bytes for incoming acknowledgments during
+slow start, while this behavior is not allowed as part of <span>[<a href="#RFC5681" class="cite xref">RFC5681</a>]</span>
+standard.<a href="#section-1-5" class="pilcrow">¶</a></p>
+<p id="section-1-6">Binary Increase Congestion Control (BIC-TCP) <span>[<a href="#XHR04" class="cite xref">XHR04</a>]</span>, a predecessor
 of CUBIC, was selected as the default TCP congestion control algorithm
 by Linux in the year 2005 and had been used for several years by the
-Internet community at large.<a href="#section-1-5" class="pilcrow">¶</a></p>
-<p id="section-1-6">CUBIC uses a similar window increase function as BIC-TCP and is
+Internet community at large.<a href="#section-1-6" class="pilcrow">¶</a></p>
+<p id="section-1-7">CUBIC uses a similar window increase function as BIC-TCP and is
 designed to be less aggressive and fairer to Reno in bandwidth
 usage than BIC-TCP while maintaining the strengths of BIC-TCP such as
-stability, window scalability, and round-trip time (RTT) fairness.<a href="#section-1-6" class="pilcrow">¶</a></p>
-<p id="section-1-7"><span>[<a href="#RFC5033" class="cite xref">RFC5033</a>]</span> documents the IETF's best current practices for
+stability, window scalability, and round-trip time (RTT) fairness.<a href="#section-1-7" class="pilcrow">¶</a></p>
+<p id="section-1-8"><span>[<a href="#RFC5033" class="cite xref">RFC5033</a>]</span> documents the IETF's best current practices for
 specifying new congestion control algorithms, specifically, ones that
 differ from the general congestion control principles outlined in
 <span>[<a href="#RFC2914" class="cite xref">RFC2914</a>]</span>. It describes what type of evaluation is expected by the
 IETF to understand the suitability of a new congestion control
 algorithm and the process to enable a specification to be approved
-for widespread deployment in the global Internet.<a href="#section-1-7" class="pilcrow">¶</a></p>
-<p id="section-1-8">There are areas in which CUBIC differs from the congestion control
+for widespread deployment in the global Internet.<a href="#section-1-8" class="pilcrow">¶</a></p>
+<p id="section-1-9">There are areas in which CUBIC differs from the congestion control
 algorithms previously published in standards-track RFCs; those
 changes are specified in this document. However, it is not obvious
 that these changes go beyond the general congestion control
 principles outlined in <span>[<a href="#RFC2914" class="cite xref">RFC2914</a>]</span>, so the process in
-<span>[<a href="#RFC5033" class="cite xref">RFC5033</a>]</span> may not apply.<a href="#section-1-8" class="pilcrow">¶</a></p>
-<p id="section-1-9">Also, the wide deployment of CUBIC on the Internet was driven by
+<span>[<a href="#RFC5033" class="cite xref">RFC5033</a>]</span> may not apply.<a href="#section-1-9" class="pilcrow">¶</a></p>
+<p id="section-1-10">Also, the wide deployment of CUBIC on the Internet was driven by
 direct adoption in most of the popular operating systems, and did not
 follow the practices documented in <span>[<a href="#RFC5033" class="cite xref">RFC5033</a>]</span>. However, due to the
 resulting Internet-scale deployment experience over a long
 period of time, the IETF has determined that CUBIC may be published
 as a standards-track specification. This decision by the IETF does
-not alter the general guidance in <span>[<a href="#RFC2914" class="cite xref">RFC2914</a>]</span>.<a href="#section-1-9" class="pilcrow">¶</a></p>
-<p id="section-1-10">The following sections first briefly explain the design
+not alter the general guidance in <span>[<a href="#RFC2914" class="cite xref">RFC2914</a>]</span>.<a href="#section-1-10" class="pilcrow">¶</a></p>
+<p id="section-1-11">The following sections first briefly explain the design
 principles of CUBIC, provide the exact specification of CUBIC,
 and finally discuss the safety features of CUBIC following the
-guidelines specified in <span>[<a href="#RFC5033" class="cite xref">RFC5033</a>]</span>.<a href="#section-1-10" class="pilcrow">¶</a></p>
+guidelines specified in <span>[<a href="#RFC5033" class="cite xref">RFC5033</a>]</span>.<a href="#section-1-11" class="pilcrow">¶</a></p>
 </section>
 </div>
 <div id="conventions">
@@ -1571,12 +1580,12 @@ synchronizations.<a href="#section-3.1-4" class="pilcrow">¶</a></p>
 <a href="#section-3.2" class="section-number selfRef">3.2. </a><a href="#name-principle-2-for-reno-friend" class="section-name selfRef">Principle 2 for Reno-Friendliness</a>
         </h3>
 <p id="section-3.2-1">CUBIC promotes per-flow fairness to Reno. Note that Reno
-performs well over paths with short RTTs and small bandwidths (or
-small BDPs). There is only a scalability problem in networks with long
-RTTs and large bandwidths (or large BDPs).<a href="#section-3.2-1" class="pilcrow">¶</a></p>
+performs well over paths with small bandwidth-delay products, and only
+experiences problems when attempting to increase bandwidth utilization
+on paths with large bandwidth-delay products.<a href="#section-3.2-1" class="pilcrow">¶</a></p>
 <p id="section-3.2-2">A congestion control algorithm designed to be friendly to Reno on
 a per-flow basis must increase its congestion window less aggressively
-in small BDP networks than in large BDP networks.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
+in small-BDP networks than in large-BDP networks.<a href="#section-3.2-2" class="pilcrow">¶</a></p>
 <p id="section-3.2-3">The aggressiveness of CUBIC mainly depends on the maximum window size
 before a window reduction, which is smaller in small-BDP networks than
 in large-BDP networks. Thus, CUBIC increases its congestion window
@@ -1674,7 +1683,7 @@ CUBIC additive increase factor used in Reno-friendly region
 as described in <a href="#Reno-friendly" class="auto internal xref">Section 4.3</a>.<a href="#section-4.1.1-2" class="pilcrow">¶</a></p>
 <p id="section-4.1.1-3"><em>C</em>:
 constant that determines the aggressiveness of CUBIC in competing with
-other congestion control algorithms in high BDP networks. Please see
+other congestion control algorithms in high-BDP networks. Please see
 <a href="#discussion" class="auto internal xref">Section 5</a> for more explanation on how it is set. The unit for <em>C</em>
 is<a href="#section-4.1.1-3" class="pilcrow">¶</a></p>
 <div id="section-4.1.1-4">
@@ -4819,19 +4828,25 @@ are not new to CUBIC and are inherently part of any transport protocol like TCP.
           <p id="appendix-A-3.19.1">      <span class="contact-name">Rod Grimes</span><a href="#appendix-A-3.19.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="appendix-A-3.20">
-          <p id="appendix-A-3.20.1">      <span class="contact-name">Tom Henderson</span><a href="#appendix-A-3.20.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-3.20.1">      <span class="contact-name">Spencer Dawkins</span><a href="#appendix-A-3.20.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="appendix-A-3.21">
-          <p id="appendix-A-3.21.1">      <span class="contact-name">Tom Petch</span><a href="#appendix-A-3.21.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-3.21.1">      <span class="contact-name">Tom Henderson</span><a href="#appendix-A-3.21.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="appendix-A-3.22">
-          <p id="appendix-A-3.22.1">      <span class="contact-name">Wesley Rosenblum</span><a href="#appendix-A-3.22.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-3.22.1">      <span class="contact-name">Tom Petch</span><a href="#appendix-A-3.22.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="appendix-A-3.23">
-          <p id="appendix-A-3.23.1">      <span class="contact-name">Yoshifumi Nishida</span><a href="#appendix-A-3.23.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-3.23.1">      <span class="contact-name">Wesley Rosenblum</span><a href="#appendix-A-3.23.1" class="pilcrow">¶</a></p>
 </li>
         <li class="compact" id="appendix-A-3.24">
-          <p id="appendix-A-3.24.1">      <span class="contact-name">Yuchung Cheng</span><a href="#appendix-A-3.24.1" class="pilcrow">¶</a></p>
+          <p id="appendix-A-3.24.1">      <span class="contact-name">Yoav Nir</span><a href="#appendix-A-3.24.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="compact" id="appendix-A-3.25">
+          <p id="appendix-A-3.25.1">      <span class="contact-name">Yoshifumi Nishida</span><a href="#appendix-A-3.25.1" class="pilcrow">¶</a></p>
+</li>
+        <li class="compact" id="appendix-A-3.26">
+          <p id="appendix-A-3.26.1">      <span class="contact-name">Yuchung Cheng</span><a href="#appendix-A-3.26.1" class="pilcrow">¶</a></p>
 </li>
       </ul>
 </section>
@@ -4848,6 +4863,8 @@ are not new to CUBIC and are inherently part of any transport protocol like TCP.
         </h3>
 <ul class="normal">
 <li class="normal" id="appendix-B.1-1.1">Specify how security considerations of TCP applies to CUBIC.<a href="#appendix-B.1-1.1" class="pilcrow">¶</a>
+</li>
+          <li class="normal" id="appendix-B.1-1.2">Elaborate differences between RFC 5681 and Cubic.<a href="#appendix-B.1-1.2" class="pilcrow">¶</a>
 </li>
         </ul>
 </section>

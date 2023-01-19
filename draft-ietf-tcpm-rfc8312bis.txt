@@ -7,12 +7,12 @@ Internet-Draft                                                       UNL
 Obsoletes: 8312 (if approved)                                      S. Ha
 Updates: 5681 (if approved)                                     Colorado
 Intended status: Standards Track                                 I. Rhee
-Expires: 20 July 2023                                             Bowery
+Expires: 23 July 2023                                             Bowery
                                                                  V. Goel
                                                               Apple Inc.
                                                           L. Eggert, Ed.
                                                                   NetApp
-                                                         16 January 2023
+                                                         19 January 2023
 
 
                CUBIC for Fast and Long-Distance Networks
@@ -77,7 +77,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 20 July 2023.
+   This Internet-Draft will expire on 23 July 2023.
 
 Copyright Notice
 
@@ -205,6 +205,16 @@ Table of Contents
    reference to guideline (1) in Section 3 of [RFC5033], which allows
    for CUBIC's behavior as defined in this document.
 
+   Specifically, CUBIC may increase the congestion window more
+   aggressively than Reno during the congestion avoidance phase.
+   According to [RFC5681], during congestion avoidance, the sender must
+   not increment cwnd by more than SMSS bytes once per RTT, whereas
+   CUBIC may increase cwnd much more aggressively.  Additionally, CUBIC
+   recommends the HyStart++ algorithm [I-D.ietf-tcpm-hystartplusplus]
+   for slow start, which allows for cwnd increases of more than SMSS
+   bytes for incoming acknowledgments during slow start, while this
+   behavior is not allowed as part of [RFC5681] standard.
+
    Binary Increase Congestion Control (BIC-TCP) [XHR04], a predecessor
    of CUBIC, was selected as the default TCP congestion control
    algorithm by Linux in the year 2005 and had been used for several
@@ -312,13 +322,13 @@ Table of Contents
 3.2.  Principle 2 for Reno-Friendliness
 
    CUBIC promotes per-flow fairness to Reno.  Note that Reno performs
-   well over paths with short RTTs and small bandwidths (or small BDPs).
-   There is only a scalability problem in networks with long RTTs and
-   large bandwidths (or large BDPs).
+   well over paths with small bandwidth-delay products, and only
+   experiences problems when attempting to increase bandwidth
+   utilization on paths with large bandwidth-delay products.
 
    A congestion control algorithm designed to be friendly to Reno on a
    per-flow basis must increase its congestion window less aggressively
-   in small BDP networks than in large BDP networks.
+   in small-BDP networks than in large-BDP networks.
 
    The aggressiveness of CUBIC mainly depends on the maximum window size
    before a window reduction, which is smaller in small-BDP networks
@@ -404,7 +414,7 @@ Table of Contents
    region as described in Section 4.3.
 
    _C_: constant that determines the aggressiveness of CUBIC in
-   competing with other congestion control algorithms in high BDP
+   competing with other congestion control algorithms in high-BDP
    networks.  Please see Section 5 for more explanation on how it is
    set.  The unit for _C_ is
 
@@ -1448,9 +1458,11 @@ Appendix A.  Acknowledgments
    *  Randall Stewart
    *  Richard Scheffenegger
    *  Rod Grimes
+   *  Spencer Dawkins
    *  Tom Henderson
    *  Tom Petch
    *  Wesley Rosenblum
+   *  Yoav Nir
    *  Yoshifumi Nishida
    *  Yuchung Cheng
 
@@ -1459,6 +1471,8 @@ Appendix B.  Evolution of CUBIC
 B.1.  Since draft-ietf-tcpm-rfc8312bis-14
 
    *  Specify how security considerations of TCP applies to CUBIC.
+
+   *  Elaborate differences between RFC 5681 and Cubic.
 
 B.2.  Since draft-ietf-tcpm-rfc8312bis-13
 
