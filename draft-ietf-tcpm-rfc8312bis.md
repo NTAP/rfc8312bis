@@ -197,6 +197,16 @@ algorithms, this document updates the first paragraph of {{Section 3 of
 in {{Section 3 of !RFC5033}}, which allows for CUBIC's behavior as defined
 in this document.
 
+Specifically, CUBIC may increase the congestion window more aggressively than
+Reno during the congestion avoidance phase. According to {{!RFC5681}},
+during congestion avoidance, the sender must not increment cwnd by more than
+SMSS bytes once per RTT, whereas CUBIC may increase cwnd much more
+aggressively. Additionally, CUBIC recommends the HyStart++
+algorithm {{!I-D.ietf-tcpm-hystartplusplus}} for slow start, which allows for
+cwnd increases of more than SMSS bytes for incoming acknowledgments during
+slow start, while this behavior is not allowed as part of {{!RFC5681}}
+standard.
+
 Binary Increase Congestion Control (BIC-TCP) {{XHR04}}, a predecessor
 of CUBIC, was selected as the default TCP congestion control algorithm
 by Linux in the year 2005 and had been used for several years by the
@@ -302,13 +312,13 @@ synchronizations.
 ## Principle 2 for Reno-Friendliness
 
 CUBIC promotes per-flow fairness to Reno. Note that Reno
-performs well over paths with short RTTs and small bandwidths (or
-small BDPs). There is only a scalability problem in networks with long
-RTTs and large bandwidths (or large BDPs).
+performs well over paths with small bandwidth-delay products, and only
+experiences problems when attempting to increase bandwidth utilization
+on paths with large bandwidth-delay products.
 
 A congestion control algorithm designed to be friendly to Reno on
 a per-flow basis must increase its congestion window less aggressively
-in small BDP networks than in large BDP networks.
+in small-BDP networks than in large-BDP networks.
 
 The aggressiveness of CUBIC mainly depends on the maximum window size
 before a window reduction, which is smaller in small-BDP networks than
@@ -397,7 +407,7 @@ as described in {{Reno-friendly}}.
 
 *C*:
 constant that determines the aggressiveness of CUBIC in competing with
-other congestion control algorithms in high BDP networks. Please see
+other congestion control algorithms in high-BDP networks. Please see
 {{discussion}} for more explanation on how it is set. The unit for *C*
 is
 
@@ -1225,9 +1235,11 @@ These individuals suggested improvements to this document:
 <li><t><contact fullname="Randall Stewart"/></t></li>
 <li><t><contact fullname="Richard Scheffenegger"/></t></li>
 <li><t><contact fullname="Rod Grimes"/></t></li>
+<li><t><contact fullname="Spencer Dawkins"/></t></li>
 <li><t><contact fullname="Tom Henderson"/></t></li>
 <li><t><contact fullname="Tom Petch"/></t></li>
 <li><t><contact fullname="Wesley Rosenblum"/></t></li>
+<li><t><contact fullname="Yoav Nir"/></t></li>
 <li><t><contact fullname="Yoshifumi Nishida"/></t></li>
 <li><t><contact fullname="Yuchung Cheng"/></t></li>
 </ul>
@@ -1242,6 +1254,8 @@ These individuals suggested improvements to this document:
 ## Since draft-ietf-tcpm-rfc8312bis-14
 
 - Specify how security considerations of TCP applies to CUBIC.
+
+- Elaborate differences between RFC 5681 and Cubic.
 
 ## Since draft-ietf-tcpm-rfc8312bis-13
 
