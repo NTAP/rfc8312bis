@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-01-19T00:05:39.089193+00:00",
+  "timestamp": "2023-01-22T00:05:46.187297+00:00",
   "repo": "NTAP/rfc8312bis",
   "labels": [
     {
@@ -16767,24 +16767,26 @@
       "id": "PR_kwDOEpK-U85HTB7H",
       "title": "address spencer's comments",
       "url": "https://github.com/NTAP/rfc8312bis/pull/163",
-      "state": "OPEN",
+      "state": "MERGED",
       "author": "goelvidhi",
       "authorAssociation": "COLLABORATOR",
       "assignees": [],
       "labels": [],
       "body": "",
       "createdAt": "2023-01-13T04:09:33Z",
-      "updatedAt": "2023-01-18T20:56:13Z",
+      "updatedAt": "2023-01-19T13:50:21Z",
       "baseRepository": "NTAP/rfc8312bis",
       "baseRefName": "main",
       "baseRefOid": "db7dc3163b7b8d6e8308b836f1da34a2d9100b6c",
       "headRepository": "goelvidhi/rfc8312bis",
       "headRefName": "Spencer_review",
       "headRefOid": "3db393460a940b0b52840be79dc79c028ab03584",
-      "closedAt": null,
-      "mergedAt": null,
-      "mergedBy": null,
-      "mergeCommit": null,
+      "closedAt": "2023-01-19T13:50:20Z",
+      "mergedAt": "2023-01-19T13:50:20Z",
+      "mergedBy": "larseggert",
+      "mergeCommit": {
+        "oid": "0202ad697e0da3da0ece29d34c406c6c267f8f35"
+      },
       "comments": [],
       "reviews": [
         {
@@ -16961,6 +16963,19 @@
               "updatedAt": "2023-01-18T20:53:20Z"
             }
           ]
+        },
+        {
+          "id": "PRR_kwDOEpK-U85LNgmF",
+          "commit": {
+            "abbreviatedOid": "3db3934"
+          },
+          "author": "larseggert",
+          "authorAssociation": "MEMBER",
+          "state": "APPROVED",
+          "body": "",
+          "createdAt": "2023-01-19T13:50:13Z",
+          "updatedAt": "2023-01-19T13:50:13Z",
+          "comments": []
         }
       ]
     }
