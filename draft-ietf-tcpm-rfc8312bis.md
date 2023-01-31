@@ -745,14 +745,14 @@ cwnd = &
 \end{array}
 \right. &
 \begin{array}{l}
-\text{reduction on loss}, cwnd \text{ is at least 2 MSS} \\
-\text{reduction on ECE}, cwnd \text{ is at least 1 MSS} \\
+\text{reduction on loss}, cwnd\text{ is at least 2 MSS} \\
+\text{reduction on ECE}, cwnd\text{ is at least 1 MSS} \\
 \end{array}
 \\
 
 ssthresh = &
 \mathrm{max}(ssthresh, 2) &
-ssthresh \text{ is at least 2 MSS} \\
+ssthresh\text{ is at least 2 MSS} \\
 
 \end{array}
 ~~~
@@ -793,7 +793,7 @@ cwnd * \frac{1 + β_{cubic}}{2}
 & \text{if } cwnd < W_{max} \text{ and fast convergence enabled},\\
 & \text{further reduce } W_{max} \\
 cwnd
-&\text{otherwise, remember } cwnd \text{ before reduction} \\
+&\text{otherwise, remember }cwnd\text{ before reduction} \\
 \end{array} \right.
 ~~~
 {: artwork-align="center" }
@@ -1257,6 +1257,8 @@ These individuals suggested improvements to this document:
 
 - Elaborate differences between RFC 5681 and Cubic.
 
+- Tweak math for better plaintext rendering.
+
 ## Since draft-ietf-tcpm-rfc8312bis-13
 
 - Add contents of [](https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf) to
@@ -1516,7 +1518,7 @@ losses, and the denominator *K*/*RTT* is the total number of RTTs between two
 successive packet losses.
 
 ~~~ math
-AVG\_W_{cubic}=\frac{\frac{1}{p}}{\frac{K}{RTT}}
+AVG\_W_{cubic} = \frac{\frac{1}{p}}{\frac{K}{RTT}}
 ~~~
 {: #peq1 artwork-align="center" }
 
@@ -1525,7 +1527,7 @@ and *C*, and network parameters *p* and *RTT*. According to the definition of
 *K* in {{eq2}}, we have
 
 ~~~ math
-K=\sqrt[3]{\frac{W_{max} - W_{max} * β_{cubic}}{C}}
+K = \sqrt[3]{\frac{W_{max} - W_{max} * β_{cubic}}{C}}
 ~~~
 {: #peq2 artwork-align="center" }
 
@@ -1539,16 +1541,16 @@ the window size in the first RTT (i.e., *n*=1 or equivalently *t*=0) is
 ~~~ math
 \begin{array}{ll}
 \frac{1}{p} &
-=\sum_{n=1}^{\frac{K}{RTT}}\left(C((n-1) RTT-K)^3+W_{max}\right) \\
+= \sum_{n=1}^{\frac{K}{RTT}}\left(C((n-1) * RTT-K)^3 + W_{max}\right) \\
 &
-=\sum_{n=1}^{\frac{K}{RTT}}\left(C * RTT^3(-n)^3+W_{max}\right) \\
+= \sum_{n=1}^{\frac{K}{RTT}}\left(C * RTT^3(-n)^3 + W_{max}\right) \\
 &
-=-C * RTT^3 * \sum_{n=1}^{\frac{K}{RTT}} n^3+W_{max} * \frac{K}{RTT} \\
+= -C * RTT^3 * \sum_{n=1}^{\frac{K}{RTT}} n^3 + W_{max} * \frac{K}{RTT} \\
 &
-\approx-C * RTT^3 * \frac{1}{4} *
-\left(\frac{K}{RTT}\right)^{4}+W_{max} * \frac{K}{RTT} \\
+\approx  -C * RTT^3 * \frac{1}{4} *
+\left(\frac{K}{RTT}\right)^{4} + W_{max} * \frac{K}{RTT} \\
 &
-=-C * \frac{1}{4} * \frac{K^{4}}{RTT}+W_{max} * \frac{K}{RTT}
+= -C * \frac{1}{4} * \frac{K^{4}}{RTT} + W_{max} * \frac{K}{RTT}
 \end{array}
 ~~~
 {: #peq3 artwork-align="center" }
@@ -1556,8 +1558,8 @@ the window size in the first RTT (i.e., *n*=1 or equivalently *t*=0) is
 After solving {{peq2}} and {{peq3}} for *K* and *W<sub>max</sub>*, we have
 
 ~~~ math
-K=\sqrt[4]{\frac{4 * \left(1-β_{cubic}\right)}
-{C * \left(3+β_{cubic}\right)} *  \frac{RTT}{p}}
+K = \sqrt[4]{\frac{4 * \left(1-β_{cubic}\right)}
+{C * \left(3 + β_{cubic}\right)} *  \frac{RTT}{p}}
 ~~~
 {: #peq4 artwork-align="center" }
 
@@ -1565,9 +1567,8 @@ The average CUBIC window size *AVG_W<sub>cubic</sub>* can be obtained by
 substituting *K* with {{peq4}} in {{peq1}}
 
 ~~~ math
-AVG\_W_{cubic}=
-\frac{\frac{1}{p}}{\frac{K}{RTT}}=
-\sqrt[4]{\frac{C * \left(3+β_{cubic}\right)}
+AVG\_W_{cubic} = \frac{\frac{1}{p}}{\frac{K}{RTT}} =
+ \sqrt[4]{\frac{C * \left(3 + β_{cubic}\right)}
 {4 * \left(1-β_{cubic}\right)} * \frac{RTT^3}{p^3}}
 ~~~
 {: artwork-align="center" }
