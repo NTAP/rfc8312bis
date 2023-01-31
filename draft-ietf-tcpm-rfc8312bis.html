@@ -4866,6 +4866,9 @@ are not new to CUBIC and are inherently part of any transport protocol like TCP.
 </li>
           <li class="normal" id="appendix-B.1-1.2">Elaborate differences between RFC 5681 and Cubic.<a href="#appendix-B.1-1.2" class="pilcrow">¶</a>
 </li>
+          <li class="normal" id="appendix-B.1-1.3">Tweak math for better plaintext rendering.
+(<a href="https://github.com/NTAP/rfc8312bis/pull/164">#164</a>)<a href="#appendix-B.1-1.3" class="pilcrow">¶</a>
+</li>
         </ul>
 </section>
 </div>
@@ -5460,6 +5463,7 @@ the window size in the first RTT (i.e., <em>n</em>=1 or equivalently <em>t</em>=
                 <path d="M711 659l-53 -223h-16c1 8 1 17 1 42c0 65 -31 144 -152 144c-201 0 -319 -201 -319 -372c0 -112 60 -214 195 -214c98 0 171 49 216 98c7 7 12 13 17 20l20 -13c-27 -41 -60 -71 -89 -92c-78 -55 -154 -61 -193 -61c-193 0 -288 131 -288 278c0 230 201 393 443 393 c54 0 106 -27 158 -27c11 0 27 2 42 27h18Z" id="E1-STIXWEBNORMALI-1D436" stroke-width="1"></path>
                 <path d="M621 220h-557v66h557v-66Z" id="E1-STIXWEBMAIN-2212" stroke-width="1"></path>
                 <path d="M29 660l12 16c153 -92 244 -259 244 -429c0 -185 -88 -327 -247 -424l-9 16c142 117 170 211 170 405c0 187 -25 302 -170 416Z" id="E1-STIXWEBMAIN-29" stroke-width="1"></path>
+                <path d="M457 337c0 -11 -8 -23 -22 -31c-25 -15 -83 -15 -155 -56c63 -37 127 -40 154 -56c14 -8 21 -20 21 -32c0 -20 -14 -39 -39 -39c-41 0 -66 70 -143 114c0 -69 29 -131 29 -162c0 -21 -20 -42 -38 -42c-19 0 -38 21 -38 42c0 31 29 93 29 162c-52 -30 -99 -93 -121 -105 c-9 -5 -18 -8 -27 -8c-24 0 -37 15 -37 32c0 14 6 30 21 39c27 15 101 25 153 55c-52 30 -129 40 -157 57c-13 8 -20 19 -20 30c0 21 15 42 36 42c7 0 14 -2 22 -6c29 -17 73 -78 130 -108c0 69 -29 135 -29 166c0 21 19 40 38 40c18 0 38 -19 38 -40 c0 -31 -29 -96 -29 -165c72 38 99 91 126 107c8 4 15 6 22 6c21 0 36 -21 36 -42Z" id="E1-STIXWEBMAIN-2217" stroke-width="1"></path>
                 <path d="M61 510l-16 4c29 95 92 162 196 162c93 0 156 -55 156 -137c0 -48 -26 -98 -93 -138c44 -19 62 -31 83 -53c28 -31 44 -77 44 -129c0 -53 -17 -102 -46 -140c-48 -64 -143 -93 -232 -93c-73 0 -112 21 -112 57c0 21 18 36 41 36c17 0 33 -6 61 -26c37 -26 58 -31 86 -31 c74 0 130 68 130 153c0 76 -35 125 -104 145c-22 7 -45 10 -102 10v14c38 13 64 24 84 36c49 28 81 73 81 134c0 68 -42 102 -108 102c-62 0 -108 -32 -149 -106Z" id="E1-STIXWEBMAIN-33" stroke-width="1"></path>
                 <path d="M636 220h-261v-261h-66v261h-261v66h261v261h66v-261h261v-66Z" id="E1-STIXWEBMAIN-2B" stroke-width="1"></path>
                 <path d="M1101 653l-4 -16c-66 -3 -109 -44 -134 -77l-438 -576h-29v442h-11l-297 -442h-29v569c0 55 -33 84 -89 84h-10l4 16h288l-4 -16h-7c-39 0 -76 0 -76 -71v-377h5l226 332v61c0 31 -19 55 -82 55h-8l4 16h285l-4 -16h-18c-62 0 -71 -37 -71 -72v-395h6l278 370 c17 22 40 53 40 72c0 16 -13 25 -54 25h-17l4 16h242Z" id="E1-STIXWEBNORMALI-1D44A" stroke-width="1"></path>
@@ -5468,7 +5472,6 @@ the window size in the first RTT (i.e., <em>n</em>=1 or equivalently <em>t</em>=
                 <path d="M305 288l45 69c26 40 61 84 111 84c32 0 49 -12 49 -33c0 -19 -13 -42 -39 -42c-22 0 -27 9 -44 9c-30 0 -41 -16 -55 -38l-55 -85c30 -62 53 -197 98 -197c16 0 40 14 61 57l14 -10c-12 -15 -57 -111 -115 -111c-41 0 -60 41 -73 77l-40 113l-63 -98 c-32 -49 -61 -92 -117 -92c-36 0 -52 25 -52 47c0 16 13 37 38 37c26 0 22 -20 47 -20c12 0 38 10 70 59l65 101l-33 92c-17 48 -43 89 -98 89c-13 0 -28 -2 -38 -6l-3 18l132 33c44 -24 63 -65 75 -98Z" id="E1-STIXWEBNORMALI-1D465" stroke-width="1"></path>
                 <path d="M382 -134v-30c-142 134 -243 343 -243 615c0 267 101 481 243 615v-30c-90 -110 -162 -282 -162 -585c0 -306 72 -475 162 -585Z" id="E1-STIXWEBSIZE1-28" stroke-width="1"></path>
                 <path d="M86 1036v30c142 -134 243 -343 243 -615c0 -267 -101 -481 -243 -615v30c90 110 162 282 162 585c0 306 -72 475 -162 585Z" id="E1-STIXWEBSIZE1-29" stroke-width="1"></path>
-                <path d="M457 337c0 -11 -8 -23 -22 -31c-25 -15 -83 -15 -155 -56c63 -37 127 -40 154 -56c14 -8 21 -20 21 -32c0 -20 -14 -39 -39 -39c-41 0 -66 70 -143 114c0 -69 29 -131 29 -162c0 -21 -20 -42 -38 -42c-19 0 -38 21 -38 42c0 31 29 93 29 162c-52 -30 -99 -93 -121 -105 c-9 -5 -18 -8 -27 -8c-24 0 -37 15 -37 32c0 14 6 30 21 39c27 15 101 25 153 55c-52 30 -129 40 -157 57c-13 8 -20 19 -20 30c0 21 15 42 36 42c7 0 14 -2 22 -6c29 -17 73 -78 130 -108c0 69 -29 135 -29 166c0 21 19 40 38 40c18 0 38 -19 38 -40 c0 -31 -29 -96 -29 -165c72 38 99 91 126 107c8 4 15 6 22 6c21 0 36 -21 36 -42Z" id="E1-STIXWEBMAIN-2217" stroke-width="1"></path>
                 <path d="M604 475h33c-6 -85 -60 -204 -158 -204c-96 0 -203 128 -275 128c-70 0 -107 -67 -123 -138h-33c5 100 65 204 163 204c96 0 203 -128 276 -128c69 0 102 67 117 138zM604 239h33c-6 -85 -60 -204 -158 -204c-96 0 -203 128 -275 128c-70 0 -107 -67 -123 -138h-33 c5 100 65 204 163 204c96 0 203 -128 276 -128c69 0 102 67 117 138Z" id="E1-STIXWEBMAIN-2248" stroke-width="1"></path>
                 <path d="M473 167h-103v-167h-78v167h-280v64l314 445h44v-445h103v-64zM292 231v343l-240 -343h240Z" id="E1-STIXWEBMAIN-34" stroke-width="1"></path>
               </defs>
@@ -5514,17 +5517,18 @@ the window size in the first RTT (i.e., <em>n</em>=1 or equivalently <em>t</em>=
                         <use xlink:href="#E1-STIXWEBMAIN-2212" x="2566" y="0"></use>
                         <use xlink:href="#E1-STIXWEBMAIN-31" x="3474" y="0"></use>
                         <use xlink:href="#E1-STIXWEBMAIN-29" x="3974" y="0"></use>
-                        <use xlink:href="#E1-STIXWEBNORMALI-1D445" x="4308" y="0"></use>
-                        <use xlink:href="#E1-STIXWEBNORMALI-1D447" x="5048" y="0"></use>
-                        <use xlink:href="#E1-STIXWEBNORMALI-1D447" x="5719" y="0"></use>
-                        <use xlink:href="#E1-STIXWEBMAIN-2212" x="6612" y="0"></use>
-                        <use xlink:href="#E1-STIXWEBNORMALI-1D43E" x="7519" y="0"></use>
-                        <g transform="translate(8322,0)">
+                        <use xlink:href="#E1-STIXWEBMAIN-2217" x="4530" y="0"></use>
+                        <use xlink:href="#E1-STIXWEBNORMALI-1D445" x="5276" y="0"></use>
+                        <use xlink:href="#E1-STIXWEBNORMALI-1D447" x="6016" y="0"></use>
+                        <use xlink:href="#E1-STIXWEBNORMALI-1D447" x="6687" y="0"></use>
+                        <use xlink:href="#E1-STIXWEBMAIN-2212" x="7580" y="0"></use>
+                        <use xlink:href="#E1-STIXWEBNORMALI-1D43E" x="8487" y="0"></use>
+                        <g transform="translate(9290,0)">
                           <use xlink:href="#E1-STIXWEBMAIN-29" x="0" y="0"></use>
                           <use xlink:href="#E1-STIXWEBMAIN-33" transform="scale(0.707)" x="471" y="513"></use>
                         </g>
-                        <use xlink:href="#E1-STIXWEBMAIN-2B" x="9332" y="0"></use>
-                        <g transform="translate(10239,0)">
+                        <use xlink:href="#E1-STIXWEBMAIN-2B" x="10299" y="0"></use>
+                        <g transform="translate(11207,0)">
                           <use xlink:href="#E1-STIXWEBNORMALI-1D44A" x="0" y="0"></use>
                           <g transform="translate(916,-150)">
                             <use xlink:href="#E1-STIXWEBNORMALI-1D45A" transform="scale(0.707)" x="0" y="0"></use>
@@ -5532,7 +5536,7 @@ the window size in the first RTT (i.e., <em>n</em>=1 or equivalently <em>t</em>=
                             <use xlink:href="#E1-STIXWEBNORMALI-1D465" transform="scale(0.707)" x="1213" y="0"></use>
                           </g>
                         </g>
-                        <use xlink:href="#E1-STIXWEBSIZE1-29" x="12503" y="-201"></use>
+                        <use xlink:href="#E1-STIXWEBSIZE1-29" x="13471" y="-201"></use>
                       </g>
                     </g>
                     <g transform="translate(0,1582)">

@@ -722,9 +722,9 @@ ssthresh =  flight_size * β      new  ssthresh
 cwnd      = cwnd                 save  cwnd
     prior
             ⎧
-            ⎨max(ssthresh, 2)    reduction on loss, cwnd  is at least 2 MSS
-cwnd =      ⎩max(ssthresh, 1)    reduction on ECE, cwnd  is at least 1 MSS
-ssthresh =  max(ssthresh, 2)     ssthresh  is at least 2 MSS
+            ⎨max(ssthresh, 2)    reduction on loss, cwnd is at least 2 MSS
+cwnd =      ⎩max(ssthresh, 1)    reduction on ECE, cwnd is at least 1 MSS
+ssthresh =  max(ssthresh, 2)     ssthresh is at least 2 MSS
 
                                Figure 5
 
@@ -763,7 +763,7 @@ ssthresh =  max(ssthresh, 2)     ssthresh  is at least 2 MSS
 W    = ⎨           2                  max
  max   ⎪                  further reduce  W
        ⎪                                   max
-       ⎩cwnd             otherwise, remember  cwnd  before reduction
+       ⎩cwnd             otherwise, remember cwnd before reduction
 
    At a congestion event, if the current _cwnd_ is less than _W_max_,
    this indicates that the saturation point experienced by this flow is
@@ -1446,6 +1446,9 @@ B.1.  Since draft-ietf-tcpm-rfc8312bis-14
 
    *  Elaborate differences between RFC 5681 and Cubic.
 
+   *  Tweak math for better plaintext rendering. (#164
+      (https://github.com/NTAP/rfc8312bis/pull/164))
+
 B.2.  Since draft-ietf-tcpm-rfc8312bis-13
 
    *  Add contents of https://cse.unl.edu/~xu/avg_cubic_cwnd.pdf to
@@ -1722,13 +1725,13 @@ Appendix C.  Proof of the Average CUBIC Window Size
    successive packet losses, and the denominator _K_/_RTT_ is the total
    number of RTTs between two successive packet losses.
 
-                                          1
-                                          ─
-                                          p
-                              AVG_W     =───
-                                   cubic  K
-                                         ───
-                                         RTT
+                                           1
+                                           ─
+                                           p
+                             AVG_W      = ───
+                                  cubic    K
+                                          ───
+                                          RTT
 
                                   Figure 9
 
@@ -1736,11 +1739,11 @@ Appendix C.  Proof of the Average CUBIC Window Size
    _C_, and network parameters _p_ and _RTT_. According to the
    definition of _K_ in Figure 2, we have
 
-                             ┌────────────────────┐
-                          3  │W    - W    * β
-                          ╲  │ max    max    cubic
-                        K= ╲ │────────────────────
-                            ╲│         C
+                              ┌────────────────────┐
+                           3  │W    - W    * β
+                           ╲  │ max    max    cubic
+                       K =  ╲ │────────────────────
+                             ╲│         C
 
                                  Figure 10
 
@@ -1751,62 +1754,62 @@ Appendix C.  Proof of the Average CUBIC Window Size
    size in the last RTT (i.e., _n_=_K_/_RTT_ or equivalently _t_=_K_-
    _RTT_) is _C_(-_RTT_)^3+_W_max_.
 
-                        K
-                       ───
-                       RTT
-                       ⎯⎯
-                    1  ╲  ⎛              3     ⎞
-                    ─ =╱  ⎜C((n-1) RTT-K) +W   ⎟
-                    p  ⎺⎺ ⎝                 max⎠
-                       n=1
-                        K
-                       ───
-                       RTT
-                       ⎯⎯
-                       ╲  ⎛       3    3     ⎞
-                      =╱  ⎜C * RTT (-n) +W   ⎟
-                       ⎺⎺ ⎝               max⎠
-                       n=1
-                                    K
-                                   ───
-                                   RTT
-                                   ⎯⎯
-                               3   ╲    3         K
-                      =-C * RTT  * ╱   n +W    * ───
-                                   ⎺⎺      max   RTT
-                                   n=1
-                                           4
-                               3   1  ⎛ K ⎞          K
-                      ≈-C * RTT  * ─ *⎜───⎟ +W    * ───
-                                   4  ⎝RTT⎠   max   RTT
-                                  4
-                            1    K          K
-                      =-C * ─ * ───+W    * ───
-                            4   RTT  max   RTT
+                       K
+                      ───
+                      RTT
+                      ⎯⎯
+                  1   ╲  ⎛                3       ⎞
+                  ─ = ╱  ⎜C((n-1) * RTT-K)  + W   ⎟
+                  p   ⎺⎺ ⎝                     max⎠
+                      n=1
+                       K
+                      ───
+                      RTT
+                      ⎯⎯
+                      ╲  ⎛       3    3       ⎞
+                    = ╱  ⎜C * RTT (-n)  + W   ⎟
+                      ⎺⎺ ⎝                 max⎠
+                      n=1
+                                   K
+                                  ───
+                                  RTT
+                                  ⎯⎯
+                              3   ╲    3           K
+                    = -C * RTT  * ╱   n  + W    * ───
+                                  ⎺⎺        max   RTT
+                                  n=1
+                                          4
+                              3   1  ⎛ K ⎞            K
+                    ≈ -C * RTT  * ─ *⎜───⎟  + W    * ───
+                                  4  ⎝RTT⎠     max   RTT
+                                 4
+                           1    K            K
+                    = -C * ─ * ─── + W    * ───
+                           4   RTT    max   RTT
 
                                  Figure 11
 
    After solving Figure 10 and Figure 11 for _K_ and _W_max_, we have
 
-                             ┌────────────────────┐
-                             │4 * ⎛1-β     ⎞
-                          4  │    ⎝   cubic⎠   RTT
-                        K=╲  │────────────── * ───
-                           ╲ │C * ⎛3+β     ⎞    p
-                            ╲│    ⎝   cubic⎠
+                             ┌──────────────────────┐
+                             │ 4 * ⎛1-β     ⎞
+                          4  │     ⎝   cubic⎠    RTT
+                      K = ╲  │──────────────── * ───
+                           ╲ │C * ⎛3 + β     ⎞    p
+                            ╲│    ⎝     cubic⎠
 
                                  Figure 12
 
    The average CUBIC window size _AVG_W_cubic_ can be obtained by
    substituting _K_ with Figure 12 in Figure 9
 
-                             1     ┌─────────────────────┐
-                             ─     │C * ⎛3+β     ⎞      3
-                             p  4  │    ⎝   cubic⎠   RTT
-                 AVG_W     =───=╲  │────────────── * ────
-                      cubic  K   ╲ │4 * ⎛1-β     ⎞     3
-                            ───   ╲│    ⎝   cubic⎠    p
-                            RTT
+                            1       ┌───────────────────────┐
+                            ─       │C * ⎛3 + β     ⎞      3
+                            p    4  │    ⎝     cubic⎠   RTT
+              AVG_W      = ─── = ╲  │──────────────── * ────
+                   cubic    K     ╲ │ 4 * ⎛1-β     ⎞      3
+                           ───     ╲│     ⎝   cubic⎠     p
+                           RTT
 
 Authors' Addresses
 
