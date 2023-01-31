@@ -1258,6 +1258,7 @@ These individuals suggested improvements to this document:
 - Elaborate differences between RFC 5681 and Cubic.
 
 - Tweak math for better plaintext rendering.
+  ([#164](https://github.com/NTAP/rfc8312bis/pull/164))
 
 ## Since draft-ietf-tcpm-rfc8312bis-13
 
