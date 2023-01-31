@@ -7,12 +7,12 @@ Internet-Draft                                                       UNL
 Obsoletes: 8312 (if approved)                                      S. Ha
 Updates: 5681 (if approved)                                     Colorado
 Intended status: Standards Track                                 I. Rhee
-Expires: 23 July 2023                                             Bowery
+Expires: 4 August 2023                                            Bowery
                                                                  V. Goel
                                                               Apple Inc.
                                                           L. Eggert, Ed.
                                                                   NetApp
-                                                         19 January 2023
+                                                         31 January 2023
 
 
                CUBIC for Fast and Long-Distance Networks
@@ -77,7 +77,7 @@ Status of This Memo
    time.  It is inappropriate to use Internet-Drafts as reference
    material or to cite them other than as "work in progress."
 
-   This Internet-Draft will expire on 23 July 2023.
+   This Internet-Draft will expire on 4 August 2023.
 
 Copyright Notice
 
@@ -419,7 +419,7 @@ Table of Contents
    set.  The unit for _C_ is
 
                                   segment
-                                  -------
+                                  ───────
                                         3
                                   second
 
@@ -506,11 +506,11 @@ Table of Contents
    there are no further congestion events and is calculated using the
    following equation:
 
-                                  ________________
-                                 /W    - cwnd
-                             3  /  max       epoch
-                         K = | /  ----------------
-                             |/           C
+                                ┌────────────────┐
+                             3  │W    - cwnd
+                             ╲  │ max       epoch
+                         K =  ╲ │────────────────
+                               ╲│       C
 
                                   Figure 2
 
@@ -524,19 +524,13 @@ Table of Contents
    window increase rate is non-decreasing and is less than the increase
    rate of slow start [SXEZ19].
 
-                  /
-                  |                if W     (t + RTT) < cwnd
-                  |cwnd                cubic
-                  |
-                  |
-                  |
-         target = <                if W     (t + RTT) > 1.5 * cwnd
-                  |1.5 * cwnd          cubic
-                  |
-                  |
-                  |W     (t + RTT)
-                  | cubic          otherwise
-                  \
+                 ⎧
+                 ⎪cwnd            if  W     (t + RTT) < cwnd
+                 ⎪                     cubic
+                 ⎨1.5 * cwnd      if  W     (t + RTT) > 1.5 * cwnd
+        target = ⎪                     cubic
+                 ⎪W     (t + RTT) otherwise
+                 ⎩ cubic
 
    The elapsed time _t_ in Figure 1 MUST NOT include periods during
    which _cwnd_ has not been updated due to application-limited behavior
@@ -575,10 +569,10 @@ Table of Contents
    Specifically, the average congestion window size of AIMD(α, β) can be
    calculated using Figure 3.
 
-                                        _______________
-                                       /  α * (1 + β)
-                   AVG_AIMD(α, β) = | / ---------------
-                                    |/  2 * (1 - β) * p
+                                      ┌───────────────┐
+                                      │  α * (1 + β)
+                   AVG_AIMD(α, β) = ╲ │───────────────
+                                     ╲│2 * (1 - β) * p
 
                                   Figure 3
 
@@ -586,7 +580,7 @@ Table of Contents
    Reno that uses AIMD(1, 0.5), α must be equal to,
 
                                      1 - β
-                                 3 * -----
+                                 3 * ─────
                                      1 + β
 
    Thus, CUBIC uses Figure 4 to estimate the window size _W_est_ in the
@@ -594,7 +588,7 @@ Table of Contents
 
                                        1 - β
                                             cubic
-                          α      = 3 * ----------
+                          α      = 3 * ──────────
                            cubic       1 + β
                                             cubic
 
@@ -622,7 +616,7 @@ Table of Contents
    acknowledged by a new ACK.
 
                                           segments_acked
-                   W    = W    + α      * --------------
+                   W    = W    + α      * ──────────────
                     est    est    cubic        cwnd
 
                                   Figure 4
@@ -647,8 +641,8 @@ Table of Contents
    by
 
                                target - cwnd
-                               -------------
-                                   cwnd
+                               ─────────────
+                                    cwnd
 
    for each received new ACK, where _target_ is calculated as described
    in Section 4.2.
@@ -673,8 +667,8 @@ Table of Contents
    new _W_max_. In this region, _cwnd_ MUST be incremented by
 
                                target - cwnd
-                               -------------
-                                   cwnd
+                               ─────────────
+                                    cwnd
 
    for each received new ACK, where _target_ is calculated as described
    in Section 4.2.
@@ -723,20 +717,14 @@ Table of Contents
    _ssthresh_ after detecting a congestion event is REQUIRED to apply
    similar mechanisms [RFC9002].
 
-             flight_size * β      new ssthresh
-ssthresh =                  cubic
-
-cwnd      =                       save cwnd
-    prior    cwnd
-
-             /max(ssthresh, 2)    reduction on loss, cwnd is at least 2 MSS
-             |
-cwnd =       <
-             |max(ssthresh, 1)    reduction on ECE, cwnd is at least 1 MSS
-             \
-
-             max(ssthresh, 2)     ssthresh is at least 2 MSS
-ssthresh =
+ssthresh =  flight_size * β      new  ssthresh
+                           cubic
+cwnd      = cwnd                 save  cwnd
+    prior
+            ⎧
+            ⎨max(ssthresh, 2)    reduction on loss, cwnd  is at least 2 MSS
+cwnd =      ⎩max(ssthresh, 1)    reduction on ECE, cwnd  is at least 1 MSS
+ssthresh =  max(ssthresh, 2)     ssthresh  is at least 2 MSS
 
                                Figure 5
 
@@ -769,17 +757,13 @@ ssthresh =
    updated as follows, before the window reduction described in
    Section 4.6.
 
-         /
-         |       1 + β
-         |            cubic if cwnd < W    and fast convergence enabled,
-         |cwnd * ----------            max
-         |            2
-  W    = <
-   max   |                  further reduce W
-         |                                  max
-         |
-         |                  otherwise, remember cwnd before reduction
-         \cwnd
+       ⎧       1 + β
+       ⎪            cubic
+       ⎪cwnd * ────────── if  cwnd < W     and fast convergence enabled,
+W    = ⎨           2                  max
+ max   ⎪                  further reduce  W
+       ⎪                                   max
+       ⎩cwnd             otherwise, remember  cwnd  before reduction
 
    At a congestion event, if the current _cwnd_ is less than _W_max_,
    this indicates that the saturation point experienced by this flow is
@@ -857,23 +841,17 @@ ssthresh =
    implementation MAY save the current value of the following variables
    before the congestion window is reduced.
 
-                        undo_cwnd =       cwnd
-
-                        undo_cwnd      =  cwnd
-                                 prior        prior
-
-                        undo_ssthresh =   ssthresh
-
-                        undo_W    =       W
-                              max          max
-
-                        undo_K =          K
-
-                        undo_t      =     t
-                              epoch        epoch
-
-                                          W
-                        undo_W_{est} =     est
+                        undo_cwnd =      cwnd
+                        undo_cwnd      = cwnd
+                                 prior       prior
+                        undo_ssthresh =  ssthresh
+                        undo_W    =      W
+                              max         max
+                        undo_K =         K
+                        undo_t      =    t
+                              epoch       epoch
+                        undo_W    =      W
+                              est         est
 
    Once the previously declared packet loss is confirmed to be spurious,
    CUBIC MAY restore the original values of the above-mentioned
@@ -881,23 +859,17 @@ ssthresh =
    _cwnd_prior_. Restoring the original values ensures that CUBIC's
    performance is similar to what it would be without spurious losses.
 
-              cwnd =       undo_cwnd     \
-                                         |
-              cwnd      =  undo_cwnd     |
-                  prior             prior|
-                                         |
-              ssthresh =   undo_ssthresh |
-                                         |
-              W    =       undo_W        |
-               max               max     >if cwnd < cwnd
-                                         |              prior
-              K =          undo_K        |
-                                         |
-              t      =     undo_t        |
-               epoch             epoch   |
-                                         |
-              W    =       undo_W        |
-               est               est     /
+              cwnd =      undo_cwnd      ⎫
+              cwnd      = undo_cwnd      ⎮
+                  prior            prior ⎮
+              ssthresh =  undo_ssthresh  ⎮
+              W    =      undo_W         ⎮
+               max              max      ⎬if cwnd < cwnd
+              K =         undo_K         ⎮              prior
+              t      =    undo_t         ⎮
+               epoch            epoch    ⎮
+              W    =      undo_W         ⎮
+               est              est      ⎭
 
    In rare cases, when the detection happens long after a spurious loss
    event and the current _cwnd_ is already higher than _cwnd_prior_,
@@ -937,25 +909,25 @@ ssthresh =
    performance analysis of CUBIC.  The average window size of CUBIC (see
    Appendix C) can be obtained by the following function:
 
-                                  ________________      ____
-                                 /C * (3 + β     )   4 /   3
-                            4   /           cubic    |/ RTT
-               AVG_W      = |  /  ---------------- * -------
-                    cubic   | /   4 * (1 - β     )       __
-                            |/              cubic     4 / 3
-                                                      |/ p
+                               ┌────────────────┐   4 ┌────┐
+                               │C * (3 + β     )    ╲ │   3
+                            4  │          cubic      ╲│RTT
+               AVG_W      = ╲  │────────────────  * ────────
+                    cubic    ╲ │4 * (1 - β     )     4 ┌──┐
+                              ╲│          cubic      ╲ │ 3
+                                                      ╲│p
 
                                   Figure 6
 
    With β__cubic_ set to 0.7, the above formula reduces to:
 
-                                                  ____
-                                     _______   4 /   3
-                                 4  /C * 3.7   |/ RTT
-                    AVG_W      = | / ------- * -------
-                         cubic   |/    1.2         __
-                                                4 / 3
-                                                |/ p
+                                               4 ┌────┐
+                                   ┌───────┐   ╲ │   3
+                                 4 │C * 3.7     ╲│RTT
+                    AVG_W      = ╲ │───────  * ────────
+                         cubic    ╲│  1.2       4 ┌──┐
+                                                ╲ │ 3
+                                                 ╲│p
 
                                   Figure 7
 
@@ -1051,13 +1023,13 @@ ssthresh =
    _C_ SHOULD be set to 0.4.  With _C_ set to 0.4, Figure 7 is reduced
    to:
 
-                                               ____
-                                            4 /   3
-                                            |/ RTT
-                       AVG_W      = 1.054 * -------
-                            cubic               __
-                                             4 / 3
-                                             |/ p
+                                            4 ┌────┐
+                                            ╲ │   3
+                                             ╲│RTT
+                       AVG_W      = 1.054 * ────────
+                            cubic            4 ┌──┐
+                                             ╲ │ 3
+                                              ╲│p
 
                                   Figure 8
 
@@ -1218,9 +1190,9 @@ ssthresh =
    [I-D.ietf-tcpm-hystartplusplus]
               Balasubramanian, P., Huang, Y., and M. Olson, "HyStart++:
               Modified Slow Start for TCP", Work in Progress, Internet-
-              Draft, draft-ietf-tcpm-hystartplusplus-12, 9 January 2023,
-              <https://datatracker.ietf.org/doc/html/draft-ietf-tcpm-
-              hystartplusplus-12>.
+              Draft, draft-ietf-tcpm-hystartplusplus-13, 30 January
+              2023, <https://datatracker.ietf.org/doc/html/draft-ietf-
+              tcpm-hystartplusplus-13>.
 
    [RFC2119]  Bradner, S., "Key words for use in RFCs to Indicate
               Requirement Levels", BCP 14, RFC 2119,
@@ -1750,13 +1722,13 @@ Appendix C.  Proof of the Average CUBIC Window Size
    successive packet losses, and the denominator _K_/_RTT_ is the total
    number of RTTs between two successive packet losses.
 
-                                           1
-                                           -
-                                           p
-                             AVG_W      = ---
-                                  cubic    K
-                                          ---
-                                          RTT
+                                          1
+                                          ─
+                                          p
+                              AVG_W     =───
+                                   cubic  K
+                                         ───
+                                         RTT
 
                                   Figure 9
 
@@ -1764,11 +1736,11 @@ Appendix C.  Proof of the Average CUBIC Window Size
    _C_, and network parameters _p_ and _RTT_. According to the
    definition of _K_ in Figure 2, we have
 
-                                ____________________
-                               /W    - W    * β
-                           3  /  max    max    cubic
-                       K = | /  --------------------
-                           |/             C
+                             ┌────────────────────┐
+                          3  │W    - W    * β
+                          ╲  │ max    max    cubic
+                        K= ╲ │────────────────────
+                            ╲│         C
 
                                  Figure 10
 
@@ -1779,56 +1751,62 @@ Appendix C.  Proof of the Average CUBIC Window Size
    size in the last RTT (i.e., _n_=_K_/_RTT_ or equivalently _t_=_K_-
    _RTT_) is _C_(-_RTT_)^3+_W_max_.
 
-                         K
-               1        ---
-               -     __ RTT  /                 3       \
-               p  = \        |C((n - 1)RTT - K)  + W   |
-                    /__ n = 1\                      max/
-
-                         K
-                        ---
-                     __ RTT  /       3      3       \
-                  = \        |C * RTT ( - n)  + W   |
-                    /__ n = 1\                   max/
-
-                                       K
-                                      ---
-                              3    __ RTT   3           K
-                  =  - C * RTT  * \        n  + W    * ---
-                                  /__ n = 1      max   RTT
-
-                                 3   1   / K \4           K
-                 approx - C * RTT  * - * |---|  + W    * ---
-                                     4   \RTT/     max   RTT
-
-                                4
-                           1   K             K
-                  =  - C * - * --- + W    * ---
-                           4   RTT    max   RTT
+                        K
+                       ───
+                       RTT
+                       ⎯⎯
+                    1  ╲  ⎛              3     ⎞
+                    ─ =╱  ⎜C((n-1) RTT-K) +W   ⎟
+                    p  ⎺⎺ ⎝                 max⎠
+                       n=1
+                        K
+                       ───
+                       RTT
+                       ⎯⎯
+                       ╲  ⎛       3    3     ⎞
+                      =╱  ⎜C * RTT (-n) +W   ⎟
+                       ⎺⎺ ⎝               max⎠
+                       n=1
+                                    K
+                                   ───
+                                   RTT
+                                   ⎯⎯
+                               3   ╲    3         K
+                      =-C * RTT  * ╱   n +W    * ───
+                                   ⎺⎺      max   RTT
+                                   n=1
+                                           4
+                               3   1  ⎛ K ⎞          K
+                      ≈-C * RTT  * ─ *⎜───⎟ +W    * ───
+                                   4  ⎝RTT⎠   max   RTT
+                                  4
+                            1    K          K
+                      =-C * ─ * ───+W    * ───
+                            4   RTT  max   RTT
 
                                  Figure 11
 
    After solving Figure 10 and Figure 11 for _K_ and _W_max_, we have
 
-                               ______________________
-                              /4 * (1 - β     )
-                         4   /           cubic    RTT
-                     K = |  /  ---------------- * ---
-                         | /   C * (3 + β     )    p
-                         |/              cubic
+                             ┌────────────────────┐
+                             │4 * ⎛1-β     ⎞
+                          4  │    ⎝   cubic⎠   RTT
+                        K=╲  │────────────── * ───
+                           ╲ │C * ⎛3+β     ⎞    p
+                            ╲│    ⎝   cubic⎠
 
                                  Figure 12
 
    The average CUBIC window size _AVG_W_cubic_ can be obtained by
    substituting _K_ with Figure 12 in Figure 9
 
-                           1          _______________________
-                           -         /C * (3 + β     )      3
-                           p    4   /           cubic    RTT
-             AVG_W      = --- = |  /  ---------------- * ----
-                  cubic    K    | /   4 * (1 - β     )     3
-                          ---   |/              cubic     p
-                          RTT
+                             1     ┌─────────────────────┐
+                             ─     │C * ⎛3+β     ⎞      3
+                             p  4  │    ⎝   cubic⎠   RTT
+                 AVG_W     =───=╲  │────────────── * ────
+                      cubic  K   ╲ │4 * ⎛1-β     ⎞     3
+                            ───   ╲│    ⎝   cubic⎠    p
+                            RTT
 
 Authors' Addresses
 
