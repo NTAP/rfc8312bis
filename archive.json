@@ -1,6 +1,6 @@
 {
   "magic": "E!vIA5L86J2I",
-  "timestamp": "2023-01-22T00:05:46.187297+00:00",
+  "timestamp": "2023-02-02T00:05:30.765608+00:00",
   "repo": "NTAP/rfc8312bis",
   "labels": [
     {
@@ -16975,6 +16975,48 @@
           "body": "",
           "createdAt": "2023-01-19T13:50:13Z",
           "updatedAt": "2023-01-19T13:50:13Z",
+          "comments": []
+        }
+      ]
+    },
+    {
+      "number": 164,
+      "id": "PR_kwDOEpK-U85I6Eew",
+      "title": "Tweak math for better plaintext rendering",
+      "url": "https://github.com/NTAP/rfc8312bis/pull/164",
+      "state": "MERGED",
+      "author": "larseggert",
+      "authorAssociation": "MEMBER",
+      "assignees": [],
+      "labels": [],
+      "body": "",
+      "createdAt": "2023-01-31T12:09:30Z",
+      "updatedAt": "2023-01-31T15:19:04Z",
+      "baseRepository": "NTAP/rfc8312bis",
+      "baseRefName": "main",
+      "baseRefOid": "0202ad697e0da3da0ece29d34c406c6c267f8f35",
+      "headRepository": "NTAP/rfc8312bis",
+      "headRefName": "utftex-math",
+      "headRefOid": "4b132b8a9fa31ef99e30b61c91ba01db0ed7bdc7",
+      "closedAt": "2023-01-31T12:12:06Z",
+      "mergedAt": "2023-01-31T12:12:06Z",
+      "mergedBy": "larseggert",
+      "mergeCommit": {
+        "oid": "d6622501bfba7e0f3c9c15e0c3c268bc5ead3cf2"
+      },
+      "comments": [],
+      "reviews": [
+        {
+          "id": "PRR_kwDOEpK-U85MJB6_",
+          "commit": {
+            "abbreviatedOid": "4b132b8"
+          },
+          "author": "lisongxu",
+          "authorAssociation": "COLLABORATOR",
+          "state": "COMMENTED",
+          "body": "Thanks, Lars",
+          "createdAt": "2023-01-31T15:19:04Z",
+          "updatedAt": "2023-01-31T15:19:04Z",
           "comments": []
         }
       ]
